@@ -1,0 +1,273 @@
+$app-height: 650px;
+$navBar-height: 60px;
+$search-area-height: $app-height;
+$deckDetails-height: $app-height;
+$deckDetails-cpt-height: 30px;
+
+@font-face {
+  font-family: HearthstoneFont;
+  src: url('../fonts/OPTIBelwe-Medium.otf');
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#hearthstone {
+  min-height: 500px;
+  width: 90%;
+  margin: 0 auto;
+
+  .logo {
+    text-align: center;
+    width: 500px;
+    margin: 10px auto;
+    display: block;
+  }
+
+  .credits {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .main-app {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    .deck-builder {
+      order: 1;
+      width: 30%;
+      margin-right: 10px;
+      display: flex;
+
+      .deck-list {
+        order: 1;
+        margin-right: 5px;
+        width: 40%;
+        flex: 1 auto;
+
+        .list-group-item {
+          img {
+            width: 32px;
+            margin-right: 10px;
+          }
+
+          span {
+            cursor: pointer;
+          }
+
+          .removeDeck {
+            display: none;
+          }
+
+          &.active {
+            .removeDeck {
+              display: block;
+            }
+          }
+        }
+      }
+
+      .deckdetails {
+        order: 2;
+        margin-left: 5px;
+        width: 218px;
+        background: #696969;
+        padding-bottom: 30px;
+        position: relative;
+        height: $deckDetails-height;
+
+        .designForBlank {
+          font-family: HearthstoneFont, serif;
+          color: #FFFFFF;
+          font-weight: bold;
+          font-size: 30px;
+          text-align: center;
+          padding: 265px 0;
+        }
+
+        .list {
+          overflow-y: scroll;
+          height: $deckDetails-height - $deckDetails-cpt-height;
+
+          .frame {
+            width: 218px;
+            height: 35px;
+            background-repeat: no-repeat;
+            background-position: center right;
+            margin: 0;
+            padding: 7px 0 7px 37px;
+            position: relative;
+            cursor: pointer;
+
+            .name {
+              font-family: HearthstoneFont, serif;
+              color: #FFFFFF;
+              font-weight: bold;
+              font-size: 11px;
+              @include no-select;
+            }
+
+            .cost {
+              position: absolute;
+              top: 3px;
+              left : 11px;
+              color: #FFFFFF;
+              font-weight: bold;
+              font-size: 20px;
+              font-family: HearthstoneFont, serif;
+              text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+              @include no-select;
+
+              &.expensive {
+                top: 6px;
+                left: 8px;
+                font-size: 16px;
+              }
+            }
+
+            .countbox {
+              position: absolute;
+              top: 6px;
+              right: 4px;
+              width: 25px;
+              height:24px;
+              background: url('../images/resources/frame_countbox.png');
+              display: none;
+              @include no-select;
+
+              img {
+                position: absolute;
+                top: 0;
+                right: 1px;
+              }
+
+              &.enable {
+                display: block;
+              }
+            }
+          }
+        }
+
+        .cpt {
+          position: absolute;
+          bottom: 0;
+          height: $deckDetails-cpt-height;
+          text-align: center;
+          display: block;
+          margin: 0;
+          width: 100%;
+          padding: 5px 0;
+          font-family: HearthstoneFont, serif;
+          color: #FFFFFF;
+          font-weight: bold;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .search-area {
+      order: 2;
+      width: 70%;
+      height: $search-area-height;
+      overflow: hidden;
+
+      .navbar {
+        width: 100%;
+        margin-bottom: 0;
+        padding: 5px 0;
+        height: $navBar-height;
+
+        .container {
+          padding-left: 0;
+
+          .search {
+            width: 200px;
+            float: left;
+            height: 47px;
+            margin-right: 20px;
+          }
+
+          .Select {
+            width: 250px;
+            float: left;
+
+            .Select-control {
+              height: 47px;
+            }
+
+            .Select-placeholder {
+              top: 4px;
+            }
+
+            .Select-arrow {
+              top: 22px;
+            }
+
+            .Select-clear {
+              padding: 12px 10px;
+            }
+          }
+
+          .filters {
+            float: left;
+            margin-left: 20px;
+            padding: 5px 0;
+
+            img {
+              height: 40px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .cards {
+        overflow-y: scroll;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        height: $search-area-height - $navBar-height;
+
+        .card {
+          flex-grow: 1;
+
+          img {
+            max-width: 240px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal {
+  .heroes {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    .hero {
+      flex: 1 auto;
+
+      img {
+        max-width: 110px;
+        cursor: pointer;
+        margin: 0 auto;
+        display: block;
+      }
+
+      &.active {
+        background: #ccc;
+        border-radius: 5px;
+      }
+    }
+  }
+}
