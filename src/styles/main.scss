@@ -32,6 +32,10 @@ $deckDetails-cpt-height: 30px;
   .credits {
     text-align: center;
     margin-top: 10px;
+
+    .export {
+      margin-right: 10px;
+    }
   }
 
   .main-app {
@@ -61,12 +65,19 @@ $deckDetails-cpt-height: 30px;
             cursor: pointer;
           }
 
-          .removeDeck {
+          .actions {
             display: none;
+            margin-top: 6px;
+            float: right;
+
+            .exportDeck{
+              color: #FFFFFF;
+              margin-left: 5px;
+            }
           }
 
           &.active {
-            .removeDeck {
+            .actions {
               display: block;
             }
           }

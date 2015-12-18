@@ -7,7 +7,10 @@ export default {
             'deck-name': 'Nom du deck',
             'cards': 'Cartes',
             'no-deck-selected': 'Aucun deck sélectionné',
-            'search': 'Recherche'
+            'search': 'Recherche',
+            'export-decks': 'Exporter les Decks',
+            'export-deck': 'Exporter le deck sélectionné',
+            'import-decks': 'Importer de nouveaux decks'
         },
         en: {
             'add-deck': 'Add Deck',
@@ -16,7 +19,10 @@ export default {
             'deck-name': 'Deck name',
             'cards': 'Cards',
             'no-deck-selected': 'No deck selected',
-            'search': 'Search'
+            'search': 'Search',
+            'export-decks': 'Export Decks',
+            'export-deck': 'Export current deck',
+            'import-decks': 'Import new decks'
         }
     }
 };
