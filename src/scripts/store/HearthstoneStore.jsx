@@ -44,6 +44,8 @@ const HearthstoneStore = Reflux.createStore({
         this.current = current;
 
         this.trigger();
+
+        this.updateFilters();
     },
 
     addDeck(deckName, hero) {
@@ -219,6 +221,12 @@ const HearthstoneStore = Reflux.createStore({
         this.filters.cards = cards;
 
         this.trigger();
+    },
+
+    updateFilters() {
+        // Update heroes filter for the selected deck
+
+        // Filtercards ??
     },
 
     /* -------------
