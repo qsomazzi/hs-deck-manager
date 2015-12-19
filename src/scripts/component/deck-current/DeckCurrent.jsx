@@ -21,7 +21,10 @@ class DeckCurrent extends Component {
             <div className="list">
                 {currentDeck}
                 <p className="cpt">
-                    {deck.nbCards} {TranslationHelper.translate('cards')}
+                    <span>{deck.nbCards}</span>
+                    <img src="./images/resources/cards.png" alt="cards" />
+                    <span>{deck.cost}</span>
+                    <img src="./images/resources/dust.png" alt="dust" />
                 </p>
             </div>
         );

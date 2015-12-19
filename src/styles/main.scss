@@ -2,7 +2,7 @@ $app-height: 650px;
 $navBar-height: 60px;
 $search-area-height: $app-height;
 $deckDetails-height: $app-height;
-$deckDetails-cpt-height: 30px;
+$deckDetails-cpt-height: 35px;
 
 @font-face {
   font-family: HearthstoneFont;
@@ -169,15 +169,19 @@ $deckDetails-cpt-height: 30px;
           position: absolute;
           bottom: 0;
           height: $deckDetails-cpt-height;
-          text-align: center;
-          display: block;
           margin: 0;
           width: 100%;
-          padding: 5px 0;
+          padding: 0;
           font-family: HearthstoneFont, serif;
           color: #FFFFFF;
           font-weight: bold;
           font-size: 13px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @include no-select;
+
+          img { margin-right: 10px; }
         }
       }
     }

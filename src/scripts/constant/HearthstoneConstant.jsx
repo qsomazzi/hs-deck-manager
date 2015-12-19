@@ -28,5 +28,12 @@ export default {
             'no': 'No',
             'yes': 'Yes'
         }
+    },
+    dust: {
+        'Free': 0,
+        'Common': 40,
+        'Rare': 100,
+        'Epic': 400,
+        'Legendary': 1600
     }
 };

@@ -1,10 +1,11 @@
-import Reflux             from 'reflux';
-import _                  from 'lodash';
-import HearthstoneActions from './../action/HearthstoneActions';
-import CardsFr            from '../../../resources/data/Cards-fr.json';
-import CardsEn            from '../../../resources/data/Cards-en.json';
-import HeroesFr           from '../../../resources/data/Heroes-fr.json';
-import HeroesEn           from '../../../resources/data/Heroes-en.json';
+import Reflux              from 'reflux';
+import _                   from 'lodash';
+import HearthstoneActions  from './../action/HearthstoneActions';
+import HearthstoneConstant from './../constant/HearthstoneConstant';
+import CardsFr             from '../../../resources/data/Cards-fr.json';
+import CardsEn             from '../../../resources/data/Cards-en.json';
+import HeroesFr            from '../../../resources/data/Heroes-fr.json';
+import HeroesEn            from '../../../resources/data/Heroes-en.json';
 
 /**
  * HearthstoneStore
@@ -49,7 +50,8 @@ const HearthstoneStore = Reflux.createStore({
             name: deckName,
             cards: [],
             hero: hero,
-            nbCards: 0
+            nbCards: 0,
+            cost: 0
         });
 
         this.write();
@@ -88,10 +90,12 @@ const HearthstoneStore = Reflux.createStore({
                     });
 
                     deck.nbCards++;
+                    deck.cost = deck.cost + HearthstoneConstant.dust[card.rarity];
                 } else if (currentCard.count != 2 && currentCard.rarity != 'Legendary') {
                     currentCard.count++;
 
                     deck.nbCards++;
+                    deck.cost = deck.cost + HearthstoneConstant.dust[card.rarity];
                 }
 
                 this.write();
@@ -105,13 +109,16 @@ const HearthstoneStore = Reflux.createStore({
             let index = _.findIndex(deck.cards, 'cardId', id);
 
             if (index != -1) {
+                let rarity = deck.cards[index].rarity;
                 deck.cards[index].count--;
 
+                // remove if it's the last occurrence of this card in the deck
                 if (deck.cards[index].count == 0) {
                     deck.cards.splice(index, 1);
                 }
 
                 deck.nbCards--;
+                deck.cost = deck.cost - HearthstoneConstant.dust[rarity];
 
                 this.write();
             }
