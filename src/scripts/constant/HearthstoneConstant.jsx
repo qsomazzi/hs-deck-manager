@@ -10,7 +10,9 @@ export default {
             'search': 'Recherche',
             'export-decks': 'Exporter les Decks',
             'export-deck': 'Exporter le deck sélectionné',
-            'import-decks': 'Importer de nouveaux decks'
+            'confirm-remove-deck': 'Êtes vous sur de vouloir supprimer ce deck ?',
+            'no': 'Non',
+            'yes': 'Oui'
         },
         en: {
             'add-deck': 'Add Deck',
@@ -22,7 +24,9 @@ export default {
             'search': 'Search',
             'export-decks': 'Export Decks',
             'export-deck': 'Export current deck',
-            'import-decks': 'Import new decks'
+            'confirm-remove-deck': 'Are you sure you want to remove this deck ?',
+            'no': 'No',
+            'yes': 'Yes'
         }
     }
 };

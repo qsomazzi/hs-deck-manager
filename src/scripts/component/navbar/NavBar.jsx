@@ -10,9 +10,9 @@ import TranslationHelper               from './../../helper/TranslationHelper';
  */
 class NavBar extends Component {
     renderOptions() {
-        let { heroes } = this.props;
+        let { filters } = this.props;
 
-        return _.map(heroes, hero => {
+        return _.map(filters.heroes, hero => {
             return {
                 value:       hero.cardId,
                 label:       hero.name,
@@ -70,14 +70,7 @@ class NavBar extends Component {
 
 NavBar.PropTypes = {
     nbCards: PropTypes.number.isRequired,
-    filters: PropTypes.object.isRequired,
-    heroes:  PropTypes.arrayOf(
-        PropTypes.shape({
-            cardId:      PropTypes.string.isRequired,
-            name:        PropTypes.string.isRequired,
-            playerClass: PropTypes.string.isRequired
-        })
-    ).isRequired
+    filters: PropTypes.array.isRequired
 };
 
 export default NavBar;

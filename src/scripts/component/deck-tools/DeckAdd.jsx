@@ -1,9 +1,9 @@
-import React, { Component, PropTypes }             from 'react';
-import { ListGroup, ListGroupItem, Button, Modal } from 'react-bootstrap';
-import _                                           from 'lodash';
-import classNames                                  from 'classnames';
-import HearthstoneActions                          from './../../action/HearthstoneActions';
-import TranslationHelper                           from './../../helper/TranslationHelper'
+import React, { Component, PropTypes } from 'react';
+import { Button, Modal }               from 'react-bootstrap';
+import _                               from 'lodash';
+import classNames                      from 'classnames';
+import HearthstoneActions              from './../../action/HearthstoneActions';
+import TranslationHelper               from './../../helper/TranslationHelper'
 
 /**
  * DeckAdd
@@ -13,7 +13,8 @@ class DeckAdd extends Component {
         super(props);
 
         this.state = {
-            selectedHero: "HERO_01"
+            selectedHero: "HERO_01",
+            displayModal: false
         };
     }
 
@@ -25,16 +26,22 @@ class DeckAdd extends Component {
 
     addDeck(e) {
         if (e.keyCode == 13) {
+            this.toggleModal();
             HearthstoneActions.addDeck(e.target.value, this.state.selectedHero);
         }
     }
 
+
+    toggleModal() {
+        this.setState({displayModal: !this.state.displayModal});
+    }
+
     renderModal() {
-        let { showModal, heroes } = this.props;
-        let { selectedHero }      = this.state;
+        let { heroes } = this.props;
+        let { selectedHero, displayModal } = this.state;
 
         return (
-            <Modal show={showModal} onHide={HearthstoneActions.toggleModal}>
+            <Modal show={displayModal} onHide={this.toggleModal.bind(this)}>
                 <Modal.Header closeButton>
                     <Modal.Title>{TranslationHelper.translate('add-deck')}</Modal.Title>
                 </Modal.Header>
@@ -78,7 +85,7 @@ class DeckAdd extends Component {
                     bsStyle="primary"
                     bsSize="large"
                     block
-                    onClick={HearthstoneActions.toggleModal} >
+                    onClick={this.toggleModal.bind(this)} >
                     {TranslationHelper.translate('add-deck')}
                 </Button>
                 {this.renderModal()}

@@ -13,13 +13,12 @@ const HearthstoneStore = Reflux.createStore({
     listenables: HearthstoneActions,
 
     init() {
-        this.decks     = localStorage.decks == undefined  ? []   : JSON.parse(localStorage.decks);
-        this.locale    = localStorage.locale == undefined ? 'fr' : JSON.parse(localStorage.locale);
-        this.heroes    = this.initHeroes();
-        this.cards     = this.initCards();
-        this.current   = null;
-        this.showModal = false;
-        this.filters   = {
+        this.decks   = localStorage.decks == undefined  ? []   : JSON.parse(localStorage.decks);
+        this.locale  = localStorage.locale == undefined ? 'fr' : JSON.parse(localStorage.locale);
+        this.heroes  = this.initHeroes();
+        this.cards   = this.initCards();
+        this.current = null;
+        this.filters = {
             cards:   this.cards,
             heroes:  this.initHeroes(true),
             hero:    null,
@@ -42,10 +41,7 @@ const HearthstoneStore = Reflux.createStore({
 
     loadDeck(current) {
         this.current = current;
-
-        this.trigger();
-
-        this.updateFilters();
+        this.updateFilters(current);
     },
 
     addDeck(deckName, hero) {
@@ -56,22 +52,20 @@ const HearthstoneStore = Reflux.createStore({
             nbCards: 0
         });
 
-        // Close modal
-        this.showModal = !this.showModal;
-
         this.write();
     },
 
     removeDeck(current) {
         this.decks.splice(current, 1);
         this.current = null;
+        this.updateFilters();
 
         this.write();
     },
 
     addCard(id) {
         if (this.current != null) {
-            let card      = this.cards[_.findIndex(this.cards, 'cardId', id)];
+            let card      = this.filters.cards[_.findIndex(this.filters.cards, 'cardId', id)];
             let deck      = this.decks[this.current];
             let newCard   = true;
             let currentCard;
@@ -144,12 +138,6 @@ const HearthstoneStore = Reflux.createStore({
         this.filterCards();
     },
 
-    toggleModal() {
-        this.showModal = !this.showModal;
-
-        this.trigger();
-    },
-
     /* -------------
      *   Internals
      * ------------- */
@@ -188,15 +176,22 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     filterCards() {
-        let { hero, cards } = this.filters;
-        cards = this.cards;
+        let { hero, heroes } = this.filters;
+        let cards            = this.cards;
 
-        // First filter on Hero
+        // First filter on available heroes
+        if (heroes.length == 2) {
+            cards = _.filter(cards, card => {
+                return !card.hasOwnProperty('playerClass') || heroes[1].playerClass == card.playerClass;
+            });
+        }
+
+        // Then filter on selected Hero
         if (hero != null) {
             if (hero.playerClass != 'Neutral') {
-                cards = _.filter(this.cards, 'playerClass', hero.playerClass);
+                cards = _.filter(cards, 'playerClass', hero.playerClass);
             } else {
-                cards = _.filter(this.cards, card => {
+                cards = _.filter(cards, card => {
                     return !card.hasOwnProperty('playerClass');
                 });
             }
@@ -214,10 +209,19 @@ const HearthstoneStore = Reflux.createStore({
         this.trigger();
     },
 
-    updateFilters() {
-        // Update heroes filter for the selected deck
+    updateFilters(current = null) {
+        this.filters.hero   = null;
+        this.filters.heroes = this.initHeroes(true);
 
-        // Filtercards ??
+        // Update heroes filter for the selected deck
+        if (current != null) {
+            let currentHero = this.decks[current].hero;
+            let heroIndex   = _.findIndex(this.filters.heroes, 'cardId', currentHero);
+
+            this.filters.heroes = _.pullAt(this.filters.heroes, 0, heroIndex);
+        }
+
+        this.filterCards();
     },
 
     /* -------------
@@ -230,13 +234,12 @@ const HearthstoneStore = Reflux.createStore({
 
     getComposedState() {
         return {
-            decks:     this.decks,
-            locale:    this.locale,
-            current:   this.current,
-            cards:     this.cards,
-            heroes:    this.heroes,
-            filters:   this.filters,
-            showModal: this.showModal
+            decks:   this.decks,
+            locale:  this.locale,
+            current: this.current,
+            cards:   this.cards,
+            heroes:  this.heroes,
+            filters: this.filters
         };
     }
 });

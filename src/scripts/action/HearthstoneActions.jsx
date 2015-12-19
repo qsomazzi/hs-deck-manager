@@ -15,8 +15,7 @@ const HearthstoneActions = Reflux.createActions([
     'toggleFilter',
 
     // Settings
-    'changeLocale',
-    'toggleModal'
+    'changeLocale'
 ]);
 
 export default HearthstoneActions;
