@@ -52,7 +52,8 @@ const HearthstoneStore = Reflux.createStore({
         this.decks.push({
             name: deckName,
             cards: [],
-            hero: hero
+            hero: hero,
+            nbCards: 0
         });
 
         // Close modal
@@ -71,29 +72,32 @@ const HearthstoneStore = Reflux.createStore({
     addCard(id) {
         if (this.current != null) {
             let card      = this.cards[_.findIndex(this.cards, 'cardId', id)];
-            let deckCards = this.decks[this.current].cards;
+            let deck      = this.decks[this.current];
             let newCard   = true;
-            let nbCards   = this.countCurrentDeck();
             let currentCard;
 
-            _.forEach(deckCards, unit => {
+            _.forEach(deck.cards, unit => {
                 if (unit.cardId == card.cardId) {
                     currentCard = unit;
                     newCard     = false;
                 }
             });
 
-            if (nbCards < 30) {
+            if (deck.nbCards < 30) {
                 if (newCard) {
-                    deckCards.push({
+                    deck.cards.push({
                         name:   card.name,
                         cost:   card.cost,
                         cardId: card.cardId,
                         rarity: card.rarity,
                         count:  1
                     });
+
+                    deck.nbCards++;
                 } else if (currentCard.count != 2 && currentCard.rarity != 'Legendary') {
                     currentCard.count++;
+
+                    deck.nbCards++;
                 }
 
                 this.write();
@@ -103,15 +107,17 @@ const HearthstoneStore = Reflux.createStore({
 
     removeCard(id) {
         if (this.current != null) {
-            let deckCards = this.decks[this.current].cards;
-            let index     = _.findIndex(deckCards, 'cardId', id);
+            let deck  = this.decks[this.current];
+            let index = _.findIndex(deck.cards, 'cardId', id);
 
             if (index != -1) {
-                deckCards[index].count--;
+                deck.cards[index].count--;
 
-                if (deckCards[index].count == 0) {
-                    deckCards.splice(index, 1);
+                if (deck.cards[index].count == 0) {
+                    deck.cards.splice(index, 1);
                 }
+
+                deck.nbCards--;
 
                 this.write();
             }
@@ -147,21 +153,6 @@ const HearthstoneStore = Reflux.createStore({
     /* -------------
      *   Internals
      * ------------- */
-
-    countCurrentDeck() {
-        if (this.current == null) {
-            return null;
-        }
-
-        let deckCards = this.decks[this.current].cards;
-        let nbCards   = 0;
-
-        _.forEach(deckCards, unit => {
-            nbCards = nbCards + unit.count;
-        });
-
-        return nbCards;
-    },
 
     initCards() {
         let cards = [];

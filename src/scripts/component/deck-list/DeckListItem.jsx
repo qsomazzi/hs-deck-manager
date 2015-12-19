@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { ListGroupItem }               from 'react-bootstrap';
 import HearthstoneActions              from './../../action/HearthstoneActions';
-import TranslationHelper               from './../../helper/TranslationHelper';
+import Export                          from './../export/Export';
 
 /**
  * DeckListItem
@@ -14,19 +14,24 @@ class DeckListItem extends Component {
         let { deck, position, current } = this.props;
 
         let active = current == position ? 'active' : '';
-        let data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(deck));
 
         return (
             <ListGroupItem active={active} >
-                <img src={`images/heroes/${deck.hero}_icon.png`} alt={deck.hero} />
-                <span onClick={HearthstoneActions.loadDeck.bind(this, position)}>{deck.name}</span>
+                <span onClick={HearthstoneActions.loadDeck.bind(this, position)}>
+                    <img src={`images/heroes/${deck.hero}_icon.png`} alt={deck.hero} />
+                    <span>{deck.name}</span>
+                </span>
+                
                 <div className="actions">
                     <span className="removeDeck" onClick={HearthstoneActions.removeDeck.bind(this, position)} >
                         <i className="fa fa-remove"></i>
                     </span>
-                    <a className="exportDeck" href={data} download={`${deck.name}.deck.json`} title={TranslationHelper.translate('export-decks')}>
-                        <i className="fa fa-download"></i>
-                    </a>
+
+                    <Export 
+                        data={deck}
+                        filename={`${deck.name}.deck.json`}
+                        type="deck"
+                        className="exportDeck" />
                 </div>
             </ListGroupItem>
         );

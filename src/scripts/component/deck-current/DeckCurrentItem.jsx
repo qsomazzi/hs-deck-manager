@@ -4,9 +4,9 @@ import classNames                      from 'classnames';
 import HearthstoneActions              from './../../action/HearthstoneActions';
 
 /**
- * DeckDetailsItem
+ * DeckCurrentItem
  */
-class DeckDetailsItem extends Component {
+class DeckCurrentItem extends Component {
     /**
      * @return {XML}
      */
@@ -36,7 +36,7 @@ class DeckDetailsItem extends Component {
     }
 }
 
-DeckDetailsItem.PropTypes = {
+DeckCurrentItem.PropTypes = {
     card: PropTypes.shape({
         name:   PropTypes.string.isRequired,
         cost:   PropTypes.number.isRequired,
@@ -45,4 +45,4 @@ DeckDetailsItem.PropTypes = {
     }).isRequired
 };
 
-export default DeckDetailsItem;
+export default DeckCurrentItem;

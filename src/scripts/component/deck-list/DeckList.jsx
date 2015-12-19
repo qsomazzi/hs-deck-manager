@@ -15,7 +15,7 @@ class DeckList extends Component {
         let { decks, current } = this.props;
 
         let deckList = _.map(decks, (deck, position) => {
-            return <DeckListItem key={`deck-${position}`} deck={deck} position={position} current={current} />;
+            return <DeckListItem key={`deck-list-item-${position}`} deck={deck} position={position} current={current} />;
         });
 
         return (

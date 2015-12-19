@@ -21,7 +21,7 @@ class Card extends Component {
 }
 
 Card.PropTypes = {
-    card:   PropTypes.shape({
+    card: PropTypes.shape({
         name:   PropTypes.string.isRequired,
         cardId: PropTypes.string.isRequired
     }).isRequired

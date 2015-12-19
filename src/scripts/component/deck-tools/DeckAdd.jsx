@@ -47,7 +47,7 @@ class DeckAdd extends Component {
                             });
 
                             return (
-                                <div key={key} className={heroClass} onClick={this.selectHero.bind(this, hero.cardId)}>
+                                <div key={`hero-${key}`} className={heroClass} onClick={this.selectHero.bind(this, hero.cardId)}>
                                     <img src={`images/heroes/${hero.cardId}.png`} alt={hero.name} />
                                 </div>
                             );
@@ -63,7 +63,6 @@ class DeckAdd extends Component {
                         placeholder={TranslationHelper.translate('add-deck')}
                         onKeyDown={this.addDeck.bind(this)} />
                     <input type="hidden" ref="selected-hero" value={selectedHero} />
-
                 </Modal.Body>
             </Modal>
         );
