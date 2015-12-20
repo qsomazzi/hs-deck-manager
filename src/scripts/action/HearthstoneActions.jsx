@@ -14,6 +14,7 @@ const HearthstoneActions = Reflux.createActions([
     'selectHero',
     'selectRarity',
     'selectType',
+    'selectSet',
     'toggleFilter',
 
     // Settings

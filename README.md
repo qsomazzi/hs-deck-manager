@@ -26,7 +26,7 @@ With 'priority' order
 - Import JSON
 - Filters cristal all = none
 - Redesign Filters Bar
-- Filter on extension (LOA, GVG,...)
+- Translate Filters
 - Filter cards on Mechanism (DeathRattle, Discover, Taunt, BattleCry, ...)
 - Translate current deck card.name
 - Review event system on actions

@@ -85,6 +85,13 @@ class NavBar extends Component {
                     onChange={HearthstoneActions.selectType}
                     className="type" />
 
+                <Select
+                    value={filters.cardSet}
+                    options={this.renderOptions('cardSet')}
+                    placeholder="Extension Filter"
+                    onChange={HearthstoneActions.selectSet}
+                    className="set" />
+
                 <div className="cristals">
                     {cristals}
                 </div>

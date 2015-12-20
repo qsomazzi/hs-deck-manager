@@ -10166,10 +10166,10 @@
         "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/frfr/animated/GVG_121_premium.gif",
         "locale": "frFR"
     }],
-    "Promotion": [{
+    "Reward": [{
         "cardId": "PRO_001",
         "name": "Elite Tauren Chieftain",
-        "cardSet": "Promotion",
+        "cardSet": "Reward",
         "type": "Minion",
         "rarity": "Legendary",
         "cost": 5,
@@ -10190,7 +10190,7 @@
     }, {
         "cardId": "EX1_112",
         "name": "Gelbin Mekkanivelle",
-        "cardSet": "Promotion",
+        "cardSet": "Reward",
         "type": "Minion",
         "faction": "Alliance",
         "rarity": "Legendary",
@@ -10209,8 +10209,7 @@
         "mechanics": [{
             "name": "Battlecry"
         }]
-    }],
-    "Reward": [{
+    }, {
         "cardId": "NEW1_016",
         "name": "Perroquet du capitaine",
         "cardSet": "Reward",

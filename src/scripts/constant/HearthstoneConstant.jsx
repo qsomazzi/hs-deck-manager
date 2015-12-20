@@ -47,5 +47,15 @@ export default {
         'Spell',
         'Minion',
         'Weapon'
+    ],
+    cardSet: [
+        'Basic',
+        'Classic',
+        'Naxxramas',
+        'Goblins vs Gnomes',
+        'Reward',
+        'Blackrock Mountain',
+        'The Grand Tournament',
+        'The League of Explorers'
     ]
 };

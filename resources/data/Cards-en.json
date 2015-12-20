@@ -10166,10 +10166,10 @@
         "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/GVG_121_premium.gif",
         "locale": "enUS"
     }],
-    "Promotion": [{
+    "Reward": [{
         "cardId": "PRO_001",
         "name": "Elite Tauren Chieftain",
-        "cardSet": "Promotion",
+        "cardSet": "Reward",
         "type": "Minion",
         "rarity": "Legendary",
         "cost": 5,
@@ -10190,7 +10190,7 @@
     }, {
         "cardId": "EX1_112",
         "name": "Gelbin Mekkatorque",
-        "cardSet": "Promotion",
+        "cardSet": "Reward",
         "type": "Minion",
         "faction": "Alliance",
         "rarity": "Legendary",
@@ -10209,8 +10209,7 @@
         "mechanics": [{
             "name": "Battlecry"
         }]
-    }],
-    "Reward": [{
+    }, {
         "cardId": "NEW1_016",
         "name": "Captain's Parrot",
         "cardSet": "Reward",
