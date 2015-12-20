@@ -50,6 +50,10 @@ class NavBar extends Component {
         );
     }
 
+    renderValue(option) {
+        return <img src={option.img} style={{borderRadius: '50%'}} alt={option.value} />;
+    }
+
     /**
      * @return {XML}
      */
@@ -72,41 +76,41 @@ class NavBar extends Component {
                 <Select
                     value={filters.hero != null ? filters.hero.cardId : null}
                     options={this.renderHeroesOptions()}
-                    placeholder="Heroes's Filter"
+                    placeholder="Hero"
                     onChange={HearthstoneActions.selectHero}
                     optionRenderer={this.renderOption}
-                    valueRenderer={this.renderOption}
+                    valueRenderer={this.renderValue}
                     className="heroes" />
 
                 <Select
                     value={filters.rarity}
                     options={this.renderImageOptions('rarity')}
-                    placeholder="Rarity Filter"
+                    placeholder="Rarity"
                     onChange={HearthstoneActions.selectRarity}
                     optionRenderer={this.renderOption}
-                    valueRenderer={this.renderOption}
+                    valueRenderer={this.renderValue}
                     className="rarity" />
-
-                <Select
-                    value={filters.cardType}
-                    options={this.renderTextOptions('cardType')}
-                    placeholder="Type Filter"
-                    onChange={HearthstoneActions.selectType}
-                    className="type" />
 
                 <Select
                     value={filters.cardSet}
                     options={this.renderImageOptions('cardSet')}
-                    placeholder="Extension Filter"
+                    placeholder="Extension"
                     onChange={HearthstoneActions.selectSet}
                     optionRenderer={this.renderOption}
-                    valueRenderer={this.renderOption}
+                    valueRenderer={this.renderValue}
                     className="set" />
+
+                <Select
+                    value={filters.cardType}
+                    options={this.renderTextOptions('cardType')}
+                    placeholder="Type"
+                    onChange={HearthstoneActions.selectType}
+                    className="type" />
 
                 <Select
                     value={filters.mechanics}
                     options={this.renderTextOptions('mechanics')}
-                    placeholder="Mechanicsm Filter"
+                    placeholder="Mechanics"
                     onChange={HearthstoneActions.selectMechanics}
                     className="mechanics" />
 

@@ -3,12 +3,19 @@ Hearthstone Deck Manager
 
 The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. 
 
+Require
+-------
+- npm
+- gulp
+- babel
+
 Installation
 ------------
 
 Run in a cmd line the following commands
 - `npm install`
-- `npm start`
+    - `npm start` -> for prod / test
+    - `npm dev` -> for dev
 
 Contributions
 -------------
