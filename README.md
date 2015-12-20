@@ -15,14 +15,12 @@ Contributions
 
 Feel free to contribute to this project. You can submit a PR or an issue, I will look into it as soon as possible.
 
-
 Features that needs to be developed
 -----------------------------------
 
 With 'priority' order
 
-- Add Lazy Load on media
-- Alert : Deck isn't full // Is this usefull ? How to display this softly ? 
+- Add Lazy Load on media 
 - Import JSON
 - Filters cristal all = none
 - Redesign Filters Bar
@@ -35,8 +33,6 @@ With 'priority' order
 - Player current collection
 - Filter cards on Owned
 - Add better translation system
-
-
 
 Resources
 ---------

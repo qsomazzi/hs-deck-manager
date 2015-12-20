@@ -48,10 +48,11 @@ class DeckListItem extends Component {
     render() {
         let { deck, position, current } = this.props;
 
-        let active = current == position ? 'active' : '';
+        let active = current == position ? 'active'  : '';
+        let style  = deck.nbCards == 30  ? 'success' : 'danger';
 
         return (
-            <ListGroupItem active={active} >
+            <ListGroupItem active={active} bsStyle={style}>
                 <span onClick={HearthstoneActions.loadDeck.bind(this, position)}>
                     <img src={`images/heroes/${deck.hero}_icon.png`} alt={deck.hero} />
                     <span>{deck.name}</span>
