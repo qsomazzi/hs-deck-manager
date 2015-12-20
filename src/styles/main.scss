@@ -1,8 +1,9 @@
-$app-height: 650px;
+$app-height: 820px;
 $navBar-height: 65px;
 $search-area-height: $app-height;
 $deckDetails-height: $app-height;
 $deckDetails-cpt-height: 35px;
+$deckAdd-height: 66px;
 
 @font-face {
   font-family: HearthstoneFont;
@@ -55,52 +56,57 @@ $deckDetails-cpt-height: 35px;
         width: 40%;
         flex: 1 auto;
 
-        .list-group-item {
-          img {
-            width: 32px;
-            margin-right: 10px;
-          }
+        .list-group {
+          height: $app-height - $deckAdd-height;
+          overflow-y: scroll;
 
-          span {
-            cursor: pointer;
-          }
-
-          .actions {
-            display: none;
-            margin-top: 6px;
-            float: right;
-
-            .exportDeck{
-              color: #FFFFFF;
-              margin-left: 5px;
+          .list-group-item {
+            img {
+              width: 32px;
+              margin-right: 10px;
             }
-          }
 
-          &.active {
-            color: #fff;
+            span {
+              cursor: pointer;
+            }
 
             .actions {
-              display: block;
+              display: none;
+              margin-top: 6px;
+              float: right;
+
+              .exportDeck{
+                color: #FFFFFF;
+                margin-left: 5px;
+              }
             }
 
-            &.list-group-item-success {
-              background-color: #3c763d;
-              border-color: #3c763d;
-            }
+            &.active {
+              color: #fff;
 
-            &.list-group-item-danger {
-              background-color: #a94442;
-              border-color: #a94442;
-            }
+              .actions {
+                display: block;
+              }
 
-            &.list-group-item-info {
-              background-color: #31708f;
-              border-color: #31708f;
-            }
+              &.list-group-item-success {
+                background-color: #3c763d;
+                border-color: #3c763d;
+              }
 
-            &.list-group-item-warning {
-              background-color: #8a6d3b;
-              border-color: #8a6d3b;
+              &.list-group-item-danger {
+                background-color: #a94442;
+                border-color: #a94442;
+              }
+
+              &.list-group-item-info {
+                background-color: #31708f;
+                border-color: #31708f;
+              }
+
+              &.list-group-item-warning {
+                background-color: #8a6d3b;
+                border-color: #8a6d3b;
+              }
             }
           }
         }
@@ -307,7 +313,7 @@ $deckDetails-cpt-height: 35px;
           flex-grow: 1;
 
           img {
-            max-width: 240px;
+            max-width: 190px;
             cursor: pointer;
           }
         }

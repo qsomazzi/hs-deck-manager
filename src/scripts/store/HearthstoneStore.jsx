@@ -45,7 +45,8 @@ const HearthstoneStore = Reflux.createStore({
      * ------------- */
 
     loadDeck(current) {
-        this.current = current;
+        this.current = current == this.current ? null : current;
+        
         this.updateFilters(current);
     },
 
