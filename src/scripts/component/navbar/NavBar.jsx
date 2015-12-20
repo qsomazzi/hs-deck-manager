@@ -22,12 +22,12 @@ class NavBar extends Component {
         });
     }
 
-    renderRarityOptions() {
-        return _.map(HearthstoneConstant.rarity, rarity => {
+    renderOptions(filterType) {
+        return _.map(HearthstoneConstant[filterType], type => {
             return {
-                value: rarity,
-                label: rarity,
-                img:   `images/resources/gem_${rarity.toLowerCase()}.png`
+                value: type,
+                label: type,
+                img:   `images/resources/gem_${type.toLowerCase()}.png`
             }
         });
     }
@@ -57,10 +57,9 @@ class NavBar extends Component {
             );
         });
 
+        // <input type="text" className="search form-control" placeholder={TranslationHelper.translate('search')} />
         return (
             <Navbar staticTop>
-                <input type="text" className="search form-control" placeholder={TranslationHelper.translate('search')} />
-
                 <Select
                     value={filters.hero != null ? filters.hero.cardId : null}
                     options={this.renderHeroesOptions()}
@@ -72,12 +71,19 @@ class NavBar extends Component {
 
                 <Select
                     value={filters.rarity}
-                    options={this.renderRarityOptions()}
+                    options={this.renderOptions('rarity')}
                     placeholder="Rarity Filter"
                     onChange={HearthstoneActions.selectRarity}
                     optionRenderer={this.renderOption}
                     valueRenderer={this.renderOption}
                     className="rarity" />
+
+                <Select
+                    value={filters.cardType}
+                    options={this.renderOptions('cardType')}
+                    placeholder="Type Filter"
+                    onChange={HearthstoneActions.selectType}
+                    className="type" />
 
                 <div className="cristals">
                     {cristals}

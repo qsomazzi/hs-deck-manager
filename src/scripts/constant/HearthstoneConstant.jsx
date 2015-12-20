@@ -42,5 +42,10 @@ export default {
         'Rare',
         'Epic',
         'Legendary'
+    ],
+    cardType: [
+        'Spell',
+        'Minion',
+        'Weapon'
     ]
 };

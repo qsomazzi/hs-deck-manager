@@ -21,21 +21,20 @@ Features that needs to be developed
 
 With 'priority' order
 
-1. Add Lazy Load on media
-2. Alert : Deck isn't full // Is this usefull ? How to display this softly ? 
-3. Import JSON
-4. Filters cristal all = none
-5. Redesign Filters Bar
-6. Filter cards on Type (Spell, Minion, Weapon)
-7. Filter cards on Mechanism (DeathRattle, Discover, Taunt, BattleCry, ...)
-8. Filter on extension (LOA, GVG,...)
-9. Translate current deck card.name
-10. Review event system on actions
-11. Redesign Deck list
-12. Search by Card Name
-13. Player current collection
-14. Filter cards on Owned
-15. Add better translation system
+- Add Lazy Load on media
+- Alert : Deck isn't full // Is this usefull ? How to display this softly ? 
+- Import JSON
+- Filters cristal all = none
+- Redesign Filters Bar
+- Filter on extension (LOA, GVG,...)
+- Filter cards on Mechanism (DeathRattle, Discover, Taunt, BattleCry, ...)
+- Translate current deck card.name
+- Review event system on actions
+- Redesign Deck list
+- Search by Card Name
+- Player current collection
+- Filter cards on Owned
+- Add better translation system
 
 
 
