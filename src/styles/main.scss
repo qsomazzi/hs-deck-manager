@@ -1,5 +1,5 @@
 $app-height: 650px;
-$navBar-height: 60px;
+$navBar-height: 110px;
 $search-area-height: $app-height;
 $deckDetails-height: $app-height;
 $deckDetails-cpt-height: 35px;
@@ -222,16 +222,18 @@ $deckDetails-cpt-height: 35px;
 
         .container {
           padding-left: 0;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
 
           .search {
             width: 200px;
-            float: left;
             height: 47px;
             margin-right: 20px;
           }
 
           .Select {
-            float: left;
             margin-right: 20px;
 
             .Select-control {
@@ -250,25 +252,14 @@ $deckDetails-cpt-height: 35px;
               padding: 12px 10px;
             }
 
-            &.heroes {
-              width: 250px;
-            }
-
-            &.rarity {
-              width: 160px;
-            }
-
-            &.type {
-              width: 130px;
-            }
-
-            &.set {
-              width: 250px;
-            }
+            &.heroes {width: 250px;}
+            &.rarity {width: 160px;}
+            &.type {width: 130px;}
+            &.set {width: 250px;}
+            &.mechanics {width: 210px;}
           }
 
           .cristals {
-            float: left;
             padding: 5px 0;
             display: flex;
             align-items: center;

@@ -103,6 +103,13 @@ class NavBar extends Component {
                     valueRenderer={this.renderOption}
                     className="set" />
 
+                <Select
+                    value={filters.mechanics}
+                    options={this.renderTextOptions('mechanics')}
+                    placeholder="Mechanicsm Filter"
+                    onChange={HearthstoneActions.selectMechanics}
+                    className="mechanics" />
+
                 <div className="cristals">
                     {cristals}
                 </div>

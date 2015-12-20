@@ -25,7 +25,6 @@ With 'priority' order
 - Filters cristal all = none
 - Redesign Filters Bar
 - Translate Filters
-- Filter cards on Mechanism (DeathRattle, Discover, Taunt, BattleCry, ...)
 - Translate current deck card.name
 - Review event system on actions
 - Redesign Deck list

@@ -20,13 +20,14 @@ const HearthstoneStore = Reflux.createStore({
         this.cards   = this.initCards();
         this.current = null;
         this.filters = {
-            cards:    this.cards,
-            heroes:   this.initHeroes(true),
-            hero:     null,
-            rarity:   null,
-            cardType: null,
-            cardSet:  null,
-            cristal:  [
+            cards:     this.cards,
+            heroes:    this.initHeroes(true),
+            hero:      null,
+            rarity:    null,
+            cardType:  null,
+            cardSet:   null,
+            mechanics: null,
+            cristal:   [
                 true, // 0
                 true, // 1
                 true, // 2
@@ -160,6 +161,12 @@ const HearthstoneStore = Reflux.createStore({
         this.filterCards();
     },
 
+    selectMechanics(value) {
+        this.filters.mechanics = value != '' ? value : null;
+
+        this.filterCards();
+    },
+
     toggleFilter(filter) {
         this.filters.cristal[filter] = ! this.filters.cristal[filter];
 
@@ -204,8 +211,8 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     filterCards() {
-        let { hero, heroes, rarity, cardType, cardSet } = this.filters;
-        let cards                                       = this.cards;
+        let { hero, heroes, rarity, cardType, cardSet, mechanics } = this.filters;
+        let cards                                                  = this.cards;
 
         // First filter on available heroes
         if (heroes.length == 2) {
@@ -248,6 +255,19 @@ const HearthstoneStore = Reflux.createStore({
         // Then filter on set selection
         if (cardSet != null) {
             cards = _.filter(cards, 'cardSet', cardSet);
+        }
+
+        // Then filter on mechanics selection
+        if (mechanics != null) {
+            cards = _.filter(cards, card => {
+                if (card.hasOwnProperty('mechanics')) {
+                    if (_.findIndex(card.mechanics, 'name', mechanics) != -1) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
         }
 
         // Then filter on Mana selection

@@ -57,5 +57,29 @@ export default {
         'Blackrock Mountain':      'extension/Blackrock_Mountain.png',
         'The Grand Tournament':    'extension/The_Grand_Tournament.png',
         'The League of Explorers': 'extension/The_League_of_Explorers.png'
-    }
+    },
+    mechanics: [
+        "Battlecry",
+        "HealTarget",
+        "Freeze",
+        "Aura",
+        "Taunt",
+        "ImmuneToSpellpower",
+        "Charge",
+        "Spellpower",
+        "AdjacentBuff",
+        "Silence",
+        "Overload",
+        "Windfury",
+        "Stealth",
+        "Divine Shield",
+        "Deathrattle",
+        "AffectedBySpellPower",
+        "Secret",
+        "Enrage",
+        "Combo",
+        "Poisonous",
+        "Inspire",
+        "InvisibleDeathrattle"
+    ]
 };
