@@ -209,7 +209,6 @@ $deckDetails-cpt-height: 35px;
           }
 
           .Select {
-            width: 250px;
             float: left;
 
             .Select-control {
@@ -227,16 +226,31 @@ $deckDetails-cpt-height: 35px;
             .Select-clear {
               padding: 12px 10px;
             }
+
+            &.heroes {
+              width: 250px;
+              margin-right: 20px;
+            }
+
+            &.rarity {
+              width: 160px;
+            }
           }
 
-          .filters {
+          .cristals {
             float: left;
             margin-left: 20px;
             padding: 5px 0;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 135px;
 
             img {
-              height: 40px;
+              height: 20px;
               cursor: pointer;
+              margin-right: 3px;
+              margin-bottom: 2px;
             }
           }
         }

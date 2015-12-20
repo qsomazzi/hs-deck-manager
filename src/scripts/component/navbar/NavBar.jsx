@@ -4,20 +4,30 @@ import _                               from 'lodash';
 import Select                          from 'react-select';
 import HearthstoneActions              from './../../action/HearthstoneActions';
 import TranslationHelper               from './../../helper/TranslationHelper';
+import HearthstoneConstant             from './../../constant/HearthstoneConstant';
 
 /**
  * NavBar
  */
 class NavBar extends Component {
-    renderOptions() {
+    renderHeroesOptions() {
         let { filters } = this.props;
 
         return _.map(filters.heroes, hero => {
             return {
                 value:       hero.cardId,
                 label:       hero.name,
-                img:         `images/heroes/${hero.cardId}_small.png`,
-                playerClass: hero.playerClass
+                img:         `images/heroes/${hero.cardId}_small.png`
+            }
+        });
+    }
+
+    renderRarityOptions() {
+        return _.map(HearthstoneConstant.rarity, rarity => {
+            return {
+                value: rarity,
+                label: rarity,
+                img:   `images/resources/gem_${rarity.toLowerCase()}.png`
             }
         });
     }
@@ -25,7 +35,7 @@ class NavBar extends Component {
     renderOption(option) {
         return (
             <div>
-                <img src={option.img} style={{borderRadius: '50%', marginRight: '10px'}} alt={option.playerClass} />
+                <img src={option.img} style={{borderRadius: '50%', marginRight: '10px'}} alt={option.value} />
                 {option.label}
             </div>
         );
@@ -37,27 +47,40 @@ class NavBar extends Component {
     render() {
         let { filters, nbCards } = this.props;
 
+        let cristals = _.map([0, 1, 2, 3, 4, 5, 6, 7], cost => {
+            return (
+                <img
+                    key={`filter-${cost}`}
+                    src={`images/resources/filter_${cost}${filters.cristal[cost] ? '_active' : '' }.png`}
+                    alt={cost}
+                    onClick={HearthstoneActions.toggleFilter.bind(this, cost)} />
+            );
+        });
+
         return (
             <Navbar staticTop>
                 <input type="text" className="search form-control" placeholder={TranslationHelper.translate('search')} />
 
                 <Select
                     value={filters.hero != null ? filters.hero.cardId : null}
-                    options={this.renderOptions()}
+                    options={this.renderHeroesOptions()}
                     placeholder="Heroes's Filter"
                     onChange={HearthstoneActions.selectHero}
                     optionRenderer={this.renderOption}
-                    valueRenderer={this.renderOption} />
+                    valueRenderer={this.renderOption}
+                    className="heroes" />
 
-                <div className="filters">
-                    <img src={`images/resources/filter_0${filters.cristal[0] ? '_active' : '' }.png`} alt="0" onClick={HearthstoneActions.toggleFilter.bind(this, 0)} />
-                    <img src={`images/resources/filter_1${filters.cristal[1] ? '_active' : '' }.png`} alt="1" onClick={HearthstoneActions.toggleFilter.bind(this, 1)} />
-                    <img src={`images/resources/filter_2${filters.cristal[2] ? '_active' : '' }.png`} alt="2" onClick={HearthstoneActions.toggleFilter.bind(this, 2)} />
-                    <img src={`images/resources/filter_3${filters.cristal[3] ? '_active' : '' }.png`} alt="3" onClick={HearthstoneActions.toggleFilter.bind(this, 3)} />
-                    <img src={`images/resources/filter_4${filters.cristal[4] ? '_active' : '' }.png`} alt="4" onClick={HearthstoneActions.toggleFilter.bind(this, 4)} />
-                    <img src={`images/resources/filter_5${filters.cristal[5] ? '_active' : '' }.png`} alt="5" onClick={HearthstoneActions.toggleFilter.bind(this, 5)} />
-                    <img src={`images/resources/filter_6${filters.cristal[6] ? '_active' : '' }.png`} alt="6" onClick={HearthstoneActions.toggleFilter.bind(this, 6)} />
-                    <img src={`images/resources/filter_7${filters.cristal[7] ? '_active' : '' }.png`} alt="7" onClick={HearthstoneActions.toggleFilter.bind(this, 7)} />
+                <Select
+                    value={filters.rarity}
+                    options={this.renderRarityOptions()}
+                    placeholder="Rarity Filter"
+                    onChange={HearthstoneActions.selectRarity}
+                    optionRenderer={this.renderOption}
+                    valueRenderer={this.renderOption}
+                    className="rarity" />
+
+                <div className="cristals">
+                    {cristals}
                 </div>
 
                 <p className="navbar-text navbar-right">

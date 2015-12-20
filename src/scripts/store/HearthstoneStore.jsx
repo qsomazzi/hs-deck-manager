@@ -23,6 +23,7 @@ const HearthstoneStore = Reflux.createStore({
             cards:   this.cards,
             heroes:  this.initHeroes(true),
             hero:    null,
+            rarity:  null,
             cristal: [
                 true, // 0
                 true, // 1
@@ -139,6 +140,12 @@ const HearthstoneStore = Reflux.createStore({
         this.filterCards();
     },
 
+    selectRarity(value) {
+        this.filters.rarity = value != '' ? value : null;
+
+        this.filterCards();
+    },
+
     toggleFilter(filter) {
         this.filters.cristal[filter] = ! this.filters.cristal[filter];
 
@@ -183,8 +190,8 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     filterCards() {
-        let { hero, heroes } = this.filters;
-        let cards            = this.cards;
+        let { hero, heroes, rarity } = this.filters;
+        let cards                    = this.cards;
 
         // First filter on available heroes
         if (heroes.length == 2) {
@@ -202,6 +209,11 @@ const HearthstoneStore = Reflux.createStore({
                     return !card.hasOwnProperty('playerClass');
                 });
             }
+        }
+
+        // Then filter on rarity selection
+        if (rarity != null) {
+            cards = _.filter(cards, 'rarity', rarity);
         }
 
         // Then filter on Mana selection

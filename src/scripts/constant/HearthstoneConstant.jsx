@@ -35,5 +35,12 @@ export default {
         'Rare': 100,
         'Epic': 400,
         'Legendary': 1600
-    }
+    },
+    rarity: [
+        'Free',
+        'Common',
+        'Rare',
+        'Epic',
+        'Legendary'
+    ]
 };
