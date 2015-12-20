@@ -227,7 +227,17 @@ const HearthstoneStore = Reflux.createStore({
 
         // Then filter on rarity selection
         if (rarity != null) {
-            cards = _.filter(cards, 'rarity', rarity);
+            if (rarity == 'Common') {
+                cards = _.filter(cards, card => {
+                    return card.rarity == 'Common' && card.cardSet != 'Basic';
+                });
+            } else if (rarity == 'Free') {
+                cards = _.filter(cards, card => {
+                    return card.rarity == 'Free' || (card.rarity == 'Common' && card.cardSet == 'Basic');
+                });
+            } else {
+                cards = _.filter(cards, 'rarity', rarity);
+            }
         }
 
         // Then filter on type selection

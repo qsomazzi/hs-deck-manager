@@ -15,19 +15,28 @@ class NavBar extends Component {
 
         return _.map(filters.heroes, hero => {
             return {
-                value:       hero.cardId,
-                label:       hero.name,
-                img:         `images/heroes/${hero.cardId}_small.png`
+                value: hero.cardId,
+                label: hero.name,
+                img:   `images/heroes/${hero.cardId}_small.png`
             }
         });
     }
 
-    renderOptions(filterType) {
-        return _.map(HearthstoneConstant[filterType], type => {
+    renderImageOptions(filterType) {
+        return _.map(HearthstoneConstant[filterType], (image, value) => {
             return {
-                value: type,
-                label: type,
-                img:   `images/resources/gem_${type.toLowerCase()}.png`
+                value: value,
+                label: value,
+                img:   `images/${image}`
+            }
+        });
+    }
+
+    renderTextOptions(filterType) {
+        return _.map(HearthstoneConstant[filterType], value => {
+            return {
+                value: value,
+                label: value
             }
         });
     }
@@ -71,7 +80,7 @@ class NavBar extends Component {
 
                 <Select
                     value={filters.rarity}
-                    options={this.renderOptions('rarity')}
+                    options={this.renderImageOptions('rarity')}
                     placeholder="Rarity Filter"
                     onChange={HearthstoneActions.selectRarity}
                     optionRenderer={this.renderOption}
@@ -80,16 +89,18 @@ class NavBar extends Component {
 
                 <Select
                     value={filters.cardType}
-                    options={this.renderOptions('cardType')}
+                    options={this.renderTextOptions('cardType')}
                     placeholder="Type Filter"
                     onChange={HearthstoneActions.selectType}
                     className="type" />
 
                 <Select
                     value={filters.cardSet}
-                    options={this.renderOptions('cardSet')}
+                    options={this.renderImageOptions('cardSet')}
                     placeholder="Extension Filter"
                     onChange={HearthstoneActions.selectSet}
+                    optionRenderer={this.renderOption}
+                    valueRenderer={this.renderOption}
                     className="set" />
 
                 <div className="cristals">

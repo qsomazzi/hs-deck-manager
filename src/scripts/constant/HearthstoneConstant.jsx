@@ -30,32 +30,32 @@ export default {
         }
     },
     dust: {
-        'Free': 0,
-        'Common': 40,
-        'Rare': 100,
-        'Epic': 400,
+        'Free':      0,
+        'Common':    40,
+        'Rare':      100,
+        'Epic':      400,
         'Legendary': 1600
     },
-    rarity: [
-        'Free',
-        'Common',
-        'Rare',
-        'Epic',
-        'Legendary'
-    ],
+    rarity: {
+        'Free':      'resources/gem_free.png',
+        'Common':    'resources/gem_common.png',
+        'Rare':      'resources/gem_rare.png',
+        'Epic':      'resources/gem_epic.png',
+        'Legendary': 'resources/gem_legendary.png'
+    },
     cardType: [
         'Spell',
         'Minion',
         'Weapon'
     ],
-    cardSet: [
-        'Basic',
-        'Classic',
-        'Naxxramas',
-        'Goblins vs Gnomes',
-        'Reward',
-        'Blackrock Mountain',
-        'The Grand Tournament',
-        'The League of Explorers'
-    ]
+    cardSet: {
+        'Basic':                   'extension/Basic.png',
+        'Classic':                 'extension/Classic.png',
+        'Naxxramas':               'extension/Naxxramas.png',
+        'Goblins vs Gnomes':       'extension/Goblins_vs_Gnomes.png',
+        'Reward':                  'extension/Reward.png',
+        'Blackrock Mountain':      'extension/Blackrock_Mountain.png',
+        'The Grand Tournament':    'extension/The_Grand_Tournament.png',
+        'The League of Explorers': 'extension/The_League_of_Explorers.png'
+    }
 };
