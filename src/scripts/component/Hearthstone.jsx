@@ -52,16 +52,25 @@ class Hearthstone extends Component {
                 <div className="main-app">
                     <div className="deck-builder">
                         <div className="deck-list">
+                            <div className="my-decks">
+                                {TranslationHelper.translate('my-decks')}
+                            </div>
+
                             <DeckList
                                 decks={decks}
                                 current={current} />
+
+                            <div className="decks-count">
+                                <span className="cpt">{decks.length}</span>
+                                <span>decks</span>
+                            </div>
 
                             <DeckAdd
                                 showModal={showModal}
                                 heroes={heroes} />
                         </div>
 
-                        <div className="panel panel-default deckdetails">
+                        <div className="panel deck-current">
                             {deckDetails}
                         </div>
                     </div>

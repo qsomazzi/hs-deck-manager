@@ -1,8 +1,8 @@
-import React, { Component, PropTypes }  from 'react';
-import { ListGroupItem, Modal, Button } from 'react-bootstrap';
-import HearthstoneActions               from './../../action/HearthstoneActions';
-import TranslationHelper                from './../../helper/TranslationHelper'
-import Export                           from './../export/Export';
+import React, { Component, PropTypes } from 'react';
+import { Modal, Button }               from 'react-bootstrap';
+import classNames                      from 'classnames';
+import HearthstoneActions              from './../../action/HearthstoneActions';
+import TranslationHelper               from './../../helper/TranslationHelper'
 
 /**
  * DeckListItem
@@ -48,29 +48,24 @@ class DeckListItem extends Component {
     render() {
         let { deck, position, current } = this.props;
 
-        let active = current == position ? 'active'  : '';
-        let style  = deck.nbCards == 30  ? 'success' : 'danger';
+        let style = {
+            background: `url('/images/heroes/${deck.hero}_deck.png')`
+        };
+
+        let itemClass = classNames('list-group-item', {
+            error:  deck.nbCards != 30,
+            active: current == position
+        });
 
         return (
-            <ListGroupItem active={active} bsStyle={style}>
-                <span onClick={HearthstoneActions.loadDeck.bind(this, position)}>
-                    <img src={`images/heroes/${deck.hero}_icon.png`} alt={deck.hero} />
-                    <span>{deck.name}</span>
-                </span>
-                
-                <div className="actions">
-                    <span className="removeDeck" onClick={this.toggleModal.bind(this)} >
-                        <i className="fa fa-remove"></i>
-                    </span>
-                    {this.renderModal()}
-
-                    <Export 
-                        data={deck}
-                        filename={`${deck.name}.deck.json`}
-                        type="deck"
-                        className="exportDeck" />
+            <div className={itemClass} style={style}>
+                <div className="deck-name" onClick={HearthstoneActions.loadDeck.bind(this, position)} title={deck.name} >
+                    <span>{ deck.name.length < 15 ? deck.name : `${deck.name.substring(0, 15)}...`}</span>
                 </div>
-            </ListGroupItem>
+                <span className="removeDeck" onClick={this.toggleModal.bind(this)} ></span>
+
+                {this.renderModal()}
+            </div>
         );
     }
 }

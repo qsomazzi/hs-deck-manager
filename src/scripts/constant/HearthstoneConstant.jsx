@@ -20,6 +20,7 @@ export default {
             'extension': 'Extension',
             'type': 'Type',
             'mechanics': 'Mécaniques',
+            'my-decks': 'Mes decks',
             // CardType
             'Spell': 'Sort',
             'Minion': 'Serviteur',
@@ -35,10 +36,10 @@ export default {
             'Classic': 'Classique',
             'Naxxramas': 'Naxxramas',
             'Goblins vs Gnomes': 'Gobelins et Gnomes',
-            'Reward': 'Récompenses',
-            'Blackrock Mountain': 'Le Mont Rochenoire',
-            'The Grand Tournament': 'Le Grand Tournoi',
-            'The League of Explorers': 'La Ligue des Explorateurs',
+            'Reward': 'Récompense',
+            'Blackrock Mountain': 'Mont Rochenoire',
+            'The Grand Tournament': 'Grand Tournoi',
+            'The League of Explorers': 'Ligue des Explorateurs',
             // Mechanics
             'Battlecry': 'Cri de guerre',
             'Freeze': 'Gèle',
@@ -77,6 +78,7 @@ export default {
             'extension': 'Extension',
             'type': 'Type',
             'mechanics': 'Mechanics',
+            'my-decks': 'My decks',
             // CardType
             'Spell': 'Spell',
             'Minion': 'Minion',

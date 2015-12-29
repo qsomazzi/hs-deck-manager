@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Modal }               from 'react-bootstrap';
+import { Modal }                       from 'react-bootstrap';
 import _                               from 'lodash';
 import classNames                      from 'classnames';
 import HearthstoneActions              from './../../action/HearthstoneActions';
+import HearthstoneStore                from './../../store/HearthstoneStore';
 import TranslationHelper               from './../../helper/TranslationHelper'
 
 /**
@@ -78,13 +79,9 @@ class DeckAdd extends Component {
     render() {
         return (
             <div>
-                <Button
-                    bsStyle="primary"
-                    bsSize="large"
-                    block
-                    onClick={this.toggleModal.bind(this)} >
-                    {TranslationHelper.translate('add-deck')}
-                </Button>
+                <div className={`add-deck ${HearthstoneStore.getLocale()}`} onClick={this.toggleModal.bind(this)} >
+                    {TranslationHelper.translate('add')}
+                </div>
                 {this.renderModal()}
             </div>
         );

@@ -1,9 +1,16 @@
 $app-height: 820px;
 $navBar-height: 65px;
 $search-area-height: $app-height;
-$deckDetails-height: $app-height;
-$deckDetails-cpt-height: 35px;
-$deckAdd-height: 66px;
+
+$deck-list-width: 273px;
+$deck-list-group-height: 678px;
+$deck-list-group-width: 180px;
+
+$deck-current-width: 218px;
+$deck-current-height: $app-height;
+$deck-current-cpt-height: 35px;
+
+$color-brown: #4F3C1D;
 
 @font-face {
   font-family: HearthstoneFont;
@@ -18,11 +25,9 @@ $deckAdd-height: 66px;
   user-select: none;
 }
 
-#hearthstone {
-  min-height: 500px;
-  width: 90%;
-  margin: 0 auto;
+body { background: #000; }
 
+#hearthstone {
   .logo {
     text-align: center;
     width: 500px;
@@ -46,80 +51,131 @@ $deckAdd-height: 66px;
 
     .deck-builder {
       order: 1;
-      width: 30%;
+      width: $deck-list-width + $deck-current-width + 10px;
+      height: $search-area-height;
       margin-right: 10px;
       display: flex;
 
       .deck-list {
         order: 1;
         margin-right: 5px;
-        width: 40%;
+        width: $deck-list-width;
         flex: 1 auto;
+        background: url('../images/resources/deck-list-background.png') no-repeat center top;
+        position: relative;
+
+        .my-decks {
+          text-align: center;
+          font-size: 15px;
+          font-family: HearthstoneFont, serif;
+          position: absolute;
+          font-weight: bold;
+          color: $color-brown;
+          top: 18px;
+          width: 90%;
+        }
 
         .list-group {
-          height: $app-height - $deckAdd-height;
+          height: $deck-list-group-height;
+          width: $deck-list-group-width;
+          position: absolute;
           overflow-y: scroll;
+          top: 75px;
+          left: 31px;
+          margin: 0;
 
           .list-group-item {
-            img {
-              width: 32px;
-              margin-right: 10px;
-            }
+            position: relative;
+            cursor: pointer;
+            border: 0;
+            background-repeat: no-repeat;
+            padding: 0;
+            height: 72px;
+            margin: 5px 0 10px 0;
 
-            span {
-              cursor: pointer;
-            }
+            .deck-name {
+              position: absolute;
+              bottom: 12px;
+              left: 18px;
+              width: 150px;
+              height: 45px;
 
-            .actions {
-              display: none;
-              margin-top: 6px;
-              float: right;
-
-              .exportDeck{
-                color: #FFFFFF;
-                margin-left: 5px;
+              span {
+                font-size: 15px;
+                font-family: HearthstoneFont, serif;
+                color: #FFF;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                position: absolute;
+                bottom: 0;
               }
+            }
+
+            .removeDeck {
+              display: none;
+              position: absolute;
+              background: url('../images/resources/remove-deck.png') no-repeat center center;
+              color: #FFF;
+              border-radius: 50%;
+              top: -5px;
+              right: -1px;
+              width: 20px;
+              height: 20px;
             }
 
             &.active {
-              color: #fff;
-
-              .actions {
+              .removeDeck {
                 display: block;
               }
+            }
 
-              &.list-group-item-success {
-                background-color: #3c763d;
-                border-color: #3c763d;
-              }
-
-              &.list-group-item-danger {
-                background-color: #a94442;
-                border-color: #a94442;
-              }
-
-              &.list-group-item-info {
-                background-color: #31708f;
-                border-color: #31708f;
-              }
-
-              &.list-group-item-warning {
-                background-color: #8a6d3b;
-                border-color: #8a6d3b;
-              }
+            &.error {
+              .deck-name span{color: red;}
             }
           }
         }
+
+        .decks-count {
+          font-size: 15px;
+          font-family: HearthstoneFont, serif;
+          position: absolute;
+          font-weight: bold;
+          color: #FFF;
+          bottom: 9px;
+          left: 30px;
+          width: 85px;
+          text-align: right;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+          .cpt {
+            font-size: 25px;
+            margin-right: 5px;
+          }
+        }
+
+        .add-deck {
+          position: absolute;
+          bottom: 15px;
+          right: 42px;
+          font-weight: bold;
+          color: $color-brown;
+          text-align: center;
+          cursor: pointer;
+          font-size: 14px;
+          font-family: HearthstoneFont, serif;
+
+          &.en {right: 51px;}
+          &:hover {color: #000;}
+        }
       }
 
-      .deckdetails {
+      .deck-current {
         order: 2;
         margin-left: 5px;
-        width: 218px;
+        width: $deck-current-width;
         background: #696969;
         padding-bottom: 30px;
         position: relative;
-        height: $deckDetails-height;
+        height: $deck-current-height;
 
         .designForBlank {
           font-family: HearthstoneFont, serif;
@@ -132,7 +188,7 @@ $deckAdd-height: 66px;
 
         .list {
           overflow-y: scroll;
-          height: $deckDetails-height - $deckDetails-cpt-height;
+          height: $deck-current-height - $deck-current-cpt-height;
 
           .frame {
             width: 218px;
@@ -196,7 +252,7 @@ $deckAdd-height: 66px;
         .cpt {
           position: absolute;
           bottom: 0;
-          height: $deckDetails-cpt-height;
+          height: $deck-current-cpt-height;
           margin: 0;
           width: 100%;
           padding: 0;
@@ -209,7 +265,13 @@ $deckAdd-height: 66px;
           justify-content: center;
           @include no-select;
 
-          img { margin-right: 10px; }
+          img { margin-right: 15px; }
+
+          .exportDeck {
+            color: #FFF;
+
+            &:hover {color: #000;}
+          }
         }
       }
     }

@@ -29,10 +29,10 @@ With 'priority' order
 
 - Add Lazy Load on media 
 - Import JSON 
+- Display current deck Mana curve
 - Redesign Filters Bar
 - Translate current deck card.name
 - Review event system on actions
-- Redesign Deck list
 - Search by Card Name
 - Player current collection
 - Filter cards on Owned

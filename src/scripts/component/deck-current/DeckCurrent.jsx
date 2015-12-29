@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import DeckCurrentItem                 from './DeckCurrentItem';
 import _                               from 'lodash';
 import TranslationHelper               from '../../helper/TranslationHelper';
+import Export                          from './../export/Export';
 
 /**
  * DeckCurrent
@@ -25,6 +26,12 @@ class DeckCurrent extends Component {
                     <img src="./images/resources/cards.png" alt="cards" />
                     <span>{deck.cost}</span>
                     <img src="./images/resources/dust.png" alt="dust" />
+
+                    <Export
+                        data={deck}
+                        filename={`${deck.name}.deck.json`}
+                        type="deck"
+                        className="exportDeck" />
                 </p>
             </div>
         );
