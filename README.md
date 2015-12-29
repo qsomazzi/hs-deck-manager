@@ -27,19 +27,34 @@ Features that needs to be developed
 
 With 'priority' order
 
-- Add Lazy Load on media 
-- Import JSON 
-- Display current deck Mana curve
-- Redesign Filters Bar
-- Translate current deck card.name
-- Review event system on actions
-- Search by Card Name
-- Player current collection
-- Filter cards on Owned
-- Improve Cards size for new stuff
+* High
+    * Add Lazy Load on media 
+    * Display current deck Mana curve
+    * Redesign Filters Bar
+    * Redesign footer
+    * Translate current deck card.name
+* Medium
+    * Player current collection
+    * Filter cards on Owned
+* Low
+    * Import JSON 
+    * Improve translation system
 
 Resources
 ---------
 
 - [Blizzards assets](http://blizzard.gamespress.com)
 - [HearthStone API](https://market.mashape.com/omgvamp/hearthstone)
+
+
+History
+-------
+
+| Version |   Image   |    Date    |
+|:-------:|:---------:|:----------:|
+|    v0   | ![v0][v0] | 20/12/2015 |
+|    v1   | ![v1][v1] | 29/12/2015 |
+
+
+[v0]: resources/docs/v0.png
+[v1]: resources/docs/v1.png

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Navbar }                      from 'react-bootstrap';
 import _                               from 'lodash';
 import Select                          from 'react-select';
 import HearthstoneActions              from './../../action/HearthstoneActions';
@@ -54,6 +53,10 @@ class NavBar extends Component {
         return <img src={option.img} style={{borderRadius: '50%'}} alt={option.value} />;
     }
 
+    searchCard(event) {
+        HearthstoneActions.searchCard(event.target.value);
+    }
+
     /**
      * @return {XML}
      */
@@ -70,58 +73,65 @@ class NavBar extends Component {
             );
         });
 
-        // <input type="text" className="search form-control" placeholder={TranslationHelper.translate('search')} />
         return (
-            <Navbar staticTop>
-                <Select
-                    value={filters.hero != null ? filters.hero.cardId : null}
-                    options={this.renderHeroesOptions()}
-                    placeholder={TranslationHelper.translate('hero')}
-                    onChange={HearthstoneActions.selectHero}
-                    optionRenderer={this.renderOption}
-                    valueRenderer={this.renderValue}
-                    className="heroes" />
+            <nav role="navigation" className="navbar navbar-default navbar-static-top">
+                <div className="filters">
+                    <input
+                        type="text"
+                        className="search form-control"
+                        placeholder={TranslationHelper.translate('search')}
+                        onChange={this.searchCard.bind(this)} />
 
-                <Select
-                    value={filters.rarity}
-                    options={this.renderImageOptions('rarity')}
-                    placeholder={TranslationHelper.translate('rarity')}
-                    onChange={HearthstoneActions.selectRarity}
-                    optionRenderer={this.renderOption}
-                    valueRenderer={this.renderValue}
-                    className="rarity" />
+                    <Select
+                        value={filters.hero != null ? filters.hero.cardId : null}
+                        options={this.renderHeroesOptions()}
+                        placeholder={TranslationHelper.translate('hero')}
+                        onChange={HearthstoneActions.selectHero}
+                        optionRenderer={this.renderOption}
+                        valueRenderer={this.renderValue}
+                        className="heroes" />
 
-                <Select
-                    value={filters.cardSet}
-                    options={this.renderImageOptions('cardSet')}
-                    placeholder={TranslationHelper.translate('extension')}
-                    onChange={HearthstoneActions.selectSet}
-                    optionRenderer={this.renderOption}
-                    valueRenderer={this.renderValue}
-                    className="set" />
+                    <Select
+                        value={filters.rarity}
+                        options={this.renderImageOptions('rarity')}
+                        placeholder={TranslationHelper.translate('rarity')}
+                        onChange={HearthstoneActions.selectRarity}
+                        optionRenderer={this.renderOption}
+                        valueRenderer={this.renderValue}
+                        className="rarity" />
 
-                <Select
-                    value={filters.cardType}
-                    options={this.renderTextOptions('cardType')}
-                    placeholder={TranslationHelper.translate('type')}
-                    onChange={HearthstoneActions.selectType}
-                    className="type" />
+                    <Select
+                        value={filters.cardSet}
+                        options={this.renderImageOptions('cardSet')}
+                        placeholder={TranslationHelper.translate('extension')}
+                        onChange={HearthstoneActions.selectSet}
+                        optionRenderer={this.renderOption}
+                        valueRenderer={this.renderValue}
+                        className="set" />
 
-                <Select
-                    value={filters.mechanics}
-                    options={this.renderTextOptions('mechanics')}
-                    placeholder={TranslationHelper.translate('mechanics')}
-                    onChange={HearthstoneActions.selectMechanics}
-                    className="mechanics" />
+                    <Select
+                        value={filters.cardType}
+                        options={this.renderTextOptions('cardType')}
+                        placeholder={TranslationHelper.translate('type')}
+                        onChange={HearthstoneActions.selectType}
+                        className="type" />
 
-                <div className="cristals">
-                    {cristals}
+                    <Select
+                        value={filters.mechanics}
+                        options={this.renderTextOptions('mechanics')}
+                        placeholder={TranslationHelper.translate('mechanics')}
+                        onChange={HearthstoneActions.selectMechanics}
+                        className="mechanics" />
+
+                    <div className="cristals">
+                        {cristals}
+                    </div>
+
+                    <p className="navbar-text navbar-right">
+                        {`${nbCards} ${TranslationHelper.translate('cards')}`}
+                    </p>
                 </div>
-
-                <p className="navbar-text navbar-right">
-                    {`${nbCards} ${TranslationHelper.translate('cards')}`}
-                </p>
-            </Navbar>
+            </nav>
         );
     }
 }

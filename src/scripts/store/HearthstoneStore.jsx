@@ -21,6 +21,7 @@ const HearthstoneStore = Reflux.createStore({
         this.cards   = this.initCards();
         this.current = null;
         this.filters = {
+            search:    null,
             cards:     this.cards,
             heroes:    this.initHeroes(true),
             hero:      null,
@@ -137,6 +138,12 @@ const HearthstoneStore = Reflux.createStore({
         this.write();
     },
 
+    searchCard(value) {
+        this.filters.search = value != '' ? value : null;
+
+        this.filterCards();
+    },
+
     selectHero(value) {
         let index = _.findIndex(this.filters.heroes, 'cardId', value);
 
@@ -219,8 +226,8 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     filterCards() {
-        let { hero, heroes, rarity, cardType, cardSet, mechanics } = this.filters;
-        let cards                                                  = this.cards;
+        let { hero, heroes, rarity, cardType, cardSet, mechanics, search } = this.filters;
+        let cards                                                          = this.cards;
 
         // First filter on available heroes
         if (heroes.length == 2) {
@@ -290,6 +297,13 @@ const HearthstoneStore = Reflux.createStore({
                 let filter = card.cost > 7 ? 7 : card.cost;
 
                 return this.filters.cristal[filter];
+            });
+        }
+
+        // We filter at least with search because this cost a lot, so we try to filter on a smaller set of results
+        if (search != null) {
+            cards = _.filter(cards, card => {
+                return card.name.toLowerCase().search(search) != -1;
             });
         }
 

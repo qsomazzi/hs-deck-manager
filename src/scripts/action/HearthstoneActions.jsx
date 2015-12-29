@@ -12,6 +12,7 @@ const HearthstoneActions = Reflux.createActions([
     'removeCard',
 
     // Filters
+    'searchCard',
     'selectHero',
     'selectRarity',
     'selectType',
