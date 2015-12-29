@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import TranslationHelper               from './../../helper/TranslationHelper';
 
 /**
  * Export
@@ -9,14 +8,13 @@ class Export extends Component {
      * @return {XML}
      */
     render() {
-        let { data, filename, type, className } = this.props;
+        let { data, filename, icon, className, children } = this.props;
 
-        let href    = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
-        let content = type == 'deck' ? <i className="fa fa-download"></i> : TranslationHelper.translate(`export-${type}`);
+        let href = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
 
         return (
             <a className={className} href={href} download={filename}>
-                {content}
+                <i className={icon}></i> {children}
             </a>
         );
     }
@@ -25,8 +23,12 @@ class Export extends Component {
 Export.PropTypes = {
     data:      PropTypes.object.isRequired,
     filename:  PropTypes.string.isRequired,
-    type:      PropTypes.oneOf(['deck', 'decks']).isRequired,
-    className: PropTypes.string.isRequired
+    className: PropTypes.string.isRequired,
+    icon:      PropTypes.string
+};
+
+Export.defaultProp = {
+    icon: null
 };
 
 export default Export;

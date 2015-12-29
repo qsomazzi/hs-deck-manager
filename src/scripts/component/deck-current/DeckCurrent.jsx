@@ -27,11 +27,9 @@ class DeckCurrent extends Component {
                     <span>{deck.cost}</span>
                     <img src="./images/resources/dust.png" alt="dust" />
 
-                    <Export
-                        data={deck}
-                        filename={`${deck.name}.deck.json`}
-                        type="deck"
-                        className="exportDeck" />
+                    <Export data={deck} filename={`${deck.name}.deck.json`} icon="fa fa-download" className="exportDeck" >
+                        {TranslationHelper.translate('export-deck')}
+                    </Export>
                 </p>
             </div>
         );

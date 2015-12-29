@@ -88,11 +88,9 @@ class Hearthstone extends Component {
                     <a className="btn btn-success import" onClick={HearthstoneActions.importDefaultDecks.bind(this)}>
                         {TranslationHelper.translate('import-default')}
                     </a>
-                    <Export 
-                        data={decks}
-                        filename="all-decks.json" 
-                        type="decks"
-                        className="btn btn-info export" />
+                    <Export data={decks} filename="all-decks.json" className="btn btn-info export" >
+                        {TranslationHelper.translate('export-decks')}
+                    </Export>
                     <ButtonGroup>
                         <Button onClick={HearthstoneActions.changeLocale.bind(this, 'fr')} active={locale == 'fr'}>French</Button>
                         <Button onClick={HearthstoneActions.changeLocale.bind(this, 'en')} active={locale == 'en'}>English</Button>
