@@ -28,7 +28,7 @@ Features that needs to be developed
 With 'priority' order
 
 - Add Lazy Load on media 
-- Import JSON
+- Import JSON 
 - Filters cristal all = none
 - Redesign Filters Bar
 - Translate Filters
@@ -39,6 +39,7 @@ With 'priority' order
 - Player current collection
 - Filter cards on Owned
 - Add better translation system
+- Improve Cards size for new stuff
 
 Resources
 ---------

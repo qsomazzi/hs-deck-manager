@@ -5,6 +5,7 @@ const HearthstoneActions = Reflux.createActions([
     'loadDeck',
     'addDeck',
     'removeDeck',
+    'importDefaultDecks',
 
     // Cards
     'addCard',

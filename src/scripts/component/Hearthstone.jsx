@@ -4,6 +4,7 @@ import { ButtonGroup, Button } from 'react-bootstrap';
 import reactMixin              from 'react-mixin';
 import HearthstoneStore        from './../store/HearthstoneStore';
 import HearthstoneActions      from './../action/HearthstoneActions';
+import TranslationHelper       from './../helper/TranslationHelper';
 import DeckList                from './deck-list/DeckList';
 import DeckCurrent             from './deck-current/DeckCurrent';
 import DeckEmpty               from './deck-current/DeckEmpty';
@@ -75,6 +76,9 @@ class Hearthstone extends Component {
                 </div>
 
                 <div className="credits">
+                    <a className="btn btn-success import" onClick={HearthstoneActions.importDefaultDecks.bind(this)}>
+                        {TranslationHelper.translate('import-default')}
+                    </a>
                     <Export 
                         data={decks}
                         filename="all-decks.json" 

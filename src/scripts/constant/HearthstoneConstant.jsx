@@ -12,7 +12,8 @@ export default {
             'export-deck': 'Exporter le deck sélectionné',
             'confirm-remove-deck': 'Êtes vous sur de vouloir supprimer ce deck ?',
             'no': 'Non',
-            'yes': 'Oui'
+            'yes': 'Oui',
+            'import-default': 'Importer les decks par défaut'
         },
         en: {
             'add-deck': 'Add Deck',
@@ -26,7 +27,8 @@ export default {
             'export-deck': 'Export current deck',
             'confirm-remove-deck': 'Are you sure you want to remove this deck ?',
             'no': 'No',
-            'yes': 'Yes'
+            'yes': 'Yes',
+            'import-default': 'Import default decks'
         }
     },
     dust: {

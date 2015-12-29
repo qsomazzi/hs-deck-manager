@@ -6,6 +6,7 @@ import CardsFr             from '../../../resources/data/Cards-fr.json';
 import CardsEn             from '../../../resources/data/Cards-en.json';
 import HeroesFr            from '../../../resources/data/Heroes-fr.json';
 import HeroesEn            from '../../../resources/data/Heroes-en.json';
+import DefaultDecks        from '../../../resources/default-decks.json';
 
 /**
  * HearthstoneStore
@@ -46,7 +47,7 @@ const HearthstoneStore = Reflux.createStore({
 
     loadDeck(current) {
         this.current = current == this.current ? null : current;
-        
+
         this.updateFilters(current);
     },
 
@@ -172,6 +173,12 @@ const HearthstoneStore = Reflux.createStore({
         this.filters.cristal[filter] = ! this.filters.cristal[filter];
 
         this.filterCards();
+    },
+
+    importDefaultDecks() {
+        this.decks = DefaultDecks;
+
+        this.write();
     },
 
     /* -------------
