@@ -16,7 +16,7 @@ class NavBar extends Component {
         return _.map(filters.heroes, hero => {
             return {
                 value: hero.cardId,
-                label: hero.name,
+                label: TranslationHelper.translate(hero.name),
                 img:   `images/heroes/${hero.cardId}_small.png`
             }
         });
@@ -26,7 +26,7 @@ class NavBar extends Component {
         return _.map(HearthstoneConstant[filterType], (image, value) => {
             return {
                 value: value,
-                label: value,
+                label: TranslationHelper.translate(value),
                 img:   `images/${image}`
             }
         });
@@ -36,7 +36,7 @@ class NavBar extends Component {
         return _.map(HearthstoneConstant[filterType], value => {
             return {
                 value: value,
-                label: value
+                label: TranslationHelper.translate(value)
             }
         });
     }
@@ -76,7 +76,7 @@ class NavBar extends Component {
                 <Select
                     value={filters.hero != null ? filters.hero.cardId : null}
                     options={this.renderHeroesOptions()}
-                    placeholder="Hero"
+                    placeholder={TranslationHelper.translate('hero')}
                     onChange={HearthstoneActions.selectHero}
                     optionRenderer={this.renderOption}
                     valueRenderer={this.renderValue}
@@ -85,7 +85,7 @@ class NavBar extends Component {
                 <Select
                     value={filters.rarity}
                     options={this.renderImageOptions('rarity')}
-                    placeholder="Rarity"
+                    placeholder={TranslationHelper.translate('rarity')}
                     onChange={HearthstoneActions.selectRarity}
                     optionRenderer={this.renderOption}
                     valueRenderer={this.renderValue}
@@ -94,7 +94,7 @@ class NavBar extends Component {
                 <Select
                     value={filters.cardSet}
                     options={this.renderImageOptions('cardSet')}
-                    placeholder="Extension"
+                    placeholder={TranslationHelper.translate('extension')}
                     onChange={HearthstoneActions.selectSet}
                     optionRenderer={this.renderOption}
                     valueRenderer={this.renderValue}
@@ -103,14 +103,14 @@ class NavBar extends Component {
                 <Select
                     value={filters.cardType}
                     options={this.renderTextOptions('cardType')}
-                    placeholder="Type"
+                    placeholder={TranslationHelper.translate('type')}
                     onChange={HearthstoneActions.selectType}
                     className="type" />
 
                 <Select
                     value={filters.mechanics}
                     options={this.renderTextOptions('mechanics')}
-                    placeholder="Mechanics"
+                    placeholder={TranslationHelper.translate('mechanics')}
                     onChange={HearthstoneActions.selectMechanics}
                     className="mechanics" />
 

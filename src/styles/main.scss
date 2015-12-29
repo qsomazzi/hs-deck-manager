@@ -264,7 +264,7 @@ $deckAdd-height: 66px;
               .Select-menu-outer{width: 250px;}
             }
             &.rarity {
-              width: 101px;
+              width: 106px;
 
               .Select-menu-outer{width: 160px;}
             }
@@ -323,11 +323,16 @@ $deckAdd-height: 66px;
 }
 
 .modal {
+  .modal-title {
+    text-align: center;
+  }
+
   .heroes {
     display: flex;
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 
     .hero {
       flex: 1 auto;

@@ -5,7 +5,7 @@ const TranslationHelper = {
     translate(key) {
         let locale = HearthstoneStore.getLocale();
 
-        return HearthstoneConstant.translation[locale][key];
+        return HearthstoneConstant.translation[locale][key] != undefined ? HearthstoneConstant.translation[locale][key] : key;
     }
 };
 

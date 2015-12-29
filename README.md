@@ -30,14 +30,12 @@ With 'priority' order
 - Add Lazy Load on media 
 - Import JSON 
 - Redesign Filters Bar
-- Translate Filters
 - Translate current deck card.name
 - Review event system on actions
 - Redesign Deck list
 - Search by Card Name
 - Player current collection
 - Filter cards on Owned
-- Add better translation system
 - Improve Cards size for new stuff
 
 Resources

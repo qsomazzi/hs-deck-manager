@@ -46,7 +46,6 @@ class DeckAdd extends Component {
                     <Modal.Title>{TranslationHelper.translate('add-deck')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>{TranslationHelper.translate('hero-selection')}</h4>
                     <div className="heroes">
                         {_.map(heroes, (hero, key) => {
                             let heroClass = classNames('hero', {
@@ -62,12 +61,10 @@ class DeckAdd extends Component {
 
                         <div className="clearfix" ></div>
                     </div>
-
-                    <h4>{TranslationHelper.translate('deck-name')}</h4>
                     <input
                         type="text"
                         className="form-control"
-                        placeholder={TranslationHelper.translate('add-deck')}
+                        placeholder={TranslationHelper.translate('deck-name')}
                         onKeyDown={this.addDeck.bind(this)} />
                     <input type="hidden" ref="selected-hero" value={selectedHero} />
                 </Modal.Body>
