@@ -15,7 +15,7 @@ Installation
 Run in a cmd line the following commands
 - `npm install`
     - `npm start` -> for prod / test
-    - `npm dev` -> for dev
+    - `npm dev`   -> for dev
 
 Contributions
 -------------
@@ -29,7 +29,6 @@ With 'priority' order
 
 - Add Lazy Load on media 
 - Import JSON 
-- Filters cristal all = none
 - Redesign Filters Bar
 - Translate Filters
 - Translate current deck card.name

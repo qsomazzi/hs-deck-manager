@@ -29,14 +29,14 @@ const HearthstoneStore = Reflux.createStore({
             cardSet:   null,
             mechanics: null,
             cristal:   [
-                true, // 0
-                true, // 1
-                true, // 2
-                true, // 3
-                true, // 4
-                true, // 5
-                true, // 6
-                true  // 7
+                false, // 0
+                false, // 1
+                false, // 2
+                false, // 3
+                false, // 4
+                false, // 5
+                false, // 6
+                false  // 7
             ]
         };
     },
@@ -279,11 +279,19 @@ const HearthstoneStore = Reflux.createStore({
         }
 
         // Then filter on Mana selection
-        cards = _.filter(cards, card => {
-            let filter = card.cost > 7 ? 7 : card.cost;
-
-            return this.filters.cristal[filter];
+        let oneSelected = false;
+        _.forEach(this.filters.cristal, cristal => {
+            if (cristal == true) {
+                oneSelected = true;
+            }
         });
+        if (oneSelected) {
+            cards = _.filter(cards, card => {
+                let filter = card.cost > 7 ? 7 : card.cost;
+
+                return this.filters.cristal[filter];
+            });
+        }
 
         this.filters.cards = cards;
 
