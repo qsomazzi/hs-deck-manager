@@ -5,9 +5,9 @@ The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last
 
 Require
 -------
-- npm
-- gulp
-- babel
+- npm ~3.3.5
+- gulp ~3.9.0
+- babel ~6.3.17
 
 Installation
 ------------
@@ -28,11 +28,13 @@ Features that needs to be developed
 With 'priority' order
 
 * High
-    * Add Lazy Load on media 
-    * Display current deck Mana curve
+    * Add Lazy Load on media
+    * Display current deck Mana curve : display bellow hero selected
     * Redesign Filters Bar
     * Redesign footer
     * Translate current deck card.name
+    * Display currentDeck on deck selection by slide right
+    * Search english cardName
 * Medium
     * Player current collection
     * Filter cards on Owned

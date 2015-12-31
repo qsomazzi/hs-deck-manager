@@ -91,8 +91,8 @@ function compileJs(watch) {
     let bundler = watchify(browserify(config.scripts.src, { 
         debug: true,
         extensions: ['.js', '.jsx'],
-        cache: {},  // for watchify
-        packageCache: {},  // for watchify
+        cache: {},        // for watchify
+        packageCache: {}  // for watchify
     }).transform(babelify));
 
     function rebundle() {
