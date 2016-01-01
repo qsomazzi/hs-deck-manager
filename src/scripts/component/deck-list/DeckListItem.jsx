@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal, Button }               from 'react-bootstrap';
 import classNames                      from 'classnames';
+import _                               from 'lodash';
 import HearthstoneActions              from './../../action/HearthstoneActions';
+import HearthstoneStore                from './../../store/HearthstoneStore';
 import TranslationHelper               from './../../helper/TranslationHelper'
 
 /**
@@ -26,7 +28,7 @@ class DeckListItem extends Component {
         HearthstoneActions.removeDeck(this.props.position);
     }
 
-    renderModal() {
+    renderDeleteModal() {
         let { displayModal } = this.state;
 
         return (
@@ -49,12 +51,16 @@ class DeckListItem extends Component {
         let { deck, position, current } = this.props;
 
         let style = {
-            background: `url('/images/heroes/${deck.hero}_deck.png')`
+            backgroundImage: `url('/images/heroes/${deck.hero}_deck.png')`
         };
 
         let itemClass = classNames('list-group-item', {
             error:  deck.nbCards != 30,
             active: current == position
+        });
+
+        let barSizesRendered = _.map(HearthstoneStore.getManaCurve(deck), (height, key) => {
+            return <div key={key} className={`bar bar-${key}`} style={{height: height}}></div>;
         });
 
         return (
@@ -64,7 +70,10 @@ class DeckListItem extends Component {
                 </div>
                 <span className="removeDeck" onClick={this.toggleModal.bind(this)} ></span>
 
-                {this.renderModal()}
+                <div className="mana-curve">
+                    {barSizesRendered}
+                </div>
+                {this.renderDeleteModal()}
             </div>
         );
     }

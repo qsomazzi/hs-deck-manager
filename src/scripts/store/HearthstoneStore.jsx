@@ -344,6 +344,35 @@ const HearthstoneStore = Reflux.createStore({
             heroes:  this.heroes,
             filters: this.filters
         };
+    },
+
+    getManaCurve(deck) {
+        let barSizes = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0
+        };
+
+        _.forEach(deck.cards, card => {
+            let cost = card.cost < 8 ? card.cost : 7;
+
+            barSizes[cost]++;
+
+            if (card.count == 2) {
+                barSizes[cost]++;
+            }
+        });
+
+        return _.map(barSizes, bar => {
+            let height = (bar * 100) / 30;
+
+            return height <= 45 ? height : 45;
+        });
     }
 });
 
