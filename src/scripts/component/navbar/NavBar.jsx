@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _                               from 'lodash';
 import Select                          from 'react-select';
 import HearthstoneActions              from './../../action/HearthstoneActions';
+import HearthstoneStore                from './../../store/HearthstoneStore';
 import TranslationHelper               from './../../helper/TranslationHelper';
 import HearthstoneConstant             from './../../constant/HearthstoneConstant';
 
@@ -14,9 +15,9 @@ class NavBar extends Component {
 
         return _.map(filters.heroes, hero => {
             return {
-                value: hero.cardId,
+                value: hero.id,
                 label: TranslationHelper.translate(hero.name),
-                img:   `images/heroes/${hero.cardId}_small.png`
+                img:   HearthstoneStore.getHeroImage(hero, 'small')
             }
         });
     }
@@ -57,6 +58,10 @@ class NavBar extends Component {
         HearthstoneActions.searchCard(event.target.value);
     }
 
+    selectFilter(type, value) {
+        HearthstoneActions.selectFilter(type, value);
+    }
+
     /**
      * @return {XML}
      */
@@ -83,10 +88,10 @@ class NavBar extends Component {
                         onChange={this.searchCard.bind(this)} />
 
                     <Select
-                        value={filters.hero != null ? filters.hero.cardId : null}
+                        value={filters.hero != null ? filters.hero.id : null}
                         options={this.renderHeroesOptions()}
                         placeholder={TranslationHelper.translate('hero')}
-                        onChange={HearthstoneActions.selectHero}
+                        onChange={this.selectFilter.bind(this, 'hero')}
                         optionRenderer={this.renderOption}
                         valueRenderer={this.renderValue}
                         className="heroes" />
@@ -95,7 +100,7 @@ class NavBar extends Component {
                         value={filters.rarity}
                         options={this.renderImageOptions('rarity')}
                         placeholder={TranslationHelper.translate('rarity')}
-                        onChange={HearthstoneActions.selectRarity}
+                        onChange={this.selectFilter.bind(this, 'rarity')}
                         optionRenderer={this.renderOption}
                         valueRenderer={this.renderValue}
                         className="rarity" />
@@ -104,7 +109,7 @@ class NavBar extends Component {
                         value={filters.cardSet}
                         options={this.renderImageOptions('cardSet')}
                         placeholder={TranslationHelper.translate('extension')}
-                        onChange={HearthstoneActions.selectSet}
+                        onChange={this.selectFilter.bind(this, 'cardSet')}
                         optionRenderer={this.renderOption}
                         valueRenderer={this.renderValue}
                         className="set" />
@@ -113,14 +118,14 @@ class NavBar extends Component {
                         value={filters.cardType}
                         options={this.renderTextOptions('cardType')}
                         placeholder={TranslationHelper.translate('type')}
-                        onChange={HearthstoneActions.selectType}
+                        onChange={this.selectFilter.bind(this, 'cardType')}
                         className="type" />
 
                     <Select
                         value={filters.mechanics}
                         options={this.renderTextOptions('mechanics')}
                         placeholder={TranslationHelper.translate('mechanics')}
-                        onChange={HearthstoneActions.selectMechanics}
+                        onChange={this.selectFilter.bind(this, 'mechanics')}
                         className="mechanics" />
 
                     <div className="cristals">

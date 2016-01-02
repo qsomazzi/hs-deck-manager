@@ -2,12 +2,12 @@ import React, { Component }    from 'react';
 import { ListenerMixin }       from 'reflux';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import reactMixin              from 'react-mixin';
+import classNames              from 'classnames';
 import HearthstoneStore        from './../store/HearthstoneStore';
 import HearthstoneActions      from './../action/HearthstoneActions';
 import TranslationHelper       from './../helper/TranslationHelper';
 import DeckList                from './deck-list/DeckList';
 import DeckCurrent             from './deck-current/DeckCurrent';
-import DeckEmpty               from './deck-current/DeckEmpty';
 import DeckAdd                 from './deck-tools/DeckAdd';
 import Cards                   from './cards/Cards';
 import NavBar                  from './navbar/NavBar';
@@ -43,7 +43,10 @@ class Hearthstone extends Component {
     render() {
         let { locale, decks, current, heroes, filters, showModal } = this.state;
 
-        let deckDetails = current != null ? <DeckCurrent deck={decks[current]} /> : <DeckEmpty />;
+        let deckDetails      = current != null ? <DeckCurrent deck={decks[current]} /> : null;
+        let currentDeckClass = classNames('panel deck-current', {
+            active: current != null
+        });
 
         return (
             <div>
@@ -70,7 +73,7 @@ class Hearthstone extends Component {
                                 heroes={heroes} />
                         </div>
 
-                        <div className="panel deck-current">
+                        <div className={currentDeckClass}>
                             {deckDetails}
                         </div>
                     </div>

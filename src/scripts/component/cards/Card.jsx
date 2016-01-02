@@ -14,7 +14,7 @@ class Card extends Component {
 
         return (
             <div className="card">
-                <img src={`images/cards/${HearthstoneStore.getLocale()}/${card.cardId}.png`} alt={card.name} onClick={HearthstoneActions.addCard.bind(this, card.cardId)} />
+                <img src={HearthstoneStore.getCardImage(card)} alt={HearthstoneStore.getCardName(card)} onClick={HearthstoneActions.addCard.bind(this, card.id)} />
             </div>
         );
     }
@@ -22,8 +22,9 @@ class Card extends Component {
 
 Card.PropTypes = {
     card: PropTypes.shape({
-        name:   PropTypes.string.isRequired,
-        cardId: PropTypes.string.isRequired
+        nameFr: PropTypes.string.isRequired,
+        nameEn: PropTypes.string.isRequired,
+        id:     PropTypes.string.isRequired
     }).isRequired
 };
 

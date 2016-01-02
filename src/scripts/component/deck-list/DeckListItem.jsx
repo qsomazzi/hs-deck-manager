@@ -81,9 +81,9 @@ class DeckListItem extends Component {
 
 DeckListItem.PropTypes = {
     deck: PropTypes.shape({
-            name:  PropTypes.string.isRequired,
-            hero:  PropTypes.string.isRequired,
-            cards: PropTypes.array.isRequired
+        name:  PropTypes.string.isRequired,
+        hero:  PropTypes.string.isRequired,
+        cards: PropTypes.array.isRequired
     }).isRequired,
     position: PropTypes.number.isRequired,
     current: PropTypes.number

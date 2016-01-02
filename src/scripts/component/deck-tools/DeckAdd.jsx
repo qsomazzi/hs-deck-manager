@@ -19,26 +19,26 @@ class DeckAdd extends Component {
         };
     }
 
-    selectHero(cardId) {
+    selectHero(id) {
         this.setState({
-            selectedHero: cardId
+            selectedHero: id
         });
     }
 
     addDeck(e) {
         if (e.keyCode == 13) {
             this.toggleModal();
+
             HearthstoneActions.addDeck(e.target.value, this.state.selectedHero);
         }
     }
-
 
     toggleModal() {
         this.setState({displayModal: !this.state.displayModal});
     }
 
     renderModal() {
-        let { heroes } = this.props;
+        let { heroes }                     = this.props;
         let { selectedHero, displayModal } = this.state;
 
         return (
@@ -50,12 +50,12 @@ class DeckAdd extends Component {
                     <div className="heroes">
                         {_.map(heroes, (hero, key) => {
                             let heroClass = classNames('hero', {
-                                'active': selectedHero == hero.cardId
+                                'active': selectedHero == hero.id
                             });
 
                             return (
-                                <div key={`hero-${key}`} className={heroClass} onClick={this.selectHero.bind(this, hero.cardId)}>
-                                    <img src={`images/heroes/${hero.cardId}.png`} alt={hero.name} />
+                                <div key={`hero-${key}`} className={heroClass} onClick={this.selectHero.bind(this, hero.id)}>
+                                    <img src={HearthstoneStore.getHeroImage(hero)} alt={hero.name} />
                                 </div>
                             );
                         })}

@@ -8,7 +8,7 @@ $deck-list-group-width: 180px;
 $deck-list-height: 72px;
 $deck-list-mana-curve-height: 115px;
 
-$deck-current-width: 218px;
+$deck-current-width: 216px;
 $deck-current-height: $app-height;
 $deck-current-cpt-height: 35px;
 
@@ -48,12 +48,12 @@ body { background: #000; }
 
   .main-app {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
 
     .deck-builder {
       order: 1;
-      width: $deck-list-width + $deck-current-width + 10px;
+      width: $deck-list-width + $deck-current-width + 10px;;
       height: $search-area-height;
       margin-right: 10px;
       display: flex;
@@ -208,20 +208,13 @@ body { background: #000; }
       .deck-current {
         order: 2;
         margin-left: 5px;
-        width: $deck-current-width;
+        width: 0;
         background: #696969;
         padding-bottom: 30px;
         position: relative;
         height: $deck-current-height;
-
-        .designForBlank {
-          font-family: HearthstoneFont, serif;
-          color: #FFFFFF;
-          font-weight: bold;
-          font-size: 30px;
-          text-align: center;
-          padding: 265px 0;
-        }
+        transition: all 0.6s cubic-bezier(.87,-.41,.19,1.44);
+        border: 0;
 
         .list {
           overflow-y: scroll;
@@ -310,12 +303,14 @@ body { background: #000; }
             &:hover {color: #000;}
           }
         }
+
+        &.active { width: $deck-current-width; }
       }
     }
 
     .search-area {
       order: 2;
-      width: 70%;
+      width: auto;
       height: $search-area-height;
       overflow: hidden;
 

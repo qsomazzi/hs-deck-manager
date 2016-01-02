@@ -2,11 +2,9 @@ import Reflux              from 'reflux';
 import _                   from 'lodash';
 import HearthstoneActions  from './../action/HearthstoneActions';
 import HearthstoneConstant from './../constant/HearthstoneConstant';
-import CardsFr             from '../../../resources/data/Cards-fr.json';
-import CardsEn             from '../../../resources/data/Cards-en.json';
-import HeroesFr            from '../../../resources/data/Heroes-fr.json';
-import HeroesEn            from '../../../resources/data/Heroes-en.json';
-import DefaultDecks        from '../../../resources/default-decks.json';
+import AllCards            from '../../../resources/json/Cards.json';
+import AllHeroes           from '../../../resources/json/Heroes.json';
+import DefaultDecks        from '../../../resources/json/default-decks.json';
 
 /**
  * HearthstoneStore
@@ -49,7 +47,7 @@ const HearthstoneStore = Reflux.createStore({
     loadDeck(current) {
         this.current = current == this.current ? null : current;
 
-        this.updateFilters(current);
+        this.updateFilters();
     },
 
     addDeck(deckName, hero) {
@@ -74,13 +72,13 @@ const HearthstoneStore = Reflux.createStore({
 
     addCard(id) {
         if (this.current != null) {
-            let card      = this.filters.cards[_.findIndex(this.filters.cards, 'cardId', id)];
+            let card      = this.filters.cards[_.findIndex(this.filters.cards, 'id', id)];
             let deck      = this.decks[this.current];
             let newCard   = true;
             let currentCard;
 
             _.forEach(deck.cards, unit => {
-                if (unit.cardId == card.cardId) {
+                if (unit.id == card.id) {
                     currentCard = unit;
                     newCard     = false;
                 }
@@ -89,9 +87,10 @@ const HearthstoneStore = Reflux.createStore({
             if (deck.nbCards < 30) {
                 if (newCard) {
                     deck.cards.push({
-                        name:   card.name,
+                        nameFr: card.nameFr,
+                        nameEn: card.nameEn,
                         cost:   card.cost,
-                        cardId: card.cardId,
+                        id:     card.id,
                         rarity: card.rarity,
                         count:  1
                     });
@@ -113,7 +112,7 @@ const HearthstoneStore = Reflux.createStore({
     removeCard(id) {
         if (this.current != null) {
             let deck  = this.decks[this.current];
-            let index = _.findIndex(deck.cards, 'cardId', id);
+            let index = _.findIndex(deck.cards, 'id', id);
 
             if (index != -1) {
                 let rarity = deck.cards[index].rarity;
@@ -144,34 +143,22 @@ const HearthstoneStore = Reflux.createStore({
         this.filterCards();
     },
 
-    selectHero(value) {
-        let index = _.findIndex(this.filters.heroes, 'cardId', value);
+    selectFilter(type, value) {
+        switch (type) {
+            case 'hero':
+                let index = _.findIndex(this.filters.heroes, 'id', value);
 
-        this.filters.hero = index != -1 ? this.filters.heroes[index] : null;
+                this.filters.hero = index != -1 ? this.filters.heroes[index] : null;
+                break;
+            case 'rarity':
+            case 'cardSet':
+            case 'cardType':
+            case 'mechanics':
+                this.filters[type] = value != '' ? value : null;
+                break;
 
-        this.filterCards();
-    },
-
-    selectRarity(value) {
-        this.filters.rarity = value != '' ? value : null;
-
-        this.filterCards();
-    },
-
-    selectType(value) {
-        this.filters.cardType = value != '' ? value : null;
-
-        this.filterCards();
-    },
-
-    selectSet(value) {
-        this.filters.cardSet = value != '' ? value : null;
-
-        this.filterCards();
-    },
-
-    selectMechanics(value) {
-        this.filters.mechanics = value != '' ? value : null;
+                break;
+        }
 
         this.filterCards();
     },
@@ -193,29 +180,23 @@ const HearthstoneStore = Reflux.createStore({
      * ------------- */
 
     initCards() {
-        let cards = [];
+        let sort = this.locale == 'fr' ? 'nameFr' : 'nameEn';
 
-        _.forEach(this.locale == 'fr' ? CardsFr : CardsEn, CardsByType => {
-            _.forEach(CardsByType, Card => {
-                cards.push(Card);
-            });
-        });
-
-        return _.sortByAll(cards, ['cost', 'name']);
+        return _.sortByAll(AllCards, ['cost', sort]);
     },
 
     initHeroes(forFilters = false) {
-        let heroes = this.locale == 'fr'  ? HeroesFr : HeroesEn;
+        let heroes = AllHeroes;
 
         if (forFilters) {
             heroes.push({
-                cardId:      'HERO_00',
+                id:          'HERO_00',
                 name:        'Neutral',
                 playerClass: 'Neutral'
             });
         }
 
-        return _.sortByAll(heroes, ['cardId', 'name']);
+        return _.sortByAll(heroes, ['id', 'name']);
     },
 
     write() {
@@ -232,19 +213,15 @@ const HearthstoneStore = Reflux.createStore({
         // First filter on available heroes
         if (heroes.length == 2) {
             cards = _.filter(cards, card => {
-                return !card.hasOwnProperty('playerClass') || heroes[1].playerClass == card.playerClass;
+                return heroes[1].playerClass == card.playerClass || card.playerClass == null;
             });
         }
 
         // Then filter on selected Hero
         if (hero != null) {
-            if (hero.playerClass != 'Neutral') {
-                cards = _.filter(cards, 'playerClass', hero.playerClass);
-            } else {
-                cards = _.filter(cards, card => {
-                    return !card.hasOwnProperty('playerClass');
-                });
-            }
+            let playerClass = hero.playerClass != 'Neutral' ? hero.playerClass : null;
+
+            cards = _.filter(cards, 'playerClass', playerClass);
         }
 
         // Then filter on rarity selection
@@ -275,7 +252,7 @@ const HearthstoneStore = Reflux.createStore({
         // Then filter on mechanics selection
         if (mechanics != null) {
             cards = _.filter(cards, card => {
-                if (card.hasOwnProperty('mechanics')) {
+                if (card.mechanics != null) {
                     if (_.findIndex(card.mechanics, 'name', mechanics) != -1) {
                         return true;
                     }
@@ -302,8 +279,10 @@ const HearthstoneStore = Reflux.createStore({
 
         // We filter at least with search because this cost a lot, so we try to filter on a smaller set of results
         if (search != null) {
+            let name = this.locale == 'fr' ? 'nameFr' : 'nameEn';
+
             cards = _.filter(cards, card => {
-                return card.name.toLowerCase().search(search) != -1;
+                return card[name].toLowerCase().search(search) != -1;
             });
         }
 
@@ -312,16 +291,21 @@ const HearthstoneStore = Reflux.createStore({
         this.trigger();
     },
 
-    updateFilters(current = null) {
+    updateFilters() {
         this.filters.hero   = null;
         this.filters.heroes = this.initHeroes(true);
 
         // Update heroes filter for the selected deck
-        if (current != null) {
-            let currentHero = this.decks[current].hero;
-            let heroIndex   = _.findIndex(this.filters.heroes, 'cardId', currentHero);
-
-            this.filters.heroes = _.pullAt(this.filters.heroes, 0, heroIndex);
+        if (this.current != null) {
+            this.filters.heroes = _.pullAt(
+                this.filters.heroes,
+                0,
+                _.findIndex(
+                    this.filters.heroes,
+                    'id',
+                    this.decks[this.current].hero
+                )
+            );
         }
 
         this.filterCards();
@@ -373,6 +357,46 @@ const HearthstoneStore = Reflux.createStore({
 
             return height <= 45 ? height : 45;
         });
+    },
+
+    getCardName(card, truncate = null) {
+        let name = this.locale == 'fr' ? card.nameFr : card.nameEn;
+
+        if (truncate != null) {
+            return name < 20 ? name : `${name.substring(0, 20)}...`;
+        }
+
+        return name;
+    },
+
+    getCardImage(card, size = 'large') {
+        let path = '/images/cards/';
+
+        switch (size) {
+            case 'large':
+                path += this.locale;
+                break;
+            case 'small':
+                path += 'small';
+                break;
+        }
+
+        return `${path}/${card.id}.png`;
+    },
+
+    getHeroImage(hero, size = 'default') {
+        let path = '/images/heroes';
+
+        switch (size) {
+            case 'default':
+                path += `/${hero.id}.png`;
+                break;
+            case 'small':
+                path += `/${hero.id}_small.png`;
+                break;
+        }
+
+        return path;
     }
 });
 

@@ -13,11 +13,7 @@ const HearthstoneActions = Reflux.createActions([
 
     // Filters
     'searchCard',
-    'selectHero',
-    'selectRarity',
-    'selectType',
-    'selectSet',
-    'selectMechanics',
+    'selectFilter',
     'toggleFilter',
 
     // Settings

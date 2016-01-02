@@ -27,14 +27,15 @@ Features that needs to be developed
 
 With 'priority' order
 
+* Bug
+    * Correct defaults decks format
 * High
     * Add Lazy Load on media
     * Redesign Filters Bar
     * Redesign footer
     * Redesign scroll cursor
-    * Translate current deck card.name
+    * Redesign Modals
     * Display currentDeck on deck selection by slide right
-    * Search english cardName
 * Medium
     * Player current collection
     * Filter cards on Owned
