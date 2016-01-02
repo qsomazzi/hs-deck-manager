@@ -326,6 +326,7 @@ body { background: #000; }
           flex-wrap: wrap;
           justify-content: center;
           align-items: center;
+          min-width: 1245px;
 
           .search {
             width: 200px;
@@ -402,6 +403,8 @@ body { background: #000; }
         justify-content: center;
         flex-wrap: wrap;
         height: $search-area-height - $navBar-height;
+        align-items: flex-start;
+        align-content: flex-start;
 
         .card {
           flex-grow: 1;
