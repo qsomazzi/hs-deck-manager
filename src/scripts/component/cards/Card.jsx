@@ -14,7 +14,10 @@ class Card extends Component {
 
         return (
             <div className="card">
-                <img src={HearthstoneStore.getCardImage(card)} alt={HearthstoneStore.getCardName(card)} onClick={HearthstoneActions.addCard.bind(this, card.id)} />
+                <img
+                    src={HearthstoneStore.getCardImage(card)}
+                    alt={HearthstoneStore.getCardName(card)}
+                    onClick={HearthstoneActions.addCard.bind(this, card.id)} />
             </div>
         );
     }

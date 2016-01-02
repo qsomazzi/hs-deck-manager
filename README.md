@@ -1,7 +1,7 @@
 Hearthstone Deck Manager
 ========================
 
-The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. 
+The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. - Last version : 31 / 12 / 2015
 
 Require
 -------
@@ -28,14 +28,13 @@ Features that needs to be developed
 With 'priority' order
 
 * Bug
-    * Correct defaults decks format
+    * /
 * High
     * Add Lazy Load on media
     * Redesign Filters Bar
     * Redesign footer
     * Redesign scroll cursor
     * Redesign Modals
-    * Display currentDeck on deck selection by slide right
 * Medium
     * Player current collection
     * Filter cards on Owned

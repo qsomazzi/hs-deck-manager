@@ -407,8 +407,13 @@ body { background: #000; }
           flex-grow: 1;
 
           img {
-            max-width: 190px;
+            width: 190px;
+            height: 262px;
             cursor: pointer;
+            -webkit-transition: opacity 500ms ease-in-out;
+            -moz-transition: opacity 500ms ease-in-out;
+            -o-transition: opacity 500ms ease-in-out;
+            transition: opacity 500ms ease-in-out;
           }
         }
       }
