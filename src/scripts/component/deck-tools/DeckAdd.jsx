@@ -47,28 +47,33 @@ class DeckAdd extends Component {
                     <Modal.Title>{TranslationHelper.translate('add-deck')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="heroes">
-                        {_.map(heroes, (hero, key) => {
-                            let heroClass = classNames('hero', {
-                                'active': selectedHero == hero.id
-                            });
+                    <div className="modal-add">
+                        <div className="heroes">
+                            {_.map(heroes, (hero, key) => {
+                                let heroClass = classNames('hero', {
+                                    'active': selectedHero == hero.id
+                                });
 
-                            return (
-                                <div key={`hero-${key}`} className={heroClass} onClick={this.selectHero.bind(this, hero.id)}>
-                                    <img src={HearthstoneStore.getHeroImage(hero)} alt={hero.name} />
-                                </div>
-                            );
-                        })}
+                                return (
+                                    <div key={`hero-${key}`} className={heroClass} onClick={this.selectHero.bind(this, hero.id)}>
+                                        <img src={HearthstoneStore.getHeroImage(hero)} alt={hero.name} />
+                                    </div>
+                                );
+                            })}
 
-                        <div className="clearfix" ></div>
+                            <div className="clearfix" ></div>
+                        </div>
+
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder={TranslationHelper.translate('deck-name')}
+                            onKeyDown={this.addDeck.bind(this)} />
+                        <input type="hidden" ref="selected-hero" value={selectedHero} />
                     </div>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder={TranslationHelper.translate('deck-name')}
-                        onKeyDown={this.addDeck.bind(this)} />
-                    <input type="hidden" ref="selected-hero" value={selectedHero} />
                 </Modal.Body>
+                <Modal.Footer>
+                </Modal.Footer>
             </Modal>
         );
     }

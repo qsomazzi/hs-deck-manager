@@ -34,11 +34,17 @@ class DeckListItem extends Component {
         return (
             <Modal show={displayModal} onHide={this.toggleModal.bind(this)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{TranslationHelper.translate('confirm-remove-deck')}</Modal.Title>
+                    <Modal.Title>{TranslationHelper.translate('remove')}</Modal.Title>
                 </Modal.Header>
+                <Modal.Body>
+                    <div className="modal-remove">
+                        {TranslationHelper.translate('confirm-remove-deck')}
+
+                        <img className="cancel" onClick={this.toggleModal.bind(this)} src="../images/modal/cancel.png" alt={TranslationHelper.translate('no')} />
+                        <img className="confirm" onClick={this.removeDeck.bind(this)} src="../images/modal/confirm.png" alt={TranslationHelper.translate('yes')} />
+                    </div>
+                </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="danger" onClick={this.toggleModal.bind(this)}>{TranslationHelper.translate('no')}</Button>
-                    <Button bsStyle="success" onClick={this.removeDeck.bind(this)}>{TranslationHelper.translate('yes')}</Button>
                 </Modal.Footer>
             </Modal>
         );

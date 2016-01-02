@@ -34,7 +34,6 @@ With 'priority' order
     * Redesign Filters Bar
     * Redesign footer
     * Redesign scroll cursor
-    * Redesign Modals
 * Medium
     * Player current collection
     * Filter cards on Owned
