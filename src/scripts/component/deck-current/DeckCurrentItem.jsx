@@ -22,13 +22,13 @@ class DeckCurrentItem extends Component {
         });
 
         return (
-            <p onClick={HearthstoneActions.removeCard.bind(this, card.id)} className="frame" style={{backgroundImage: `url('/images/resources/frame.png'), url('${HearthstoneStore.getCardImage(card, 'small')}')`}}>
+            <p onClick={HearthstoneActions.removeCard.bind(this, card.id)} className="frame" style={{backgroundImage: `url('/images/ui/deck-current/frame.png'), url('${HearthstoneStore.getCardImage(card, 'small')}')`}}>
                 <span className={costClass}>{card.cost}</span>
                 <span className="name">{HearthstoneStore.getCardName(card, 20)}</span>
 
                 <span className={countBoxClass}>
-                    {card.count == 2 ? <img src="/images/resources/frame_2.png" alt="2"/> : ''}
-                    {card.rarity == 'Legendary' ? <img src="/images/resources/frame_legendary.png" alt="*"/> : ''}
+                    {card.count == 2 ? <img src="/images/ui/deck-current/frame_2.png" alt="2"/> : ''}
+                    {card.rarity == 'Legendary' ? <img src="/images/ui/deck-current/frame_legendary.png" alt="*"/> : ''}
                 </span>
             </p>
         );

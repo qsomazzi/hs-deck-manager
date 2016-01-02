@@ -23,9 +23,9 @@ class DeckCurrent extends Component {
                 {currentDeck}
                 <p className="cpt">
                     <span>{deck.nbCards}</span>
-                    <img src="./images/resources/cards.png" alt="cards" />
+                    <img src="./images/ui/deck-current/cards.png" alt="cards" />
                     <span>{deck.cost}</span>
-                    <img src="./images/resources/dust.png" alt="dust" />
+                    <img src="./images/ui/deck-current/dust.png" alt="dust" />
 
                     <Export data={deck} filename={`${deck.name}.deck.json`} icon="fa fa-download" className="exportDeck" >
                         {TranslationHelper.translate('export-deck')}

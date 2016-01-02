@@ -32,8 +32,8 @@ With 'priority' order
 * High
     * Add Lazy Load on media
     * Redesign Filters Bar
-    * Redesign footer
     * Redesign scroll cursor
+    * Redesign search area
 * Medium
     * Player current collection
     * Filter cards on Owned

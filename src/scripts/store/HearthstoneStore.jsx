@@ -131,8 +131,8 @@ const HearthstoneStore = Reflux.createStore({
         }
     },
 
-    changeLocale(locale) {
-        this.locale = locale;
+    changeLocale() {
+        this.locale = this.locale == 'fr' ? 'en' : 'fr';
 
         this.write();
     },
@@ -322,7 +322,6 @@ const HearthstoneStore = Reflux.createStore({
     getComposedState() {
         return {
             decks:   this.decks,
-            locale:  this.locale,
             current: this.current,
             cards:   this.cards,
             heroes:  this.heroes,

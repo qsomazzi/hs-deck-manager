@@ -37,15 +37,6 @@ body { background: #000; }
     display: block;
   }
 
-  .credits {
-    text-align: center;
-    margin-top: 10px;
-
-    .export {
-      margin: 0 10px;
-    }
-  }
-
   .main-app {
     display: flex;
     justify-content: flex-start;
@@ -53,7 +44,6 @@ body { background: #000; }
 
     .deck-builder {
       order: 1;
-      width: $deck-list-width + $deck-current-width + 10px;;
       height: $search-area-height;
       margin-right: 10px;
       display: flex;
@@ -63,7 +53,7 @@ body { background: #000; }
         margin-right: 5px;
         width: $deck-list-width;
         flex: 1 auto;
-        background: url('../images/resources/deck-list-background.png') no-repeat center top;
+        background: url('../images/ui/deck-list/background.png') no-repeat center top;
         position: relative;
 
         .my-decks {
@@ -117,7 +107,7 @@ body { background: #000; }
             .removeDeck {
               display: none;
               position: absolute;
-              background: url('../images/resources/remove-deck.png') no-repeat center center;
+              background: url('../images/ui/deck-list/remove-deck.png') no-repeat center center;
               color: #FFF;
               border-radius: 50%;
               top: -5px;
@@ -130,7 +120,7 @@ body { background: #000; }
             .mana-curve {
               display:none;
               height: $deck-list-mana-curve-height;
-              background: url('../images/resources/mana-curve.png') no-repeat bottom center;
+              background: url('../images/ui/deck-list/mana-curve.png') no-repeat bottom center;
               position: absolute;
               bottom: 0;
               width: 100%;
@@ -141,7 +131,7 @@ body { background: #000; }
                 bottom: 30px;
                 background: red;
                 width: 8px;
-                background: url('../images/resources/mana-curve-bar.png') no-repeat top center;
+                background: url('../images/ui/deck-list/mana-curve-bar.png') no-repeat top center;
 
                 &.bar-0 {left: 34px;}
                 &.bar-1 {left: 49px;}
@@ -262,7 +252,7 @@ body { background: #000; }
               right: 4px;
               width: 25px;
               height:24px;
-              background: url('../images/resources/frame_countbox.png');
+              background: url('../images/ui/deck-current/frame_countbox.png');
               display: none;
               @include no-select;
 
@@ -310,7 +300,7 @@ body { background: #000; }
 
     .search-area {
       order: 2;
-      width: auto;
+      width: 100%;
       height: $search-area-height;
       overflow: hidden;
 
@@ -422,11 +412,57 @@ body { background: #000; }
       }
     }
   }
+
+  .footer {
+    margin: 0;
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .footer-left {
+      background: url('../images/ui/footer/footer-left.png') no-repeat left top;
+      width: 52px;
+      height: 60px;
+    }
+
+    .footer-content {
+      background: url('../images/ui/footer/footer-content.png') repeat-x center top;
+      min-width: 300px;
+      height: 60px;
+      margin-left: -1px;
+
+      a {
+        text-align: center;
+        font-size: 15px;
+        font-family: HearthstoneFont, serif;
+        color: #FFF;
+        height: 60px;
+        padding: 17px 0;
+        display: inline-block;
+        cursor: pointer;
+
+        &.import, &.export {
+          background: url('../images/ui/footer/separator.png') no-repeat right top;
+          padding-right: 37px;
+        }
+
+        &:hover { text-decoration: none; font-weight: bold; }
+      }
+    }
+
+    .footer-right {
+      background: url('../images/ui/footer/footer-right.png') no-repeat right top;
+      width: 52px;
+      height: 60px;
+    }
+  }
 }
 
 .modal {
   .modal-header {
-    background: url('../images/modal/modal-top.png') no-repeat top center;
+    background: url('../images/ui/modal/modal-top.png') no-repeat top center;
     border: 0;
     height: 129px;
 
@@ -457,14 +493,14 @@ body { background: #000; }
   }
 
   .modal-body {
-    background: url('../images/modal/modal-body.png') repeat-y center top;
+    background: url('../images/ui/modal/modal-body.png') repeat-y center top;
     padding: 0 50px;
     margin-top: -1px;
     min-height: 227px;
   }
 
   .modal-footer {
-    background: url('../images/modal/modal-footer.png') no-repeat center bottom;
+    background: url('../images/ui/modal/modal-footer.png') no-repeat center bottom;
     height: 53px;
     border: 0;
   }

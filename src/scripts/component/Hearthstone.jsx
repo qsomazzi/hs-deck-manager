@@ -1,6 +1,5 @@
 import React, { Component }    from 'react';
 import { ListenerMixin }       from 'reflux';
-import { ButtonGroup, Button } from 'react-bootstrap';
 import reactMixin              from 'react-mixin';
 import classNames              from 'classnames';
 import HearthstoneStore        from './../store/HearthstoneStore';
@@ -11,7 +10,7 @@ import DeckCurrent             from './deck-current/DeckCurrent';
 import DeckAdd                 from './deck-tools/DeckAdd';
 import Cards                   from './cards/Cards';
 import NavBar                  from './navbar/NavBar';
-import Export                  from './export/Export';
+import Footer                  from './navbar/Footer';
 
 /**
  * Hearthstone
@@ -41,7 +40,7 @@ class Hearthstone extends Component {
      * @return {XML}
      */
     render() {
-        let { locale, decks, current, heroes, filters, showModal } = this.state;
+        let { decks, current, heroes, filters, showModal } = this.state;
 
         let deckDetails      = current != null ? <DeckCurrent deck={decks[current]} /> : null;
         let currentDeckClass = classNames('panel deck-current', {
@@ -87,18 +86,7 @@ class Hearthstone extends Component {
                     </div>
                 </div>
 
-                <div className="credits">
-                    <a className="btn btn-success import" onClick={HearthstoneActions.importDefaultDecks.bind(this)}>
-                        {TranslationHelper.translate('import-default')}
-                    </a>
-                    <Export data={decks} filename="all-decks.json" className="btn btn-info export" >
-                        {TranslationHelper.translate('export-decks')}
-                    </Export>
-                    <ButtonGroup>
-                        <Button onClick={HearthstoneActions.changeLocale.bind(this, 'fr')} active={locale == 'fr'}>French</Button>
-                        <Button onClick={HearthstoneActions.changeLocale.bind(this, 'en')} active={locale == 'en'}>English</Button>
-                    </ButtonGroup>
-                </div>
+                <Footer decks={decks} />
             </div>
         );
     }
