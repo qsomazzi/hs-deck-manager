@@ -51,11 +51,14 @@ Resources
 History
 -------
 
-| Version |   Image   |    Date    |
-|:-------:|:---------:|:----------:|
-|    v0   | ![v0][v0] | 20/12/2015 |
-|    v1   | ![v1][v1] | 29/12/2015 |
+| Version |                          Image                          |    Date    |
+|:-------:|:-------------------------------------------------------:|:----------:|
+|    v0   |                        ![v0][v0]                        | 20/12/2015 |
+|    v1   |                        ![v1][v1]                        | 29/12/2015 |
+|   v1.1  | ![v1.1-menu][v1.1-menu] ![v1.1-my-decks][v1.1-my-decks] | 03/01/2016 |
 
 
 [v0]: resources/docs/v0.png
 [v1]: resources/docs/v1.png
+[v1.1-menu]: resources/docs/v1.1-menu.png
+[v1.1-my-decks]: resources/docs/v1.1-my-decks.png
