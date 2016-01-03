@@ -5,9 +5,8 @@ import classNames              from 'classnames';
 import HearthstoneStore        from './../store/HearthstoneStore';
 import HearthstoneActions      from './../action/HearthstoneActions';
 import TranslationHelper       from './../helper/TranslationHelper';
-import DeckList                from './deck-list/DeckList';
 import DeckCurrent             from './deck-current/DeckCurrent';
-import DeckAdd                 from './deck-tools/DeckAdd';
+import Menu                    from './menu/Menu';
 import Cards                   from './cards/Cards';
 import NavBar                  from './navbar/NavBar';
 import Footer                  from './navbar/Footer';
@@ -40,7 +39,7 @@ class Hearthstone extends Component {
      * @return {XML}
      */
     render() {
-        let { decks, current, heroes, filters, showModal } = this.state;
+        let { decks, current, heroes, filters, menu } = this.state;
 
         let deckDetails      = current != null ? <DeckCurrent deck={decks[current]} /> : null;
         let currentDeckClass = classNames('panel deck-current', {
@@ -53,24 +52,11 @@ class Hearthstone extends Component {
 
                 <div className="main-app">
                     <div className="deck-builder">
-                        <div className="deck-list">
-                            <div className="my-decks">
-                                {TranslationHelper.translate('my-decks')}
-                            </div>
-
-                            <DeckList
-                                decks={decks}
-                                current={current} />
-
-                            <div className="decks-count">
-                                <span className="cpt">{decks.length}</span>
-                                <span>decks</span>
-                            </div>
-
-                            <DeckAdd
-                                showModal={showModal}
-                                heroes={heroes} />
-                        </div>
+                        <Menu
+                            heroes={heroes}
+                            decks={decks}
+                            current={current}
+                            menu={menu} />
 
                         <div className={currentDeckClass}>
                             {deckDetails}

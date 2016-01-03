@@ -83,10 +83,8 @@ class DeckAdd extends Component {
      */
     render() {
         return (
-            <div>
-                <div className={`add-deck ${HearthstoneStore.getLocale()}`} onClick={this.toggleModal.bind(this)} >
-                    {TranslationHelper.translate('add')}
-                </div>
+            <div className="list-group-item menu-btn" onClick={this.toggleModal.bind(this)}>
+                {TranslationHelper.translate('add-deck')}
                 {this.renderModal()}
             </div>
         );
@@ -94,8 +92,7 @@ class DeckAdd extends Component {
 }
 
 DeckAdd.PropTypes = {
-    showModal: PropTypes.bool.isRequired,
-    heroes:    PropTypes.array.isRequired
+    heroes: PropTypes.array.isRequired
 };
 
 export default DeckAdd;

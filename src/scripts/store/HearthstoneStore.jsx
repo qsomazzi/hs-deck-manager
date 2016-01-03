@@ -17,6 +17,7 @@ const HearthstoneStore = Reflux.createStore({
         this.locale  = localStorage.locale == undefined ? 'fr' : JSON.parse(localStorage.locale);
         this.heroes  = this.initHeroes();
         this.cards   = this.initCards();
+        this.menu    = 'menu';
         this.current = null;
         this.filters = {
             search:    null,
@@ -175,6 +176,11 @@ const HearthstoneStore = Reflux.createStore({
         this.write();
     },
 
+    openMenu(menuItem) {
+        this.menu = menuItem;
+        this.loadDeck(null);
+    },
+
     /* -------------
      *   Internals
      * ------------- */
@@ -325,7 +331,8 @@ const HearthstoneStore = Reflux.createStore({
             current: this.current,
             cards:   this.cards,
             heroes:  this.heroes,
-            filters: this.filters
+            filters: this.filters,
+            menu:    this.menu
         };
     },
 

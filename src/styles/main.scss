@@ -50,15 +50,15 @@ body { background: #000; }
       margin-right: 10px;
       display: flex;
 
-      .deck-list {
+      .menu {
         order: 1;
         margin-right: 5px;
         width: $deck-list-width;
         flex: 1 auto;
-        background: url('../images/ui/deck-list/background.png') no-repeat center top;
+        background: url('../images/ui/menu/background.png') no-repeat center top;
         position: relative;
 
-        .my-decks {
+        .title {
           text-align: center;
           font-size: 15px;
           font-family: HearthstoneFont, serif;
@@ -111,7 +111,7 @@ body { background: #000; }
             .removeDeck {
               display: none;
               position: absolute;
-              background: url('../images/ui/deck-list/remove-deck.png') no-repeat center center;
+              background: url('../images/ui/menu/remove-deck.png') no-repeat center center;
               color: #FFF;
               border-radius: 50%;
               top: -5px;
@@ -124,7 +124,7 @@ body { background: #000; }
             .mana-curve {
               display:none;
               height: $deck-list-mana-curve-height;
-              background: url('../images/ui/deck-list/mana-curve.png') no-repeat bottom center;
+              background: url('../images/ui/menu/mana-curve.png') no-repeat bottom center;
               position: absolute;
               bottom: 0;
               width: 100%;
@@ -135,7 +135,7 @@ body { background: #000; }
                 bottom: 30px;
                 background: red;
                 width: 8px;
-                background: url('../images/ui/deck-list/mana-curve-bar.png') no-repeat top center;
+                background: url('../images/ui/menu/mana-curve-bar.png') no-repeat top center;
 
                 &.bar-0 {left: 34px;}
                 &.bar-1 {left: 49px;}
@@ -146,6 +146,18 @@ body { background: #000; }
                 &.bar-6 {left: 124px;}
                 &.bar-7 {left: 139px;}
               }
+            }
+
+            &.menu-btn {
+              background-image: url('../images/ui/menu/btn.png');
+              font-size: 15px;
+              font-family: HearthstoneFont, serif;
+              font-weight: bold;
+              color: #000;
+              text-align: center;
+              padding: 25px 0;
+              cursor: pointer;
+              @include no-select;
             }
 
             &.active {
@@ -184,10 +196,11 @@ body { background: #000; }
           }
         }
 
-        .add-deck {
+        .menu-action {
           position: absolute;
           bottom: 15px;
-          right: 42px;
+          right: 37px;
+          width: 60px;
           font-weight: bold;
           color: $color-brown;
           text-align: center;
@@ -196,8 +209,7 @@ body { background: #000; }
           font-family: HearthstoneFont, serif;
           @include no-select;
 
-          &.en {right: 51px;}
-          &:hover {color: #000;}
+          &:hover { color: #FFF; }
         }
       }
 
@@ -438,7 +450,7 @@ body { background: #000; }
 
     .footer-content {
       background: url('../images/ui/footer/footer-content.png') repeat-x center top;
-      min-width: 300px;
+      min-width: 230px;
       height: 60px;
       margin-left: -1px;
 
@@ -453,7 +465,7 @@ body { background: #000; }
         cursor: pointer;
         @include no-select;
 
-        &.import, &.export {
+        &.export {
           background: url('../images/ui/footer/separator.png') no-repeat right top;
           padding-right: 37px;
         }
@@ -546,6 +558,19 @@ body { background: #000; }
       width: 80%;
       margin: 0 auto;
       text-align: center;
+    }
+  }
+
+  .modal-settings {
+    text-align: center;
+    font-size: 15px;
+    font-family: HearthstoneFont, serif;
+    font-weight: bold;
+    height: 220px;
+
+    .import{
+      color: #000;
+      cursor: pointer;
     }
   }
 

@@ -20,9 +20,6 @@ class Footer extends Component {
                 <div className="footer-left"></div>
 
                 <div className="footer-content">
-                    <a className="import" onClick={HearthstoneActions.importDefaultDecks.bind(this)}>
-                        {TranslationHelper.translate('import-default')}
-                    </a>
                     <Export data={decks} filename="all-decks.json" className="export">
                         {TranslationHelper.translate('export-decks')}
                     </Export>

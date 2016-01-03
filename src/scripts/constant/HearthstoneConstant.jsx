@@ -3,7 +3,6 @@ export default {
         fr: {
             // Ui / texts
             'add-deck': 'Ajouter un deck',
-            'add': 'Ajouter',
             'deck-name': 'Nom du deck',
             'cards': 'Cartes',
             'no-deck-selected': 'Aucun deck sélectionné',
@@ -22,6 +21,9 @@ export default {
             'type': 'Type',
             'mechanics': 'Mécaniques',
             'my-decks': 'Mes decks',
+            'menu': 'Menu',
+            'my-collection': 'Ma collection',
+            'settings': 'Paramètres',
             // CardType
             'Spell': 'Sort',
             'Minion': 'Serviteur',
@@ -62,7 +64,6 @@ export default {
         en: {
             // Ui / texts
             'add-deck': 'Add Deck',
-            'add': 'Add',
             'deck-name': 'Deck name',
             'cards': 'Cards',
             'no-deck-selected': 'No deck selected',
@@ -81,6 +82,9 @@ export default {
             'type': 'Type',
             'mechanics': 'Mechanics',
             'my-decks': 'My decks',
+            'menu': 'Menu',
+            'my-collection': 'My collection',
+            'settings': 'Settings',
             // CardType
             'Spell': 'Spell',
             'Minion': 'Minion',
