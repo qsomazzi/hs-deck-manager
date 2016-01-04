@@ -1,7 +1,7 @@
 Hearthstone Deck Manager
 ========================
 
-The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. - Last version : 31 / 12 / 2015
+The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. - Last version : 04 / 01 / 2016
 
 Require
 -------
