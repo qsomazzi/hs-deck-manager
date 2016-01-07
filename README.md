@@ -29,7 +29,6 @@ With 'priority' order
 
 * Bug
     * Cpt at the bottom of menu by Item selected
-    * Handle user collection
     * Handle sort (name with é | è)...
 * High
     * Add Lazy Load on media

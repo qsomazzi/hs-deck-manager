@@ -470,6 +470,24 @@ const HearthstoneStore = Reflux.createStore({
         let card = this.collection[_.findIndex(this.collection, {'id': id})];
 
         return card != undefined && (card.count == 2 || card.rarity == 'Legendary');
+    },
+
+    getDeckCost(deck) {
+        let initialCost = deck.cost;
+
+        _.forEach(deck.cards, card => {
+            let collectionCard = this.collection[_.findIndex(this.collection, {'id': card.id})];
+
+            if (collectionCard != undefined) {
+                initialCost -= HearthstoneConstant.dust[card.rarity];
+
+                if (card.count == 2 && collectionCard.count == 2) {
+                    initialCost -= HearthstoneConstant.dust[card.rarity];
+                }
+            }
+        });
+
+        return initialCost;
     }
 });
 

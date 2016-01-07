@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import DeckCurrentItem                 from './DeckCurrentItem';
 import _                               from 'lodash';
-import TranslationHelper               from '../../helper/TranslationHelper';
+import HearthstoneStore                from './../../store/HearthstoneStore';
+import TranslationHelper               from './../../helper/TranslationHelper';
 import Export                          from './../export/Export';
 
 /**
@@ -24,7 +25,7 @@ class DeckCurrent extends Component {
                 <p className="cpt">
                     <span>{deck.nbCards}</span>
                     <img src="./images/ui/deck-current/cards.png" alt="cards" />
-                    <span>{deck.cost}</span>
+                    <span>{HearthstoneStore.getDeckCost(deck)}</span>
                     <img src="./images/ui/deck-current/dust.png" alt="dust" />
 
                     <Export data={deck} filename={`${deck.name}.deck.json`} icon="fa fa-download" className="exportDeck" >
