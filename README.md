@@ -28,15 +28,14 @@ Features that needs to be developed
 With 'priority' order
 
 * Bug
-    * /
+    * Cpt at the bottom of menu by Item selected
+    * Handle user collection
+    * Handle sort (name with é | è)...
 * High
     * Add Lazy Load on media
     * Redesign Filters Bar
     * Redesign scroll cursor
     * Redesign search area
-* Medium
-    * Player current collection
-    * Filter cards on Owned
 * Low
     * Import JSON 
     * Improve translation system

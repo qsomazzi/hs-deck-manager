@@ -18,7 +18,8 @@ const HearthstoneActions = Reflux.createActions([
     // Settings
     'changeLocale',
     'importDefaultDecks',
-    'openMenu'
+    'openMenu',
+    'reinitCollection'
 ]);
 
 export default HearthstoneActions;

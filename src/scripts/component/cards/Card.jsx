@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames                      from 'classnames';
 import HearthstoneActions              from './../../action/HearthstoneActions';
 import HearthstoneStore                from './../../store/HearthstoneStore';
 
@@ -12,8 +13,12 @@ class Card extends Component {
     render() {
         let { card } = this.props;
 
+        let cardClass = classNames('card', {
+            owned: HearthstoneStore.isInCollection(card.id)
+        });
+
         return (
-            <div className="card">
+            <div className={cardClass}>
                 <img
                     src={HearthstoneStore.getCardImage(card)}
                     alt={HearthstoneStore.getCardName(card)}

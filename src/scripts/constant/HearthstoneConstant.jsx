@@ -24,6 +24,8 @@ export default {
             'menu': 'Menu',
             'my-collection': 'Ma collection',
             'settings': 'Paramètres',
+            'reinit-collection': 'Réinitialise la collection',
+            'status': 'Status',
             // CardType
             'Spell': 'Sort',
             'Minion': 'Serviteur',
@@ -59,7 +61,10 @@ export default {
             'Secret': 'Secret',
             'Enrage': 'Accès de rage',
             'Combo': 'Combo',
-            'Inspire': 'Exaltation'
+            'Inspire': 'Exaltation',
+            // Status
+            'Owned': 'Possédés',
+            'NotOwned': 'Non possédés'
         },
         en: {
             // Ui / texts
@@ -85,6 +90,8 @@ export default {
             'menu': 'Menu',
             'my-collection': 'My collection',
             'settings': 'Settings',
+            'reinit-collection': 'Réinitialise the collection',
+            'status': 'Status',
             // CardType
             'Spell': 'Spell',
             'Minion': 'Minion',
@@ -120,7 +127,10 @@ export default {
             'Secret': 'Secret',
             'Enrage': 'Enrage',
             'Combo': 'Combo',
-            'Inspire': 'Inspire'
+            'Inspire': 'Inspire',
+            // Status
+            'Owned': 'Owned',
+            'NotOwned': 'Not owned'
         }
     },
     dust: {
@@ -141,6 +151,10 @@ export default {
         'Spell',
         'Minion',
         'Weapon'
+    ],
+    status: [
+        'Owned',
+        'NotOwned'
     ],
     cardSet: {
         'Basic':                   'extension/Basic.png',

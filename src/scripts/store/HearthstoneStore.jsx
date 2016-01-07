@@ -13,13 +13,14 @@ const HearthstoneStore = Reflux.createStore({
     listenables: HearthstoneActions,
 
     init() {
-        this.decks   = localStorage.decks == undefined  ? []   : JSON.parse(localStorage.decks);
-        this.locale  = localStorage.locale == undefined ? 'fr' : JSON.parse(localStorage.locale);
-        this.heroes  = this.initHeroes();
-        this.cards   = this.initCards();
-        this.menu    = 'menu';
-        this.current = null;
-        this.filters = {
+        this.collection = localStorage.collection == undefined ? this.initCollection() : JSON.parse(localStorage.collection);
+        this.decks      = localStorage.decks == undefined      ? []                    : JSON.parse(localStorage.decks);
+        this.locale     = localStorage.locale == undefined     ? 'fr'                  : JSON.parse(localStorage.locale);
+        this.heroes     = this.initHeroes();
+        this.cards      = this.initCards();
+        this.menu       = 'menu';
+        this.current    = null;
+        this.filters    = {
             search:    null,
             cards:     this.cards,
             heroes:    this.initHeroes(true),
@@ -28,6 +29,7 @@ const HearthstoneStore = Reflux.createStore({
             cardType:  null,
             cardSet:   null,
             mechanics: null,
+            status:    null,
             cristal:   [
                 false, // 0
                 false, // 1
@@ -72,63 +74,89 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     addCard(id) {
-        if (this.current != null) {
-            let card      = this.filters.cards[_.findIndex(this.filters.cards, 'id', id)];
-            let deck      = this.decks[this.current];
-            let newCard   = true;
-            let currentCard;
+        if (this.menu == 'my-decks' || this.menu == 'my-collection') {
+            let card = this.filters.cards[_.findIndex(this.filters.cards, {'id': id})];
 
-            _.forEach(deck.cards, unit => {
-                if (unit.id == card.id) {
-                    currentCard = unit;
-                    newCard     = false;
-                }
-            });
+            if (this.current != null) {
+                let deck = this.decks[this.current];
 
-            if (deck.nbCards < 30) {
-                if (newCard) {
-                    deck.cards.push({
-                        nameFr: card.nameFr,
-                        nameEn: card.nameEn,
-                        cost:   card.cost,
-                        id:     card.id,
-                        rarity: card.rarity,
-                        count:  1
-                    });
-
-                    deck.nbCards++;
-                    deck.cost = deck.cost + HearthstoneConstant.dust[card.rarity];
-                } else if (currentCard.count != 2 && currentCard.rarity != 'Legendary') {
-                    currentCard.count++;
-
-                    deck.nbCards++;
-                    deck.cost = deck.cost + HearthstoneConstant.dust[card.rarity];
-                }
-
-                this.write();
+                this.addNewCard(card, deck.cards, deck);
+            } else {
+                this.addNewCard(card, this.collection);
             }
         }
     },
 
-    removeCard(id) {
-        if (this.current != null) {
-            let deck  = this.decks[this.current];
-            let index = _.findIndex(deck.cards, 'id', id);
+    addNewCard(card, cards, deck = null) {
+        let newCard   = true;
+        let currentCard;
 
-            if (index != -1) {
-                let rarity = deck.cards[index].rarity;
-                deck.cards[index].count--;
-
-                // remove if it's the last occurrence of this card in the deck
-                if (deck.cards[index].count == 0) {
-                    deck.cards.splice(index, 1);
-                }
-
-                deck.nbCards--;
-                deck.cost = deck.cost - HearthstoneConstant.dust[rarity];
-
-                this.write();
+        _.forEach(cards, unit => {
+            if (unit.id == card.id) {
+                currentCard = unit;
+                newCard     = false;
             }
+        });
+
+        if (deck != null && deck.nbCards == 30) {
+            return;
+        }
+
+        if (newCard) {
+            cards.push({
+                nameFr: card.nameFr,
+                nameEn: card.nameEn,
+                cost:   card.cost,
+                id:     card.id,
+                rarity: card.rarity,
+                count:  1
+            });
+
+            if (deck != null) {
+                deck.nbCards++;
+                deck.cost = deck.cost + HearthstoneConstant.dust[card.rarity];
+            }
+        } else if (currentCard.count != 2 && currentCard.rarity != 'Legendary') {
+            currentCard.count++;
+
+            if (deck != null) {
+                deck.nbCards++;
+                deck.cost = deck.cost + HearthstoneConstant.dust[card.rarity];
+            }
+        }
+
+        this.filterCards();
+        this.write();
+    },
+
+    removeCard(id) {
+        let deck = null;
+        let cards;
+
+        if (this.menu == 'my-decks' && this.current != null) {
+            deck  = this.decks[this.current];
+            cards = deck.cards;
+        } else if(this.menu == 'my-collection') {
+            cards = this.collection;
+        }
+
+        let index = _.findIndex(cards, {'id': id});
+
+        if (index != -1) {
+            cards[index].count--;
+
+            // remove if it's the last occurrence of this card in the deck
+            if (cards[index].count == 0) {
+                cards.splice(index, 1);
+            }
+
+            if (deck != null) {
+                deck.nbCards--;
+                deck.cost = deck.cost - HearthstoneConstant.dust[cards[index].rarity];
+            }
+
+            this.filterCards();
+            this.write();
         }
     },
 
@@ -147,7 +175,7 @@ const HearthstoneStore = Reflux.createStore({
     selectFilter(type, value) {
         switch (type) {
             case 'hero':
-                let index = _.findIndex(this.filters.heroes, 'id', value);
+                let index = _.findIndex(this.filters.heroes, {'id': value});
 
                 this.filters.hero = index != -1 ? this.filters.heroes[index] : null;
                 break;
@@ -155,9 +183,8 @@ const HearthstoneStore = Reflux.createStore({
             case 'cardSet':
             case 'cardType':
             case 'mechanics':
+            case 'status':
                 this.filters[type] = value != '' ? value : null;
-                break;
-
                 break;
         }
 
@@ -181,6 +208,10 @@ const HearthstoneStore = Reflux.createStore({
         this.loadDeck(null);
     },
 
+    reinitCollection() {
+        this.collection = this.initCollection();
+    },
+
     /* -------------
      *   Internals
      * ------------- */
@@ -189,6 +220,25 @@ const HearthstoneStore = Reflux.createStore({
         let sort = this.locale == 'fr' ? 'nameFr' : 'nameEn';
 
         return _.sortByAll(AllCards, ['cost', sort]);
+    },
+
+    initCollection() {
+        let cards = [];
+
+        _.forEach(AllCards, card => {
+            if (card.rarity == 'Free' || card.cardSet == 'Basic') {
+                cards.push({
+                    nameFr: card.nameFr,
+                    nameEn: card.nameEn,
+                    cost:   card.cost,
+                    id:     card.id,
+                    rarity: card.rarity,
+                    count:  2
+                });
+            }
+        });
+
+        return cards;
     },
 
     initHeroes(forFilters = false) {
@@ -208,13 +258,14 @@ const HearthstoneStore = Reflux.createStore({
     write() {
         this.trigger();
 
-        localStorage.decks  = JSON.stringify(this.decks);
-        localStorage.locale = JSON.stringify(this.locale);
+        localStorage.decks      = JSON.stringify(this.decks);
+        localStorage.locale     = JSON.stringify(this.locale);
+        localStorage.collection = JSON.stringify(this.collection);
     },
 
     filterCards() {
-        let { hero, heroes, rarity, cardType, cardSet, mechanics, search } = this.filters;
-        let cards                                                          = this.cards;
+        let { hero, heroes, rarity, cardType, cardSet, mechanics, search, status } = this.filters;
+        let cards                                                                  = this.cards;
 
         // First filter on available heroes
         if (heroes.length == 2) {
@@ -227,7 +278,7 @@ const HearthstoneStore = Reflux.createStore({
         if (hero != null) {
             let playerClass = hero.playerClass != 'Neutral' ? hero.playerClass : null;
 
-            cards = _.filter(cards, 'playerClass', playerClass);
+            cards = _.filter(cards, {'playerClass': playerClass});
         }
 
         // Then filter on rarity selection
@@ -238,28 +289,28 @@ const HearthstoneStore = Reflux.createStore({
                 });
             } else if (rarity == 'Free') {
                 cards = _.filter(cards, card => {
-                    return card.rarity == 'Free' || (card.rarity == 'Common' && card.cardSet == 'Basic');
+                    return card.rarity == 'Free' || card.cardSet == 'Basic';
                 });
             } else {
-                cards = _.filter(cards, 'rarity', rarity);
+                cards = _.filter(cards, {'rarity': rarity});
             }
         }
 
         // Then filter on type selection
         if (cardType != null) {
-            cards = _.filter(cards, 'type', cardType);
+            cards = _.filter(cards, {'type': cardType});
         }
 
         // Then filter on set selection
         if (cardSet != null) {
-            cards = _.filter(cards, 'cardSet', cardSet);
+            cards = _.filter(cards, {'cardSet': cardSet});
         }
 
         // Then filter on mechanics selection
         if (mechanics != null) {
             cards = _.filter(cards, card => {
                 if (card.mechanics != null) {
-                    if (_.findIndex(card.mechanics, 'name', mechanics) != -1) {
+                    if (_.findIndex(card.mechanics, {'name': mechanics}) != -1) {
                         return true;
                     }
                 }
@@ -280,6 +331,19 @@ const HearthstoneStore = Reflux.createStore({
                 let filter = card.cost > 7 ? 7 : card.cost;
 
                 return this.filters.cristal[filter];
+            });
+        }
+
+        // Then filter on status selection
+        if (status != null) {
+            cards = _.filter(cards, card => {
+                let index = _.findIndex(this.collection, {'id': card.id});
+
+                if (status == 'Owned') {
+                    return index != -1 && (this.collection[index].count == 2 || this.collection[index].rarity == 'Legendary');
+                } else {
+                    return index == -1 || (this.collection[index].count != 2 && this.collection[index].rarity != 'Legendary');
+                }
             });
         }
 
@@ -306,11 +370,7 @@ const HearthstoneStore = Reflux.createStore({
             this.filters.heroes = _.pullAt(
                 this.filters.heroes,
                 0,
-                _.findIndex(
-                    this.filters.heroes,
-                    'id',
-                    this.decks[this.current].hero
-                )
+                _.findIndex(this.filters.heroes, {'id': this.decks[this.current].hero})
             );
         }
 
@@ -327,12 +387,13 @@ const HearthstoneStore = Reflux.createStore({
 
     getComposedState() {
         return {
-            decks:   this.decks,
-            current: this.current,
-            cards:   this.cards,
-            heroes:  this.heroes,
-            filters: this.filters,
-            menu:    this.menu
+            decks:      this.decks,
+            current:    this.current,
+            cards:      this.cards,
+            heroes:     this.heroes,
+            filters:    this.filters,
+            collection: this.collection,
+            menu:       this.menu
         };
     },
 
@@ -403,6 +464,12 @@ const HearthstoneStore = Reflux.createStore({
         }
 
         return path;
+    },
+
+    isInCollection(id) {
+        let card = this.collection[_.findIndex(this.collection, {'id': id})];
+
+        return card != undefined && (card.count == 2 || card.rarity == 'Legendary');
     }
 });
 

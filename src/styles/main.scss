@@ -27,6 +27,67 @@ $color-brown: #4F3C1D;
   user-select: none;
 }
 
+
+
+// Card
+.frame {
+  height: 35px;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 7px 0 7px 37px;
+  position: relative;
+  cursor: pointer;
+
+  .name {
+    font-family: HearthstoneFont, serif;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 11px;
+    @include no-select;
+  }
+
+  .cost {
+    position: absolute;
+    top: 3px;
+    left : 11px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: HearthstoneFont, serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    @include no-select;
+
+    &.expensive {
+      top: 6px;
+      left: 8px;
+      font-size: 16px;
+    }
+  }
+
+  .countbox {
+    position: absolute;
+    top: 6px;
+    width: 25px;
+    height:24px;
+    background: url('../images/ui/deck-current/frame_countbox.png');
+    display: none;
+    @include no-select;
+
+    img {
+      position: absolute;
+      top: 0;
+      right: 1px;
+    }
+
+    &.enable {
+      display: block;
+    }
+  }
+}
+
+
+
+
 body { background: #000; }
 
 #hearthstone {
@@ -175,6 +236,15 @@ body { background: #000; }
               .deck-name span{color: red;}
             }
           }
+
+          .frame {
+            width: 100%;
+            background-position: left center, right center;
+
+            .countbox {
+              right: 0;
+            }
+          }
         }
 
         .decks-count {
@@ -230,59 +300,10 @@ body { background: #000; }
 
           .frame {
             width: 218px;
-            height: 35px;
-            background-repeat: no-repeat;
-            background-position: center right;
-            margin: 0;
-            padding: 7px 0 7px 37px;
-            position: relative;
-            cursor: pointer;
-
-            .name {
-              font-family: HearthstoneFont, serif;
-              color: #FFFFFF;
-              font-weight: bold;
-              font-size: 11px;
-              @include no-select;
-            }
-
-            .cost {
-              position: absolute;
-              top: 3px;
-              left : 11px;
-              color: #FFFFFF;
-              font-weight: bold;
-              font-size: 20px;
-              font-family: HearthstoneFont, serif;
-              text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-              @include no-select;
-
-              &.expensive {
-                top: 6px;
-                left: 8px;
-                font-size: 16px;
-              }
-            }
+            background-position: right center;
 
             .countbox {
-              position: absolute;
-              top: 6px;
               right: 4px;
-              width: 25px;
-              height:24px;
-              background: url('../images/ui/deck-current/frame_countbox.png');
-              display: none;
-              @include no-select;
-
-              img {
-                position: absolute;
-                top: 0;
-                right: 1px;
-              }
-
-              &.enable {
-                display: block;
-              }
             }
           }
         }
@@ -387,6 +408,11 @@ body { background: #000; }
 
               .Select-menu-outer{width: 210px;}
             }
+            &.status {
+              width: 155px;
+
+              .Select-menu-outer{width: 155px;}
+            }
           }
 
           .cristals {
@@ -418,6 +444,7 @@ body { background: #000; }
 
         .card {
           flex-grow: 1;
+          opacity: 0.5;
           @include no-select;
 
           img {
@@ -428,6 +455,10 @@ body { background: #000; }
             -moz-transition: opacity 500ms ease-in-out;
             -o-transition: opacity 500ms ease-in-out;
             transition: opacity 500ms ease-in-out;
+          }
+
+          &.owned {
+            opacity: 1;
           }
         }
       }
@@ -568,9 +599,10 @@ body { background: #000; }
     font-weight: bold;
     height: 220px;
 
-    .import{
+    a {
       color: #000;
       cursor: pointer;
+      display: block;
     }
   }
 

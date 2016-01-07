@@ -39,7 +39,7 @@ class Hearthstone extends Component {
      * @return {XML}
      */
     render() {
-        let { decks, current, heroes, filters, menu } = this.state;
+        let { decks, current, heroes, filters, menu, collection } = this.state;
 
         let deckDetails      = current != null ? <DeckCurrent deck={decks[current]} /> : null;
         let currentDeckClass = classNames('panel deck-current', {
@@ -56,7 +56,8 @@ class Hearthstone extends Component {
                             heroes={heroes}
                             decks={decks}
                             current={current}
-                            menu={menu} />
+                            menu={menu}
+                            collection={collection} />
 
                         <div className={currentDeckClass}>
                             {deckDetails}

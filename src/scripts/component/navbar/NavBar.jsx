@@ -128,6 +128,13 @@ class NavBar extends Component {
                         onChange={this.selectFilter.bind(this, 'mechanics')}
                         className="mechanics" />
 
+                    <Select
+                        value={filters.status}
+                        options={this.renderTextOptions('status')}
+                        placeholder={TranslationHelper.translate('status')}
+                        onChange={this.selectFilter.bind(this, 'status')}
+                        className="status" />
+
                     <div className="cristals">
                         {cristals}
                     </div>

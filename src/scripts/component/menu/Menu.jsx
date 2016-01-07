@@ -3,6 +3,7 @@ import { ListGroup, Modal }            from 'react-bootstrap';
 import HearthstoneActions              from './../../action/HearthstoneActions';
 import TranslationHelper               from './../../helper/TranslationHelper'
 import DeckList                        from './../deck-list/DeckList';
+import Collection                      from './../collection/Collection';
 
 /**
  * Menu
@@ -40,6 +41,12 @@ class Menu extends Component {
         this.toggleModal();
     }
 
+    reinitCollection() {
+        HearthstoneActions.reinitCollection();
+        HearthstoneActions.openMenu('my-collection');
+        this.toggleModal();
+    }
+
     renderModal() {
         let { displayModal } = this.state;
 
@@ -50,8 +57,12 @@ class Menu extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-settings">
-                        <a className="import" onClick={this.importDefaultDecks.bind(this)}>
+                        <a onClick={this.importDefaultDecks.bind(this)}>
                             {TranslationHelper.translate('import-default')}
+                        </a>
+
+                        <a onClick={this.reinitCollection.bind(this)}>
+                            {TranslationHelper.translate('reinit-collection')}
                         </a>
                     </div>
                 </Modal.Body>
@@ -65,7 +76,7 @@ class Menu extends Component {
      * @return {XML}
      */
     render() {
-        let { decks, current, heroes, menu } = this.props;
+        let { decks, current, heroes, menu, collection } = this.props;
         let menuItem, menuTitle, menuAction;
 
         switch (menu) {
@@ -80,7 +91,7 @@ class Menu extends Component {
                 menuAction = <div className="menu-action" onClick={HearthstoneActions.openMenu.bind(this, 'menu')}><i className="fa fa-reply"></i></div>;
                 break;
             case 'my-collection':
-                menuItem   = null;
+                menuItem   = <Collection collection={collection} />;
                 menuTitle  = TranslationHelper.translate('my-collection');
                 menuAction = <div className="menu-action" onClick={HearthstoneActions.openMenu.bind(this, 'menu')}><i className="fa fa-reply"></i></div>;
                 break;
@@ -107,10 +118,11 @@ class Menu extends Component {
 }
 
 Menu.PropTypes = {
-    current: PropTypes.number,
-    heroes:  PropTypes.array.isRequired,
-    decks:   PropTypes.array.isRequired,
-    menu:    PropTypes.string.isRequired
+    current:    PropTypes.number,
+    heroes:     PropTypes.array.isRequired,
+    decks:      PropTypes.array.isRequired,
+    collection: PropTypes.array.isRequired,
+    menu:       PropTypes.string.isRequired
 };
 
 export default Menu;
