@@ -37,11 +37,9 @@ class DeckCurrentItem extends Component {
 
 DeckCurrentItem.PropTypes = {
     card: PropTypes.shape({
-        nameFr: PropTypes.string.isRequired,
-        nameEn: PropTypes.string.isRequired,
-        cost:   PropTypes.number.isRequired,
-        count:  PropTypes.number.isRequired,
-        id:     PropTypes.string.isRequired
+        cost:  PropTypes.number.isRequired,
+        count: PropTypes.number.isRequired,
+        id:    PropTypes.string.isRequired
     }).isRequired
 };
 

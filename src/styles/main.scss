@@ -27,9 +27,9 @@ $color-brown: #4F3C1D;
   user-select: none;
 }
 
+body { background: #000; }
 
-
-// Card
+// Card frame (my collection / my decks)
 .frame {
   height: 35px;
   background-repeat: no-repeat;
@@ -84,11 +84,6 @@ $color-brown: #4F3C1D;
     }
   }
 }
-
-
-
-
-body { background: #000; }
 
 #hearthstone {
   .logo {
@@ -481,9 +476,10 @@ body { background: #000; }
 
     .footer-content {
       background: url('../images/ui/footer/footer-content.png') repeat-x center top;
-      min-width: 230px;
+      min-width: 160px;
       height: 60px;
       margin-left: -1px;
+      text-align: center;
 
       a {
         text-align: center;
@@ -495,11 +491,6 @@ body { background: #000; }
         display: inline-block;
         cursor: pointer;
         @include no-select;
-
-        &.export {
-          background: url('../images/ui/footer/separator.png') no-repeat right top;
-          padding-right: 37px;
-        }
 
         &:hover { text-decoration: none; font-weight: bold; }
       }
@@ -603,6 +594,12 @@ body { background: #000; }
       color: #000;
       cursor: pointer;
       display: block;
+      padding: 10px 0;
+    }
+
+    .languages {
+      width: 200px;
+      margin: 0 auto;
     }
   }
 

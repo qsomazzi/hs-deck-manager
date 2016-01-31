@@ -29,15 +29,15 @@ With 'priority' order
 
 * Bug
     * Cpt at the bottom of menu by Item selected
-    * Handle sort (name with é | è)...
+    * Wrong : Sort Collection and Current deck
+    * Flag
 * High
     * Add Lazy Load on media
     * Redesign Filters Bar
     * Redesign scroll cursor
     * Redesign search area
 * Low
-    * Import JSON 
-    * Improve translation system
+    * Import JSON
 
 Resources
 ---------

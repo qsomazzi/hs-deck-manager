@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import HearthstoneActions              from './../../action/HearthstoneActions';
-import HearthstoneStore                from './../../store/HearthstoneStore';
 import TranslationHelper               from './../../helper/TranslationHelper';
 import Export                          from './../export/Export';
 
@@ -13,7 +12,6 @@ class Footer extends Component {
      */
     render() {
         let { decks } = this.props;
-        let locale    = HearthstoneStore.getLocale();
 
         return (
             <div className="footer">
@@ -21,9 +19,8 @@ class Footer extends Component {
 
                 <div className="footer-content">
                     <Export data={decks} filename="all-decks.json" className="export">
-                        {TranslationHelper.translate('export-decks')}
+                        {TranslationHelper.translate('ui.exportDecks')}
                     </Export>
-                    <a onClick={HearthstoneActions.changeLocale}>{locale == 'fr' ? 'English' : 'French'}</a>
                 </div>
 
                 <div className="footer-right"></div>

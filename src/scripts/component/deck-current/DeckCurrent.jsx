@@ -15,7 +15,7 @@ class DeckCurrent extends Component {
     render() {
         let { deck } = this.props;
 
-        let currentDeck = _.map(_.sortByAll(deck.cards, ['cost', 'nameFr']), (card, key) => {
+        let currentDeck = _.map(_.sortByAll(deck.cards, ['cost', 'name']), (card, key) => {
             return <DeckCurrentItem card={card} key={`current-deck-item-${key}`} />;
         });
 
@@ -29,7 +29,7 @@ class DeckCurrent extends Component {
                     <img src="./images/ui/deck-current/dust.png" alt="dust" />
 
                     <Export data={deck} filename={`${deck.name}.deck.json`} icon="fa fa-download" className="exportDeck" >
-                        {TranslationHelper.translate('export-deck')}
+                        {TranslationHelper.translate('ui.exportDeck')}
                     </Export>
                 </p>
             </div>
@@ -39,7 +39,7 @@ class DeckCurrent extends Component {
 
 DeckCurrent.PropTypes = {
     deck: PropTypes.shape({
-        name: PropTypes.string.isRequired,
+        name:  PropTypes.string.isRequired,
         cards: PropTypes.array.isRequired
     }).isRequired
 };

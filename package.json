@@ -38,11 +38,13 @@
     "bootstrap": "^3.3.5",
     "classnames": "^2.2.0",
     "font-awesome": "^4.5.0",
+    "gm": "^1.21.1",
     "react": "^0.13.3",
     "react-bootstrap": "^0.26.4",
     "react-mixin": "^3.0.0",
     "react-select": "^0.6.11",
-    "reflux": "^0.2.12"
+    "reflux": "^0.2.12",
+    "sync-request": "^3.0.0"
   },
   "scripts": {
     "start": "gulp publish",

@@ -4,56 +4,13 @@ import Select                          from 'react-select';
 import HearthstoneActions              from './../../action/HearthstoneActions';
 import HearthstoneStore                from './../../store/HearthstoneStore';
 import TranslationHelper               from './../../helper/TranslationHelper';
+import Select2Helper                   from './../../helper/Select2Helper';
 import HearthstoneConstant             from './../../constant/HearthstoneConstant';
 
 /**
  * NavBar
  */
 class NavBar extends Component {
-    renderHeroesOptions() {
-        let { filters } = this.props;
-
-        return _.map(filters.heroes, hero => {
-            return {
-                value: hero.id,
-                label: TranslationHelper.translate(hero.name),
-                img:   HearthstoneStore.getHeroImage(hero, 'small')
-            }
-        });
-    }
-
-    renderImageOptions(filterType) {
-        return _.map(HearthstoneConstant[filterType], (image, value) => {
-            return {
-                value: value,
-                label: TranslationHelper.translate(value),
-                img:   `images/${image}`
-            }
-        });
-    }
-
-    renderTextOptions(filterType) {
-        return _.map(HearthstoneConstant[filterType], value => {
-            return {
-                value: value,
-                label: TranslationHelper.translate(value)
-            }
-        });
-    }
-
-    renderOption(option) {
-        return (
-            <div>
-                <img src={option.img} style={{borderRadius: '50%', marginRight: '10px'}} alt={option.value} />
-                {option.label}
-            </div>
-        );
-    }
-
-    renderValue(option) {
-        return <img src={option.img} style={{borderRadius: '50%'}} alt={option.value} />;
-    }
-
     searchCard(event) {
         HearthstoneActions.searchCard(event.target.value);
     }
@@ -84,54 +41,54 @@ class NavBar extends Component {
                     <input
                         type="text"
                         className="search form-control"
-                        placeholder={TranslationHelper.translate('search')}
+                        placeholder={TranslationHelper.translate('ui.search')}
                         onChange={this.searchCard.bind(this)} />
 
                     <Select
                         value={filters.hero != null ? filters.hero.id : null}
-                        options={this.renderHeroesOptions()}
-                        placeholder={TranslationHelper.translate('hero')}
+                        options={Select2Helper.renderHeroesOptions(filters)}
+                        placeholder={TranslationHelper.translate('ui.hero')}
                         onChange={this.selectFilter.bind(this, 'hero')}
-                        optionRenderer={this.renderOption}
-                        valueRenderer={this.renderValue}
+                        optionRenderer={Select2Helper.renderOption.bind(this, null)}
+                        valueRenderer={Select2Helper.renderValue}
                         className="heroes" />
 
                     <Select
                         value={filters.rarity}
-                        options={this.renderImageOptions('rarity')}
-                        placeholder={TranslationHelper.translate('rarity')}
+                        options={Select2Helper.renderImageOptions('rarity')}
+                        placeholder={TranslationHelper.translate('ui.rarity')}
                         onChange={this.selectFilter.bind(this, 'rarity')}
-                        optionRenderer={this.renderOption}
-                        valueRenderer={this.renderValue}
+                        optionRenderer={Select2Helper.renderOption.bind(this, 'rarity')}
+                        valueRenderer={Select2Helper.renderValue}
                         className="rarity" />
 
                     <Select
                         value={filters.cardSet}
-                        options={this.renderImageOptions('cardSet')}
-                        placeholder={TranslationHelper.translate('extension')}
+                        options={Select2Helper.renderImageOptions('cardSet')}
+                        placeholder={TranslationHelper.translate('ui.extension')}
                         onChange={this.selectFilter.bind(this, 'cardSet')}
-                        optionRenderer={this.renderOption}
-                        valueRenderer={this.renderValue}
+                        optionRenderer={Select2Helper.renderOption.bind(this, 'cardSet')}
+                        valueRenderer={Select2Helper.renderValue}
                         className="set" />
 
                     <Select
                         value={filters.cardType}
-                        options={this.renderTextOptions('cardType')}
-                        placeholder={TranslationHelper.translate('type')}
+                        options={Select2Helper.renderTextOptions('cardType')}
+                        placeholder={TranslationHelper.translate('ui.type')}
                         onChange={this.selectFilter.bind(this, 'cardType')}
                         className="type" />
 
                     <Select
                         value={filters.mechanics}
-                        options={this.renderTextOptions('mechanics')}
-                        placeholder={TranslationHelper.translate('mechanics')}
+                        options={Select2Helper.renderTextOptions('mechanics')}
+                        placeholder={TranslationHelper.translate('ui.mechanics')}
                         onChange={this.selectFilter.bind(this, 'mechanics')}
                         className="mechanics" />
 
                     <Select
                         value={filters.status}
-                        options={this.renderTextOptions('status')}
-                        placeholder={TranslationHelper.translate('status')}
+                        options={Select2Helper.renderTextOptions('status')}
+                        placeholder={TranslationHelper.translate('ui.status')}
                         onChange={this.selectFilter.bind(this, 'status')}
                         className="status" />
 
@@ -140,7 +97,7 @@ class NavBar extends Component {
                     </div>
 
                     <p className="navbar-text navbar-right">
-                        {`${nbCards} ${TranslationHelper.translate('cards')}`}
+                        {`${nbCards} ${TranslationHelper.translate('ui.cards')}`}
                     </p>
                 </div>
             </nav>

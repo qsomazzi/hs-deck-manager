@@ -44,7 +44,7 @@ class DeckAdd extends Component {
         return (
             <Modal show={displayModal} onHide={this.toggleModal.bind(this)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{TranslationHelper.translate('add-deck')}</Modal.Title>
+                    <Modal.Title>{TranslationHelper.translate('ui.addDeck')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="modal-add">
@@ -67,7 +67,7 @@ class DeckAdd extends Component {
                         <input
                             type="text"
                             className="form-control"
-                            placeholder={TranslationHelper.translate('deck-name')}
+                            placeholder={TranslationHelper.translate('ui.deckName')}
                             onKeyDown={this.addDeck.bind(this)} />
                         <input type="hidden" ref="selected-hero" value={selectedHero} />
                     </div>
@@ -84,7 +84,7 @@ class DeckAdd extends Component {
     render() {
         return (
             <div className="list-group-item menu-btn" onClick={this.toggleModal.bind(this)}>
-                {TranslationHelper.translate('add-deck')}
+                {TranslationHelper.translate('ui.addDeck')}
                 {this.renderModal()}
             </div>
         );

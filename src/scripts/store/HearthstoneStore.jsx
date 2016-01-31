@@ -2,9 +2,10 @@ import Reflux              from 'reflux';
 import _                   from 'lodash';
 import HearthstoneActions  from './../action/HearthstoneActions';
 import HearthstoneConstant from './../constant/HearthstoneConstant';
-import AllCards            from '../../../resources/json/Cards.json';
-import AllHeroes           from '../../../resources/json/Heroes.json';
-import DefaultDecks        from '../../../resources/json/default-decks.json';
+import TranslationHelper   from './../helper/TranslationHelper';
+import AllCards            from './../resources/Cards.json';
+import AllHeroes           from './../resources/Heroes.json';
+import DefaultDecks        from './../resources/default-decks.json';
 
 /**
  * HearthstoneStore
@@ -15,7 +16,7 @@ const HearthstoneStore = Reflux.createStore({
     init() {
         this.collection = localStorage.collection == undefined ? this.initCollection() : JSON.parse(localStorage.collection);
         this.decks      = localStorage.decks == undefined      ? []                    : JSON.parse(localStorage.decks);
-        this.locale     = localStorage.locale == undefined     ? 'fr'                  : JSON.parse(localStorage.locale);
+        this.locale     = localStorage.locale == undefined     ? 'frFR'                : JSON.parse(localStorage.locale);
         this.heroes     = this.initHeroes();
         this.cards      = this.initCards();
         this.menu       = 'menu';
@@ -104,8 +105,6 @@ const HearthstoneStore = Reflux.createStore({
 
         if (newCard) {
             cards.push({
-                nameFr: card.nameFr,
-                nameEn: card.nameEn,
                 cost:   card.cost,
                 id:     card.id,
                 rarity: card.rarity,
@@ -160,8 +159,10 @@ const HearthstoneStore = Reflux.createStore({
         }
     },
 
-    changeLocale() {
-        this.locale = this.locale == 'fr' ? 'en' : 'fr';
+    changeLocale(locale) {
+        this.locale = locale;
+        this.heroes = this.initHeroes();
+        this.cards  = this.initCards();
 
         this.write();
     },
@@ -217,9 +218,18 @@ const HearthstoneStore = Reflux.createStore({
      * ------------- */
 
     initCards() {
-        let sort = this.locale == 'fr' ? 'nameFr' : 'nameEn';
+        let cards = [];
 
-        return _.sortByAll(AllCards, ['cost', sort]);
+        _.forEach(AllCards, card => {
+            let name = TranslationHelper.translate(card.id, this.locale);
+
+            card.name = name;
+            card.nameSortable = this.slugify(name);
+
+            cards.push(card);
+        });
+
+        return _.sortByAll(cards, ['cost', 'nameSortable']);
     },
 
     initCollection() {
@@ -228,8 +238,6 @@ const HearthstoneStore = Reflux.createStore({
         _.forEach(AllCards, card => {
             if (card.rarity == 'Free' || card.cardSet == 'Basic') {
                 cards.push({
-                    nameFr: card.nameFr,
-                    nameEn: card.nameEn,
                     cost:   card.cost,
                     id:     card.id,
                     rarity: card.rarity,
@@ -242,17 +250,29 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     initHeroes(forFilters = false) {
-        let heroes = AllHeroes;
+        let heroes = [];
+
+        _.forEach(AllHeroes, hero => {
+            let name = TranslationHelper.translate(hero.id, this.locale);
+
+            hero.name         = name;
+            hero.nameSortable = this.slugify(name);
+
+            heroes.push(hero);
+        });
 
         if (forFilters) {
+            let name = TranslationHelper.translate('HERO_00', this.locale);
+
             heroes.push({
-                id:          'HERO_00',
-                name:        'Neutral',
-                playerClass: 'Neutral'
+                id:           'HERO_00',
+                name:         name,
+                nameSortable: this.slugify(name),
+                playerClass:  'Neutral'
             });
         }
 
-        return _.sortByAll(heroes, ['id', 'name']);
+        return _.sortByAll(heroes, ['id', 'nameSortable']);
     },
 
     write() {
@@ -349,10 +369,8 @@ const HearthstoneStore = Reflux.createStore({
 
         // We filter at least with search because this cost a lot, so we try to filter on a smaller set of results
         if (search != null) {
-            let name = this.locale == 'fr' ? 'nameFr' : 'nameEn';
-
             cards = _.filter(cards, card => {
-                return card[name].toLowerCase().search(search) != -1;
+                return card.name.toLowerCase().search(search) != -1;
             });
         }
 
@@ -375,6 +393,14 @@ const HearthstoneStore = Reflux.createStore({
         }
 
         this.filterCards();
+    },
+
+    slugify(text) {
+        return text.toString()
+            .toLowerCase()
+            .replace(/[àáâãäå]/g,'a')
+            .replace(/[éèêë]/g,'e')
+            .replace(/[œ]/g,'oe');
     },
 
     /* -------------
@@ -427,7 +453,7 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     getCardName(card, truncate = null) {
-        let name = this.locale == 'fr' ? card.nameFr : card.nameEn;
+        let name = TranslationHelper.translate(card.id);
 
         if (truncate != null) {
             return name < 20 ? name : `${name.substring(0, 20)}...`;
@@ -441,7 +467,9 @@ const HearthstoneStore = Reflux.createStore({
 
         switch (size) {
             case 'large':
-                path += this.locale;
+                let locale = (this.locale == 'koKR' || this.locale == 'plPL' || this.locale == 'jaJP') ? 'enUS' : this.locale;
+
+                path += locale;
                 break;
             case 'small':
                 path += 'small';

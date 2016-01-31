@@ -14,7 +14,7 @@ class Collection extends Component {
 
         return (
             <div className="list-group">
-                {_.map(_.sortByAll(collection, ['cost', 'nameFr']), (card, key) => {
+                {_.map(_.sortByAll(collection, ['cost', 'name']), (card, key) => {
                     return <DeckCurrentItem card={card} key={`collection-item-${key}`} />;
                 })}
             </div>

@@ -25,9 +25,7 @@ class Cards extends Component {
 Cards.PropTypes = {
     cards:  PropTypes.arrayOf(
         PropTypes.shape({
-            nameFr: PropTypes.string.isRequired,
-            nameEn: PropTypes.string.isRequired,
-            id:     PropTypes.string.isRequired
+            id: PropTypes.string.isRequired
         })
     ).isRequired
 };

@@ -88,17 +88,18 @@ function notifyError(err) {
 }
 
 function compileJs(watch) {
-    let bundler = watchify(browserify(config.scripts.src, { 
+    let bundler = browserify(config.scripts.src, {
         debug: true,
         extensions: ['.js', '.jsx'],
         cache: {},        // for watchify
         packageCache: {}  // for watchify
-    }).transform(babelify));
+    }).transform(babelify);
 
     function rebundle() {
         bundler.bundle()
             .on('error', notifyError)
             .pipe(source(config.scripts.index))
+            .pipe(addsrc(config.plugins.js))
             .pipe(buffer())
             .pipe(gulp.dest(config.scripts.dest))
             .pipe(sourcemaps.init({ loadMaps: true }))
@@ -110,7 +111,9 @@ function compileJs(watch) {
     }
 
     if (watch) {
-        bundler.on('update', function() {
+        let watchi = watchify(bundler);
+
+        watchi.on('update', function() {
             gutil.log(gutil.colors.green('Changes in JS files spotted. New compilation triggered.'));
             rebundle();
         });
