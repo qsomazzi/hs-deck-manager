@@ -39,10 +39,14 @@ const Select2Helper = {
 
         return (
             <div>
-                <img src={option.img} style={{borderRadius: '50%', marginRight: '10px'}} alt={option.value} />
+                <img src={option.img} alt={option.value} />
                 {TranslationHelper.translate(translateKey)}
             </div>
         );
+    },
+
+    renderTextValue(filterType, option) {
+        return <div>{TranslationHelper.translate(filterType + '.' + option.value)}</div>;
     },
 
     renderValue(option) {

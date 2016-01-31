@@ -50,17 +50,17 @@ export default {
         'Combo',
         'Inspire'
     ],
-    languages: [
-        'enUS',
-        'frFR',
-        'deDE',
-        'esES',
-        'itIT',
-        'koKR',
-        'plPL',
-        'ptBR',
-        'ruRU',
-        'zhCN',
-        'jaJP'
-    ]
+    languages: {
+        'enUS': 'flag/enUS.jpg',
+        'frFR': 'flag/frFR.jpg',
+        'deDE': 'flag/deDE.jpg',
+        'esES': 'flag/esES.jpg',
+        'itIT': 'flag/itIT.jpg',
+        'koKR': 'flag/koKR.jpg',
+        'plPL': 'flag/plPL.jpg',
+        'ptBR': 'flag/ptBR.jpg',
+        'ruRU': 'flag/ruRU.jpg',
+        'zhCN': 'flag/zhCN.jpg',
+        'jaJP': 'flag/jaJP.jpg'
+    }
 };

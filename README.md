@@ -1,7 +1,7 @@
 Hearthstone Deck Manager
 ========================
 
-The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. - Last version : 04 / 01 / 2016
+The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. - Last version : 01 / 02 / 2016
 
 Require
 -------
@@ -29,8 +29,7 @@ With 'priority' order
 
 * Bug
     * Cpt at the bottom of menu by Item selected
-    * Wrong : Sort Collection and Current deck
-    * Flag
+    * Wrong Sort in Collection and Current deck
 * High
     * Add Lazy Load on media
     * Redesign Filters Bar

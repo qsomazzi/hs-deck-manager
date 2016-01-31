@@ -70,9 +70,12 @@ class Menu extends Component {
 
                         <Select
                             value={HearthstoneStore.getLocale()}
-                            options={Select2Helper.renderTextOptions('languages')}
+                            clearable={false}
+                            options={Select2Helper.renderImageOptions('languages')}
                             placeholder={TranslationHelper.translate('ui.languages')}
                             onChange={HearthstoneActions.changeLocale}
+                            optionRenderer={Select2Helper.renderOption.bind(this, 'languages')}
+                            valueRenderer={Select2Helper.renderTextValue.bind(this, 'languages')}
                             className="languages" />
                     </div>
                 </Modal.Body>
