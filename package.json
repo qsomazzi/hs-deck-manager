@@ -44,6 +44,7 @@
     "react-mixin": "^3.0.0",
     "react-select": "^0.6.11",
     "reflux": "^0.2.12",
+    "sleep": "^3.0.0",
     "sync-request": "^3.0.0"
   },
   "scripts": {

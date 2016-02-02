@@ -5,10 +5,47 @@ import http                from 'http';
 import fs                  from 'fs';
 import GraphicsMagick      from 'gm';
 import requestSync         from 'sync-request';
+import sleep               from 'sleep';
 import HearthstoneConstant from '../src/scripts/constant/HearthstoneConstant.jsx';
 
 var headers = {'X-Mashape-Key': '#'};
 var url     = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1&locale=';
+
+function getAndOptimizeCardImage(card, cpt, cardsFolder, locale) {
+    let fileName = cardsFolder + locale + '/' + card.cardId + '.png';
+
+    if (!fs.existsSync(fileName)) {
+        console.log('[' + locale + '][' + card.cardId+ '] Trying to get card image (' + cpt + ')');
+        let cardImageResponse = requestSync('GET', card.img);
+
+        if (cardImageResponse.statusCode == 200) {
+            console.log('[' + locale + '][' + card.cardId+ '] Trying to write card image (' + cpt + ')');
+            fs.writeFileSync(fileName, cardImageResponse.getBody());
+
+            GraphicsMagick(fileName)
+                .trim()
+                .resize(200)
+                .noProfile()
+                .quality(90)
+                .write(fileName, err => {
+                    if (err) {
+                        console.log(err);
+                    }
+                })
+            ;
+
+            console.log('[' + locale + '][' + card.cardId+ '] Success ! (' + cpt + ')');
+        } else {
+            console.log('[' + locale + '][' + card.cardId+ '] ---------------> Error : Can\'t get card image (' + card.img + ')');
+        }
+
+        // Force sleep for 2s to avoid ban
+        sleep.sleep(2);
+    } else {
+        console.log('[' + locale + '][' + card.cardId+ '] Already exist (' + cpt + ')');
+    }
+}
+
 
 gulp.task('cards',  () => {
     // Get Cards and Heroes
@@ -88,7 +125,7 @@ gulp.task('cards',  () => {
 gulp.task('images',  () => {
     let cardsFolder = 'src/images/cards/';
 
-    _.each(HearthstoneConstant.languages, locale => {
+    _.each(HearthstoneConstant.languages, (path, locale) => {
         console.log('[' + locale + '] Start');
 
         if (!fs.existsSync(cardsFolder + locale)) {
@@ -104,33 +141,7 @@ gulp.task('images',  () => {
         _.forEach(JSON.parse(cardsResponse.getBody()), cardsByType => {
             _.forEach(cardsByType, card => {
                 if (card.cardSet != 'Hero Skins' && card.type != 'Hero') {
-                    let fileName = cardsFolder + locale + '/' + card.cardId + '.png';
-
-                    if (!fs.existsSync(fileName)) {
-                        console.log('[' + locale + '][' + card.cardId+ '] Trying to get card image (' + cpt + ')');
-                        let cardImageResponse = requestSync('GET', card.img);
-
-                        if (cardImageResponse.statusCode == 200) {
-                            console.log('[' + locale + '][' + card.cardId+ '] Trying to write card image (' + cpt + ')');
-                            fs.writeFileSync(fileName, cardImageResponse.getBody());
-
-                            GraphicsMagick(fileName)
-                                .trim()
-                                .resize(250)
-                                .write(fileName, err => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                })
-                            ;
-
-                            console.log('[' + locale + '][' + card.cardId+ '] Success ! (' + cpt + ')');
-                        } else {
-                            console.log('[' + locale + '][' + card.cardId+ '] ---------------> Error : Can\'t get card image (' + card.img + ')');
-                        }
-                    } else {
-                        console.log('[' + locale + '][' + card.cardId+ '] Already exist (' + cpt + ')');
-                    }
+                    getAndOptimizeCardImage(card, cpt, cardsFolder, locale);
 
                     cpt++;
                 }
