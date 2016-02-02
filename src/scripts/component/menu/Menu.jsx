@@ -90,23 +90,26 @@ class Menu extends Component {
      */
     render() {
         let { decks, current, heroes, menu, collection } = this.props;
-        let menuItem, menuTitle, menuAction;
+        let menuItem, menuTitle, menuAction, menuCpt;
 
         switch (menu) {
             case 'menu':
                 menuItem   = this.renderMenu();
                 menuTitle  = TranslationHelper.translate('ui.menu');
                 menuAction = <div className="menu-action" onClick={this.toggleModal.bind(this)}><i className="fa fa-cog"></i></div>;
+                menuCpt    = <div className="decks-count"><span className="cpt">{decks.length}</span><span>{TranslationHelper.translate('ui.decks')}</span></div>;
                 break;
             case 'my-decks':
                 menuItem   = <DeckList heroes={heroes} decks={decks} current={current} />;
                 menuTitle  = TranslationHelper.translate('ui.myDecks');
                 menuAction = <div className="menu-action" onClick={HearthstoneActions.openMenu.bind(this, 'menu')}><i className="fa fa-reply"></i></div>;
+                menuCpt    = <div className="decks-count"><span className="cpt">{decks.length}</span><span>{TranslationHelper.translate('ui.decks')}</span></div>;
                 break;
             case 'my-collection':
                 menuItem   = <Collection collection={collection} />;
                 menuTitle  = TranslationHelper.translate('ui.myCollection');
                 menuAction = <div className="menu-action" onClick={HearthstoneActions.openMenu.bind(this, 'menu')}><i className="fa fa-reply"></i></div>;
+                menuCpt    = <div className="decks-count"><span className="cpt">{collection.length}</span><span>{TranslationHelper.translate('ui.cards')}</span></div>;
                 break;
         }
 
@@ -117,12 +120,7 @@ class Menu extends Component {
                 </div>
 
                 {menuItem}
-
-                <div className="decks-count">
-                    <span className="cpt">{decks.length}</span>
-                    <span>decks</span>
-                </div>
-
+                {menuCpt}
                 {menuAction}
                 {this.renderModal()}
             </div>

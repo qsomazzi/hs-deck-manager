@@ -79,6 +79,13 @@ class NavBar extends Component {
                         className="type" />
 
                     <Select
+                        value={filters.race}
+                        options={Select2Helper.renderTextOptions('race')}
+                        placeholder={TranslationHelper.translate('ui.race')}
+                        onChange={this.selectFilter.bind(this, 'race')}
+                        className="race" />
+
+                    <Select
                         value={filters.mechanics}
                         options={Select2Helper.renderTextOptions('mechanics')}
                         placeholder={TranslationHelper.translate('ui.mechanics')}

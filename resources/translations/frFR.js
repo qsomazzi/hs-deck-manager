@@ -18,6 +18,7 @@ export default {
         "ui.rarity": "Rareté",
         "ui.extension": "Extension",
         "ui.type": "Type",
+        "ui.race": "Race",
         "ui.mechanics": "Mécaniques",
         "ui.myDecks": "Mes decks",
         "ui.menu": "Menu",
@@ -25,6 +26,7 @@ export default {
         "ui.settings": "Paramètres",
         "ui.reinitCollection": "Réinitialise la collection",
         "ui.status": "Status",
+        "ui.decks": "decks",
         "cardType.Spell": "Sort",
         "cardType.Minion": "Serviteur",
         "cardType.Weapon": "Arme",
@@ -46,7 +48,6 @@ export default {
         "mechanics.Aura": "Aura",
         "mechanics.Taunt": "Provocation",
         "mechanics.Charge": "Charge",
-        "mechanics.Spellpower": "Dégats des sorts",
         "mechanics.Silence": "Silence",
         "mechanics.Overload": "Surcharge",
         "mechanics.Windfury": "Furie des vents",
@@ -57,6 +58,13 @@ export default {
         "mechanics.Enrage": "Accès de rage",
         "mechanics.Combo": "Combo",
         "mechanics.Inspire": "Exaltation",
+        "race.Murloc": "Murloc",
+        "race.Beast": "Bête",
+        "race.Demon": "Démon",
+        "race.Totem": "Totem",
+        "race.Pirate": "Pirate",
+        "race.Dragon": "Dragon",
+        "race.Mech": "Meca",
         "status.Owned": "Possédés",
         "status.NotOwned": "Non possédés",
         "HERO_00": "Neutre",
@@ -72,6 +80,5 @@ export default {
         "languages.zhCN": "Chinois",
         "languages.zhTW": "Taiwanais",
         "languages.jaJP": "Japonais"
-    },
-    cards: {}
+    }
 }

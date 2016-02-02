@@ -399,14 +399,19 @@ body { background: #000; }
               .Select-menu-outer{width: 250px;}
             }
             &.type {
-              width: 130px;
+              width: 120px;
 
-              .Select-menu-outer{width: 130px;}
+              .Select-menu-outer{width: 120px;}
+            }
+            &.race {
+              width: 110px;
+
+              .Select-menu-outer{width: 110px;}
             }
             &.mechanics {
-              width: 210px;
+              width: 175px;
 
-              .Select-menu-outer{width: 210px;}
+              .Select-menu-outer{width: 175px;}
             }
             &.status {
               width: 155px;

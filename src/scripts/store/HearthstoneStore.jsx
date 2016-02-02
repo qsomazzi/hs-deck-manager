@@ -31,6 +31,7 @@ const HearthstoneStore = Reflux.createStore({
             cardSet:   null,
             mechanics: null,
             status:    null,
+            race:      null,
             cristal:   [
                 false, // 0
                 false, // 1
@@ -185,6 +186,7 @@ const HearthstoneStore = Reflux.createStore({
             case 'cardType':
             case 'mechanics':
             case 'status':
+            case 'race':
                 this.filters[type] = value != '' ? value : null;
                 break;
         }
@@ -284,8 +286,8 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     filterCards() {
-        let { hero, heroes, rarity, cardType, cardSet, mechanics, search, status } = this.filters;
-        let cards                                                                  = this.cards;
+        let { hero, heroes, rarity, cardType, race, cardSet, mechanics, search, status } = this.filters;
+        let cards                                                                        = this.cards;
 
         // First filter on available heroes
         if (heroes.length == 2) {
@@ -319,6 +321,11 @@ const HearthstoneStore = Reflux.createStore({
         // Then filter on type selection
         if (cardType != null) {
             cards = _.filter(cards, {'type': cardType});
+        }
+
+        // Then filter on race selection
+        if (race != null) {
+            cards = _.filter(cards, {'race': race});
         }
 
         // Then filter on set selection

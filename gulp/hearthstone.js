@@ -46,80 +46,80 @@ function getAndOptimizeCardImage(card, cpt, cardsFolder, locale) {
     }
 }
 
-
 gulp.task('cards',  () => {
     // Get Cards and Heroes
     console.log('Call API');
-    request({url: url + 'enUS', headers: headers}, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-            let allCards = [];
-            let heroes   = [];
+    let allCards = [];
+    let heroes   = [];
+    let response = requestSync('GET', url + 'enUS', {headers: headers});
 
-            console.log('Parsing Cards');
-            _.forEach(JSON.parse(body), cardsByType => {
-                _.forEach(cardsByType, card => {
-                    if (card.cardSet != 'Hero Skins') {
-                        if (card.type != 'Hero') {
-                            let mechanics = null;
+    console.log('Parsing results');
+    _.forEach(JSON.parse(response.getBody()), cardsByType => {
+        _.forEach(cardsByType, card => {
+            if (card.cardSet != 'Hero Skins') {
+                if (card.type != 'Hero') {
+                    let mechanics = null;
 
-                            if (card['mechanics'] != undefined) {
-                                mechanics = [];
-                                _.forEach(card['mechanics'], mechanic => {
-                                    mechanics.push({name: mechanic.name.replace(/ /, '')})
-                                });
-                            }
-
-                            allCards.push({
-                                id:          card.cardId,
-                                cost:        card.cost,
-                                cardSet:     card.cardSet == 'Promotion' ? 'Reward' : card.cardSet.replace(/ /g, ''),
-                                type:        card.type,
-                                rarity:      card.rarity,
-                                playerClass: card['playerClass'] != undefined ? card.playerClass : null,
-                                mechanics:   mechanics
-                            });
-                        } else {
-                            heroes.push({
-                                id:          card.cardId,
-                                name:        card.name,
-                                playerClass: card.playerClass
-                            });
-                        }
+                    if (card['mechanics'] != undefined) {
+                        mechanics = [];
+                        _.forEach(card['mechanics'], mechanic => {
+                            mechanics.push({name: mechanic.name.replace(/ /, '')})
+                        });
                     }
-                });
-            });
 
-            console.log('Writing File...');
-            fs.writeFileSync('src/scripts/resources/Cards.json', JSON.stringify(allCards));
-            fs.writeFileSync('src/scripts/resources/Heroes.json', JSON.stringify(heroes));
-        }
-    });
-
-    // Build translations
-    _.each(HearthstoneConstant.languages, locale => {
-        console.log('Call API - ' + locale);
-        request({url: url + locale, headers: headers}, (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-                let baseLocale = fs.existsSync('resources/translations/' + locale + '.js') ? locale : 'enUS';
-                let base       = require('../resources/translations/' + baseLocale);
-                let newLocale  = _.cloneDeep(base);
-
-                newLocale.locale = locale;
-
-                console.log('Parsing Cards - ' + locale);
-                _.forEach(JSON.parse(body), cardsByType => {
-                    _.forEach(cardsByType, card => {
-                        if (card.cardSet != "Hero Skins") {
-                            newLocale.cards[card.cardId] = card.name;
-                        }
+                    allCards.push({
+                        id:          card.cardId,
+                        cost:        card.cost,
+                        cardSet:     card.cardSet == 'Promotion' ? 'Reward' : card.cardSet.replace(/ /g, ''),
+                        type:        card.type,
+                        rarity:      card.rarity,
+                        playerClass: card['playerClass'] != undefined ? card.playerClass : null,
+                        race:        card['race'] != undefined ? card.race : null,
+                        mechanics:   mechanics
                     });
-                });
-
-                console.log('Writing translation - ' + locale);
-                fs.writeFileSync('src/scripts/resources/' + locale + '.json', JSON.stringify(newLocale));
+                } else {
+                    heroes.push({
+                        id:          card.cardId,
+                        name:        card.name,
+                        playerClass: card.playerClass
+                    });
+                }
             }
         });
     });
+
+    console.log('Writing File...');
+    fs.writeFileSync('src/scripts/resources/Cards.json', JSON.stringify(allCards));
+    fs.writeFileSync('src/scripts/resources/Heroes.json', JSON.stringify(heroes));
+
+    // Build translations
+    _.each(HearthstoneConstant.languages, (path, locale) => {
+        console.log('[' + locale + '] Start');
+
+        console.log('[' + locale + '] Calling API');
+        let response   = requestSync('GET', url + locale, {headers: headers});
+        let base       = require('../resources/translations/' + locale + '.js');
+        let newLocale  = _.cloneDeep(base.default);
+
+        newLocale.locale = locale;
+        newLocale.cards  = {};
+
+        console.log('[' + locale + '] Parsing results');
+        _.forEach(JSON.parse(response.getBody()), cardsByType => {
+            _.forEach(cardsByType, card => {
+                if (card.cardSet != "Hero Skins") {
+                    newLocale.cards[card.cardId] = card.name;
+                }
+            });
+        });
+
+        console.log('[' + locale + '] Writing translation');
+        fs.writeFileSync('src/scripts/resources/' + locale + '.json', JSON.stringify(newLocale));
+
+        console.log('[' + locale + '] Done.');
+    });
+
+    console.log('Everything goes perfect ! ');
 });
 
 gulp.task('images',  () => {
@@ -152,6 +152,5 @@ gulp.task('images',  () => {
     });
 
     console.log('Everything goes perfect ! ');
-
     process.exit(0);
 });

@@ -18,6 +18,7 @@ export default {
         "ui.rarity": "ui.rarity",
         "ui.extension": "ui.extension",
         "ui.type": "ui.type",
+        "ui.race": "ui.race",
         "ui.mechanics": "ui.mechanics",
         "ui.myDecks": "ui.myDecks",
         "ui.menu": "ui.menu",
@@ -25,6 +26,7 @@ export default {
         "ui.settings": "ui.settings",
         "ui.reinitCollection": "ui.reinitCollection",
         "ui.status": "ui.status",
+        "ui.decks": "ui.decks",
         "cardType.Spell": "Spell",
         "cardType.Minion": "Minion",
         "cardType.Weapon": "Weapon",
@@ -46,7 +48,6 @@ export default {
         "mechanics.Aura": "mechanics.Aura",
         "mechanics.Taunt": "mechanics.Taunt",
         "mechanics.Charge": "mechanics.Charge",
-        "mechanics.Spellpower": "mechanics.Spellpower",
         "mechanics.Silence": "mechanics.Silence",
         "mechanics.Overload": "mechanics.Overload",
         "mechanics.Windfury": "mechanics.Windfury",
@@ -57,6 +58,13 @@ export default {
         "mechanics.Enrage": "mechanics.Enrage",
         "mechanics.Combo": "mechanics.Combo",
         "mechanics.Inspire": "mechanics.Inspire",
+        "race.Murloc": "Murloc",
+        "race.Beast": "Beast",
+        "race.Demon": "Demon",
+        "race.Totem": "Totem",
+        "race.Pirate": "Pirate",
+        "race.Dragon": "Dragon",
+        "race.Mech": "Mech",
         "status.Owned": "Owned",
         "status.NotOwned": "Not Owned",
         "HERO_00": "Neutral",
@@ -71,6 +79,5 @@ export default {
         "languages.ruRU": "Russian",
         "languages.zhCN": "Chinese",
         "languages.jaJP": "Japanese"
-    },
-    cards: {}
+    }
 }

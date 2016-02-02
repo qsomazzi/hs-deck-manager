@@ -38,7 +38,6 @@ export default {
         'Aura',
         'Taunt',
         'Charge',
-        'Spellpower',
         'Silence',
         'Overload',
         'Windfury',
@@ -62,5 +61,14 @@ export default {
         'ruRU': 'flag/ruRU.jpg',
         'zhCN': 'flag/zhCN.jpg',
         'jaJP': 'flag/jaJP.jpg'
-    }
+    },
+    race: [
+        'Murloc',
+        'Beast',
+        'Demon',
+        'Totem',
+        'Pirate',
+        'Dragon',
+        'Mech'
+    ]
 };

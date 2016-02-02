@@ -29,7 +29,6 @@ Features that needs to be developed
 With 'priority' order
 
 * Bug
-    * Cpt at the bottom of menu by Item selected
     * Wrong Sort in Collection and Current deck
 * High
     * Add Lazy Load on media
