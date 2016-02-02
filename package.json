@@ -4,17 +4,21 @@
   "description": "Hearthstone Deck Manager",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:qsomazzi/hs-deck-manager.git"
   },
   "author": "Quentin SOMAZZI",
   "license": "MIT",
   "devDependencies": {
-    "babelify": "^6.3.0",
+    "babel-cli": "~6.3.5",
+    "babel-core": "~6.3.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babelify": "^7.0.0",
     "browser-sync": "^1.9.0",
     "browserify": "^11.1.0",
     "del": "^1.1.0",
     "gulp": "~3.9.0",
-    "lodash": "~3.0",
     "gulp-add-src": "^0.2.0",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-compass": "^2.0.3",
@@ -28,11 +32,12 @@
     "gulp-uglify": "~1.5.1",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
-    "run-sequence": "^1.0.2",
+    "lodash": "~3.0",
+    "request": "^2.67.0",
+    "run-sequence": "^1.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.6.1",
-    "request": "^2.67.0"
+    "watchify": "^3.6.1"
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
@@ -48,7 +53,7 @@
     "sync-request": "^3.0.0"
   },
   "scripts": {
-    "start": "gulp publish",
+    "start": "gulp",
     "dev": "gulp dev"
   }
 }

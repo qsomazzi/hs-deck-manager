@@ -20,7 +20,7 @@ import del         from 'del';
 import browserSync from 'browser-sync';
 import runSequence from 'run-sequence';
 
-gulp.task('default', ['publish'], () => {});
+gulp.task('default', ['publish']);
 
 /**
  * Main Taks
@@ -28,7 +28,7 @@ gulp.task('default', ['publish'], () => {});
 gulp.task('publish', (done) => {
     return runSequence(
         'clean',
-        ['js', 'sass', 'build-css', 'copy'],
+        ['js', 'build-css', 'copy'],
         done
     );
 });
@@ -42,10 +42,6 @@ gulp.task('dev', (done) => {
         done
     );
 });
-
-
-
-
 
 /**
  * Internals Taks
@@ -151,20 +147,18 @@ gulp.task('clean',  done => {
 
 gulp.task('serve', () => {
     if (config.server.enable) {
-        return browserSync({
+        browserSync({
             server: {
                 baseDir: config.dest
             },
             port: config.server.port,
             open: config.server.open
         });
+
+        gulp.watch([
+            config.index,
+            config.styles.cssDest + '/*.min.css', // we use only min file to prevent double reload
+            config.scripts.dest + '/*.min.js'     // same
+        ]).on('change', browserSync.reload);
     }
 });
-
-if (config.server.enable) {
-    gulp.watch([
-        config.index, 
-        config.styles.cssDest + '/*.min.css', // we use only min file to prevent double reload
-        config.scripts.dest + '/*.min.js'     // same
-    ]).on('change', browserSync.reload);
-}

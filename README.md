@@ -3,13 +3,12 @@ Hearthstone Deck Manager
 
 [![Build Status](https://travis-ci.org/qsomazzi/hs-deck-manager.svg?branch=master)](https://travis-ci.org/qsomazzi/hs-deck-manager)
 
-The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last publish version, but it's the more stable. - Last version : 01 / 02 / 2016
+The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last available version, but it's the more stable. - Last version : 01 / 02 / 2016
 
 Require
 -------
 - npm ~3.3.5
 - gulp ~3.9.0
-- babel ~6.3.17
 
 Installation
 ------------
