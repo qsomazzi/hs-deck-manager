@@ -16,8 +16,9 @@ Installation
 
 Run in a cmd line the following commands
 - `npm install`
-    - `npm start` -> for prod / test
-    - `npm dev`   -> for dev
+    - `npm start` -> for prod (build assets)
+    - `npm dev`   -> for dev (build assets, launch watchers and server)
+    - `npm test`  -> for test (launching tests units)
 
 Contributions
 -------------
