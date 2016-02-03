@@ -4,7 +4,7 @@ Hearthstone Deck Manager
 [![Build Status](https://travis-ci.org/qsomazzi/hs-deck-manager.svg?branch=master)](https://travis-ci.org/qsomazzi/hs-deck-manager)
 [![Codeship Status for qsomazzi/hs-deck-manager](https://codeship.com/projects/d2c87640-ac89-0133-dfd8-1e5da553331a/status?branch=master)](https://codeship.com/projects/131676)
 
-The [demo](http://hearthstone.qsomazzi.fr) isn't always Up-to-date with the last available version, but it's the more stable. - Last version : 01 / 02 / 2016
+[DEMO](http://hearthstoneqsomazzi.fr)
 
 Require
 -------
