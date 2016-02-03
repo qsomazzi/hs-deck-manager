@@ -133,8 +133,11 @@ describe('HearthstoneStoreTest', () => {
 
         it('should keep the locale even after reinit', () => {
             chai.assert.equal(HearthstoneStore.locale, 'enUS');
-            HearthstoneStore.changeLocale('frFR');
-            chai.assert.equal(HearthstoneStore.locale, 'frFR');
+        });
+
+        after(() => {
+            HearthstoneStore.locale = 'frFR';
+            HearthstoneStore.write();
         });
     });
 
@@ -153,10 +156,18 @@ describe('HearthstoneStoreTest', () => {
     //     });
     // });
 
-    // describe('importDefaultDecks', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    describe('importDefaultDecks', () => {
+        it('should import default deck', () => {
+            chai.assert.equal(HearthstoneStore.decks.length, 0);
+            HearthstoneStore.importDefaultDecks();
+            chai.assert.isAbove(HearthstoneStore.decks.length, 0);
+        });
+
+        after(() => {
+            HearthstoneStore.decks = [];
+            HearthstoneStore.write();
+        });
+    });
 
     describe('openMenu(menuItem)', () => {
         it('should open the right menu', () => {
@@ -231,8 +242,8 @@ describe('HearthstoneStoreTest', () => {
         });
 
         after(() => {
-            HearthstoneStore.decks = [];
-            HearthstoneStore.locale = 'frFR';
+            HearthstoneStore.decks      = [];
+            HearthstoneStore.locale     = 'frFR';
             HearthstoneStore.collection = HearthstoneStore.reinitCollection();
 
             HearthstoneStore.write();
@@ -278,10 +289,50 @@ describe('HearthstoneStoreTest', () => {
         });
     });
 
-    // describe('getManaCurve(deck)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    describe('getManaCurve(deck)', () => {
+        it('should return bar sizes simple', () => {
+            let deck = {cards: [
+                {cost: 0, count: 2},
+                {cost: 3, count: 2},
+                {cost: 3, count: 2},
+                {cost: 3, count: 2},
+                {cost: 0, count: 2},
+                {cost: 0, count: 2}
+            ]};
+
+            let manaCurve = HearthstoneStore.getManaCurve(deck);
+
+            chai.assert.equal(manaCurve[0], 20);
+            chai.assert.equal(manaCurve[1], 0);
+            chai.assert.equal(manaCurve[2], 0);
+            chai.assert.equal(manaCurve[3], 20);
+            chai.assert.equal(manaCurve[4], 0);
+            chai.assert.equal(manaCurve[5], 0);
+            chai.assert.equal(manaCurve[6], 0);
+            chai.assert.equal(manaCurve[7], 0);
+        });
+
+        it('should return bar sizes high costs', () => {
+            let deck = {cards: [
+                {cost: 9, count: 2},
+                {cost: 8, count: 2},
+                {cost: 8, count: 2},
+                {cost: 8, count: 2},
+                {cost: 7, count: 2},
+                {cost: 10, count: 2},
+                {cost: 12, count: 1},
+                {cost: 5, count: 1},
+                {cost: 5, count: 2},
+                {cost: 5, count: 2},
+                {cost: 8, count: 2},
+                {cost: 9, count: 2}
+            ]};
+
+            let manaCurve = HearthstoneStore.getManaCurve(deck);
+
+            chai.assert.equal(manaCurve[7], 45);
+        });
+    });
 
     describe('getCardName(card, truncate)', () => {
         it('should return full card name', () => {

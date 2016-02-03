@@ -4,7 +4,7 @@ Hearthstone Deck Manager
 [![Build Status](https://travis-ci.org/qsomazzi/hs-deck-manager.svg?branch=master)](https://travis-ci.org/qsomazzi/hs-deck-manager)
 [![Codeship Status for qsomazzi/hs-deck-manager](https://codeship.com/projects/d2c87640-ac89-0133-dfd8-1e5da553331a/status?branch=master)](https://codeship.com/projects/131676)
 
-[DEMO](http://hearthstoneqsomazzi.fr)
+[DEMO](http://hearthstone.qsomazzi.fr)
 
 Require
 -------
@@ -24,6 +24,7 @@ Contributions
 -------------
 
 Feel free to contribute to this project. You can submit a PR or an issue, I will look into it as soon as possible.
+*Note* : All files located under `/src/scripts/resources/` are generated with API calls, don't edit them manually. 
 
 Features that needs to be developed
 -----------------------------------
