@@ -24,6 +24,7 @@ Contributions
 -------------
 
 Feel free to contribute to this project. You can submit a PR or an issue, I will look into it as soon as possible.
+
 *Note* : All files located under `/src/scripts/resources/` are generated with API calls, don't edit them manually. 
 
 Features that needs to be developed
@@ -34,6 +35,7 @@ With 'priority' order
 * Bug
     * Wrong Sort in Collection and Current deck
 * High
+    * Finish Unit tests on HerthstoneStoreTest
     * Add Lazy Load on media
     * Redesign Filters Bar
     * Redesign scroll cursor
