@@ -114,15 +114,15 @@ describe('HearthstoneStoreTest', () => {
     //    });
     //});
 
-    // describe('addNewCard(card, cards, deck)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('addNewCard(card, cards, deck)', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 
-    // describe('removeCard(id)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('removeCard(id)', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 
     describe('changeLocale(locale)', () => {
         it('should change the app locale', () => {
@@ -141,20 +141,94 @@ describe('HearthstoneStoreTest', () => {
         });
     });
 
-    // describe('searchCard(value)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    describe('searchCard(value)', () => {
+        it('should update filter value', () => {
+            chai.assert.equal(HearthstoneStore.filters.search, null);
+            HearthstoneStore.searchCard('foo');
+            chai.assert.equal(HearthstoneStore.filters.search, 'foo');
+            HearthstoneStore.searchCard('');
+            chai.assert.equal(HearthstoneStore.filters.search, null);
+        });
+    });
 
-    // describe('selectFilter(type, value)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    describe('selectFilter(type, value)', () => {
+        it('should update hero filter', () => {
+            // Type hero
+            chai.assert.equal(HearthstoneStore.filters.hero, null);
+            HearthstoneStore.selectFilter('hero', 'HERO_01');
+            chai.assert.equal(HearthstoneStore.filters.hero.id, 'HERO_01');
+            HearthstoneStore.selectFilter('hero', 'Foo');
+            chai.assert.equal(HearthstoneStore.filters.hero, null);
+        });
 
-    // describe('toggleFilter(filter, value)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+        it('should update rarity filter', () => {
+            // Rarity
+            chai.assert.equal(HearthstoneStore.filters.rarity, null);
+            HearthstoneStore.selectFilter('rarity', 'foo');
+            chai.assert.equal(HearthstoneStore.filters.rarity, 'foo');
+            HearthstoneStore.selectFilter('rarity', '');
+            chai.assert.equal(HearthstoneStore.filters.rarity, null);
+        });
+
+        it('should update cardSet filter', () => {
+            // CardSet
+            chai.assert.equal(HearthstoneStore.filters.cardSet, null);
+            HearthstoneStore.selectFilter('cardSet', 'foo');
+            chai.assert.equal(HearthstoneStore.filters.cardSet, 'foo');
+            HearthstoneStore.selectFilter('cardSet', '');
+            chai.assert.equal(HearthstoneStore.filters.cardSet, null);
+        });
+
+        it('should update cardType filter', () => {
+            // CardType
+            chai.assert.equal(HearthstoneStore.filters.cardType, null);
+            HearthstoneStore.selectFilter('cardType', 'foo');
+            chai.assert.equal(HearthstoneStore.filters.cardType, 'foo');
+            HearthstoneStore.selectFilter('cardType', '');
+            chai.assert.equal(HearthstoneStore.filters.cardType, null);
+        });
+
+        it('should update mechanics filter', () => {
+            // Mechanics
+            chai.assert.equal(HearthstoneStore.filters.mechanics, null);
+            HearthstoneStore.selectFilter('mechanics', 'foo');
+            chai.assert.equal(HearthstoneStore.filters.mechanics, 'foo');
+            HearthstoneStore.selectFilter('mechanics', '');
+            chai.assert.equal(HearthstoneStore.filters.mechanics, null);
+        });
+
+        it('should update status filter', () => {
+            // Status
+            chai.assert.equal(HearthstoneStore.filters.status, null);
+            HearthstoneStore.selectFilter('status', 'foo');
+            chai.assert.equal(HearthstoneStore.filters.status, 'foo');
+            HearthstoneStore.selectFilter('status', '');
+            chai.assert.equal(HearthstoneStore.filters.status, null);
+        });
+
+        it('should update race filter', () => {
+            // Race
+            chai.assert.equal(HearthstoneStore.filters.race, null);
+            HearthstoneStore.selectFilter('race', 'foo');
+            chai.assert.equal(HearthstoneStore.filters.race, 'foo');
+            HearthstoneStore.selectFilter('race', '');
+            chai.assert.equal(HearthstoneStore.filters.race, null);
+        });
+    });
+
+    describe('toggleFilter(filter)', () => {
+        it('should update cristal filter', () => {
+            chai.assert.equal(HearthstoneStore.filters.cristal[0], false);
+            HearthstoneStore.toggleFilter('0');
+            chai.assert.equal(HearthstoneStore.filters.cristal[0], true);
+
+            chai.assert.equal(HearthstoneStore.filters.cristal[1], false);
+            HearthstoneStore.toggleFilter('1');
+            chai.assert.equal(HearthstoneStore.filters.cristal[1], true);
+            HearthstoneStore.toggleFilter('1');
+            chai.assert.equal(HearthstoneStore.filters.cristal[1], false);
+        });
+    });
 
     describe('importDefaultDecks', () => {
         it('should import default deck', () => {
@@ -179,25 +253,33 @@ describe('HearthstoneStoreTest', () => {
         });
     });
 
-    // describe('reinitCollection()', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    describe('reinitCollection()', () => {
+        it('should reinitialise the collection', () => {
+            HearthstoneStore.collection.push({id: 1});
+            HearthstoneStore.collection.push({id: 3});
+            HearthstoneStore.collection.push({id: 4});
+            HearthstoneStore.collection.push({id: 5});
 
-    // describe('initCards()', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+            let originalCollectionLength = HearthstoneStore.collection.length;
+            HearthstoneStore.reinitCollection();
+            chai.assert.notEqual(originalCollectionLength, HearthstoneStore.collection.length);
+        });
+    });
 
-    // describe('initCollection()', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('initCards()', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 
-    // describe('initHeroes(forFilters)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('initCollection()', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
+
+    //describe('initHeroes(forFilters)', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 
     describe('write()', () => {
         it('should write decks to localStorage', () => {
@@ -250,15 +332,15 @@ describe('HearthstoneStoreTest', () => {
         });
     });
 
-    // describe('filterCards()', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('filterCards()', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 
-    // describe('updateFilters()', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('updateFilters()', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 
     describe('slugify(text)', () => {
         it('should clean text', () => {
@@ -395,8 +477,8 @@ describe('HearthstoneStoreTest', () => {
         });
     });
 
-    // describe('getDeckCost(deck)', () => {
-    //     it('@TODO', () => {
-    //     });
-    // });
+    //describe('getDeckCost(deck)', () => {
+    //    it('@TODO', () => {
+    //    });
+    //});
 });
