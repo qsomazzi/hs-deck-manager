@@ -80,6 +80,8 @@ Totally free for private or commercial projects.
 |:-------:|:---------:|:----------:|
 |    v0   | ![v0][v0] | 20/12/2015 |
 |    v1   | ![v1][v1] | 03/01/2016 |
+|    v2   | ![v2][v2] | 06/02/2016 |
 
 [v0]: resources/docs/v0.png
 [v1]: resources/docs/v1.png
+[v2]: resources/docs/v2.png
