@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _                               from 'lodash';
 import Select                          from 'react-select';
+import classNames                      from 'classnames';
 import HearthstoneActions              from './../../action/HearthstoneActions';
 import HearthstoneStore                from './../../store/HearthstoneStore';
 import TranslationHelper               from './../../helper/TranslationHelper';
@@ -34,10 +35,14 @@ class NavBar extends Component {
      * @return {XML}
      */
     render() {
-        let { filters } = this.props;
+        let { filters, current } = this.props;
+
+        let navBarClass = classNames('navbar', {
+            'small': current !== null
+        });
 
         return (
-            <nav className="navbar navbar-static-top">
+            <nav className={navBarClass}>
                 <div className="filters">
                     <input
                         type="text"
@@ -108,10 +113,12 @@ class NavBar extends Component {
 /**
  * PropTypes
  *
- * @type {array} filters
+ * @type {array}  filters
+ * @type {number} current
  */
 NavBar.PropTypes = {
-    filters: PropTypes.array.isRequired
+    filters: PropTypes.array.isRequired,
+    current: PropTypes.number
 };
 
 export default NavBar;
