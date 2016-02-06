@@ -1,18 +1,4 @@
-$app-height: 820px;
-$navBar-height: 65px;
-$search-area-height: $app-height;
-
-$deck-list-width: 273px;
-$deck-list-group-height: 678px;
-$deck-list-group-width: 180px;
-$deck-list-height: 72px;
-$deck-list-mana-curve-height: 115px;
-
-$deck-current-width: 216px;
-$deck-current-height: $app-height;
-$deck-current-cpt-height: 35px;
-
-$color-brown: #4F3C1D;
+@import "variables";
 
 @font-face {
   font-family: HearthstoneFont;
@@ -27,11 +13,11 @@ $color-brown: #4F3C1D;
   user-select: none;
 }
 
-body { background: #000; }
+body { background: $body-background; }
 
 // Card frame (my collection / my decks)
 .frame {
-  height: 35px;
+  height: $frame-height;
   background-repeat: no-repeat;
   margin: 0;
   padding: 7px 0 7px 37px;
@@ -39,8 +25,8 @@ body { background: #000; }
   cursor: pointer;
 
   .name {
-    font-family: HearthstoneFont, serif;
-    color: #FFFFFF;
+    font-family: $font-family-hs;
+    color: $text-color;
     font-weight: bold;
     font-size: 11px;
     @include no-select;
@@ -50,17 +36,17 @@ body { background: #000; }
     position: absolute;
     top: 3px;
     left : 11px;
-    color: #FFFFFF;
+    color: $text-color;
     font-weight: bold;
     font-size: 20px;
-    font-family: HearthstoneFont, serif;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-family: $font-family-hs;
+    text-shadow: $text-shadow;
     @include no-select;
 
     &.expensive {
       top: 6px;
       left: 8px;
-      font-size: 16px;
+      font-size: $font-size;
     }
   }
 
@@ -69,7 +55,7 @@ body { background: #000; }
     top: 6px;
     width: 25px;
     height:24px;
-    background: url('../images/ui/deck-current/frame_countbox.png');
+    background: $frame-countbox-background;
     display: none;
     @include no-select;
 
@@ -88,7 +74,7 @@ body { background: #000; }
 #hearthstone {
   .logo {
     text-align: center;
-    width: 500px;
+    width: $logo-width;
     margin: 0 auto 10px auto;
     display: block;
     @include no-select;
@@ -102,7 +88,7 @@ body { background: #000; }
 
     .deck-builder {
       order: 1;
-      height: $search-area-height;
+      height: $app-height;
       margin-right: 10px;
       display: flex;
 
@@ -111,18 +97,20 @@ body { background: #000; }
         margin-right: 5px;
         width: $deck-list-width;
         flex: 1 auto;
-        background: url('../images/ui/menu/background.png') no-repeat center top;
+        background-image: $menu-background;
+        background-repeat: no-repeat;
+        background-position: center top;
         position: relative;
 
         .title {
           text-align: center;
-          font-size: 15px;
-          font-family: HearthstoneFont, serif;
+          font-size: $font-size;
+          font-family: $font-family-hs;
           position: absolute;
           font-weight: bold;
-          color: $color-brown;
+          color: $text-special-color;
           top: 18px;
-          width: 90%;
+          width: $menu-title-width;
           @include no-select;
         }
 
@@ -149,15 +137,15 @@ body { background: #000; }
               position: absolute;
               top: 15px;
               left: 18px;
-              width: 150px;
-              height: 45px;
+              width: $deck-name-width;
+              height: $deck-name-height;
               cursor: pointer;
 
               span {
-                font-size: 15px;
-                font-family: HearthstoneFont, serif;
-                color: #FFF;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                font-size: $font-size;
+                font-family: $font-family-hs;
+                color: $text-color;
+                text-shadow: $text-shadow;
                 position: absolute;
                 bottom: 0;
                 @include no-select;
@@ -167,31 +155,37 @@ body { background: #000; }
             .removeDeck {
               display: none;
               position: absolute;
-              background: url('../images/ui/menu/remove-deck.png') no-repeat center center;
-              color: #FFF;
+              background-image: $remove-deck-background;
+              background-repeat: no-repeat;
+              background-position: center center;
+              color: $text-color;
               border-radius: 50%;
               top: -5px;
               right: -1px;
-              width: 20px;
-              height: 20px;
+              width: $remove-deck-width;
+              height: $remove-deck-height;
               cursor: pointer;
             }
 
             .mana-curve {
               display:none;
-              height: $deck-list-mana-curve-height;
-              background: url('../images/ui/menu/mana-curve.png') no-repeat bottom center;
+              height: $mana-curve-height;
+              background-image: $mana-curve-background;
+              background-repeat: no-repeat;
+              background-position: bottom center;
               position: absolute;
               bottom: 0;
-              width: 100%;
+              width: $mana-curve-width;;
               box-shadow: inset 0 10px 20px #000;
 
               .bar {
                 position: absolute;
                 bottom: 30px;
-                background: red;
-                width: 8px;
-                background: url('../images/ui/menu/mana-curve-bar.png') no-repeat top center;
+                background: $mana-curve-bar-background-color;
+                width: $mana-curve-bar-width;
+                background-image: $mana-curve-bar-background;
+                background-repeat: no-repeat;
+                background-position: top center;
 
                 &.bar-0 {left: 34px;}
                 &.bar-1 {left: 49px;}
@@ -205,11 +199,11 @@ body { background: #000; }
             }
 
             &.menu-btn {
-              background-image: url('../images/ui/menu/btn.png');
-              font-size: 15px;
-              font-family: HearthstoneFont, serif;
+              background-image: $menu-btn-background;
+              font-size: $font-size;
+              font-family: $font-family-hs;
               font-weight: bold;
-              color: #000;
+              color: $text-special-color;
               text-align: center;
               padding: 25px 0;
               cursor: pointer;
@@ -217,7 +211,8 @@ body { background: #000; }
             }
 
             &.active {
-              height: $deck-list-height + $deck-list-mana-curve-height;
+              height: $deck-list-height + $mana-curve-height;
+
               .mana-curve {
                 display: block;
               }
@@ -228,12 +223,12 @@ body { background: #000; }
             }
 
             &.error {
-              .deck-name span{color: red;}
+              .deck-name span{color: $deck-name-error-color;}
             }
           }
 
           .frame {
-            width: 100%;
+            width: $collection-frame-width;
             background-position: left center, right center;
 
             .countbox {
@@ -243,16 +238,16 @@ body { background: #000; }
         }
 
         .decks-count {
-          font-size: 15px;
-          font-family: HearthstoneFont, serif;
+          font-size: $font-size;
+          font-family: $font-family-hs;
           position: absolute;
           font-weight: bold;
-          color: #FFF;
+          color: $text-color;
           bottom: 9px;
           left: 30px;
-          width: 85px;
+          width: $deck-count-width;
           text-align: right;
-          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+          text-shadow: $text-shadow;
           @include no-select;
 
           .cpt {
@@ -265,16 +260,16 @@ body { background: #000; }
           position: absolute;
           bottom: 15px;
           right: 37px;
-          width: 60px;
+          width: $menu-action-width;
           font-weight: bold;
-          color: $color-brown;
+          color: $text-special-color;
           text-align: center;
           cursor: pointer;
-          font-size: 14px;
-          font-family: HearthstoneFont, serif;
+          font-size: $font-size;
+          font-family: $font-family-hs;
           @include no-select;
 
-          &:hover { color: #FFF; }
+          &:hover { color: $text-color; }
         }
       }
 
@@ -282,7 +277,7 @@ body { background: #000; }
         order: 2;
         margin-left: 5px;
         width: 0;
-        background: #696969;
+        background: $deck-current-background-color;
         padding-bottom: 30px;
         position: relative;
         height: $deck-current-height;
@@ -294,7 +289,7 @@ body { background: #000; }
           height: $deck-current-height - $deck-current-cpt-height;
 
           .frame {
-            width: 218px;
+            width: $deck-current-frame-width;
             background-position: right center;
 
             .countbox {
@@ -306,12 +301,12 @@ body { background: #000; }
         .cpt {
           position: absolute;
           bottom: 0;
-          height: $deck-current-cpt-height;
           margin: 0;
-          width: 100%;
           padding: 0;
-          font-family: HearthstoneFont, serif;
-          color: #FFFFFF;
+          height: $deck-current-cpt-height;
+          width: $deck-current-cpt-width;
+          font-family: $font-family-hs;
+          color: $text-color;
           font-weight: bold;
           font-size: 13px;
           display: flex;
@@ -322,7 +317,7 @@ body { background: #000; }
           img { margin-right: 15px; }
 
           .exportDeck {
-            color: #FFF;
+            color: $text-color;
 
             &:hover {color: #000;}
           }
@@ -334,13 +329,13 @@ body { background: #000; }
 
     .search-area {
       order: 2;
-      width: 100%;
-      height: $search-area-height;
+      width: $search-area-width;
+      height: $app-height;
       overflow: hidden;
       border: 0;
 
       .navbar {
-        width: 100%;
+        width: $navBar-width;
         margin-bottom: 0;
         padding: 5px 0;
         height: $navBar-height;
@@ -351,11 +346,11 @@ body { background: #000; }
           flex-wrap: wrap;
           justify-content: center;
           align-items: center;
-          min-width: 1245px;
+          min-width: $navBar-filters-width;
 
           .search {
-            width: 200px;
-            height: 47px;
+            width: $navBar-filters-search-width;
+            height: $navBar-filters-search-height;
             margin-right: 20px;
           }
 
@@ -363,7 +358,7 @@ body { background: #000; }
             margin-right: 20px;
 
             .Select-control {
-              height: 47px;
+              height: $navBar-filters-select-height;
             }
 
             .Select-placeholder {
@@ -384,39 +379,39 @@ body { background: #000; }
             }
 
             &.heroes {
-              width: 102px;
+              width: $navBar-filters-select-heroes-width;
 
-              .Select-menu-outer{width: 250px;}
+              .Select-menu-outer{width: $navBar-filters-select-heroes-outer-width;}
             }
             &.rarity {
-              width: 106px;
+              width: $navBar-filters-select-rarity-width;
 
-              .Select-menu-outer{width: 160px;}
+              .Select-menu-outer{width: $navBar-filters-select-rarity-outer-width;}
             }
             &.set {
-              width: 126px;
+              width: $navBar-filters-select-set-width;
 
-              .Select-menu-outer{width: 250px;}
+              .Select-menu-outer{width: $navBar-filters-select-set-outer-width;}
             }
             &.type {
-              width: 120px;
+              width: $navBar-filters-select-type-width;
 
-              .Select-menu-outer{width: 120px;}
+              .Select-menu-outer{width: $navBar-filters-select-type-outer-width;}
             }
             &.race {
-              width: 110px;
+              width: $navBar-filters-select-race-width;
 
-              .Select-menu-outer{width: 110px;}
+              .Select-menu-outer{width: $navBar-filters-select-race-outer-width;}
             }
             &.mechanics {
-              width: 175px;
+              width: $navBar-filters-select-mechanics-width;
 
-              .Select-menu-outer{width: 175px;}
+              .Select-menu-outer{width: $navBar-filters-select-mechanics-outer-width;}
             }
             &.status {
-              width: 155px;
+              width: $navBar-filters-select-status-width;
 
-              .Select-menu-outer{width: 155px;}
+              .Select-menu-outer{width: $navBar-filters-select-status-outer-width;}
             }
           }
 
@@ -425,11 +420,11 @@ body { background: #000; }
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            width: 135px;
+            width: $navBar-filters-cristals-width;
             @include no-select;
 
             img {
-              height: 20px;
+              height: $navBar-filters-cristals-image-height;
               cursor: pointer;
               margin-right: 3px;
               margin-bottom: 2px;
@@ -443,7 +438,7 @@ body { background: #000; }
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        height: $search-area-height - $navBar-height;
+        height: $app-height - $navBar-height;
         align-items: flex-start;
         align-content: flex-start;
 
@@ -453,8 +448,8 @@ body { background: #000; }
           @include no-select;
 
           img {
-            width: 190px;
-            height: 262px;
+            width: $search-area-card-width;
+            height: $search-area-card-height;
             cursor: pointer;
             -webkit-transition: opacity 500ms ease-in-out;
             -moz-transition: opacity 500ms ease-in-out;
@@ -473,30 +468,34 @@ body { background: #000; }
   .footer {
     margin: 0;
     position: relative;
-    height: 60px;
+    height: $footer-height;
     display: flex;
     justify-content: center;
     align-items: center;
 
     .footer-left {
-      background: url('../images/ui/footer/footer-left.png') no-repeat left top;
-      width: 52px;
-      height: 60px;
+      background-image: $footer-left-background;
+      background-repeat: no-repeat;
+      background-position: left top;
+      width: $footer-left-width;
+      height: $footer-left-height;
     }
 
     .footer-content {
-      background: url('../images/ui/footer/footer-content.png') repeat-x center top;
-      min-width: 160px;
-      height: 60px;
+      background-image: $footer-content-background;
+      background-repeat: repeat-x;
+      background-position: center top;
+      min-width: $footer-content-width;
+      height: $footer-content-height;
       margin-left: -1px;
       text-align: center;
 
       a {
         text-align: center;
-        font-size: 15px;
-        font-family: HearthstoneFont, serif;
-        color: #FFF;
-        height: 60px;
+        font-size: $font-size;
+        font-family: $font-family-hs;
+        color: $text-color;
+        height: $footer-content-height;
         padding: 17px 0;
         display: inline-block;
         cursor: pointer;
@@ -507,33 +506,37 @@ body { background: #000; }
     }
 
     .footer-right {
-      background: url('../images/ui/footer/footer-right.png') no-repeat right top;
-      width: 52px;
-      height: 60px;
+      background-image: $footer-right-background;
+      background-repeat: no-repeat;
+      background-position: right top;
+      width: $footer-right-width;
+      height: $footer-right-height;
     }
   }
 }
 
 .modal {
   .modal-header {
-    background: url('../images/ui/modal/modal-top.png') no-repeat top center;
+    background-image: $modal-header-background;
+    background-repeat: no-repeat;
+    background-position: top center;
     border: 0;
-    height: 129px;
+    height: $modal-header-height;
 
     .modal-title {
       text-align: center;
-      font-size: 15px;
-      font-family: HearthstoneFont, serif;
+      font-size: $font-size;
+      font-family: $font-family-hs;
       font-weight: bold;
-      color: $color-brown;
+      color: $text-special-color;
       padding-top: 5px;
       @include no-select;
     }
 
     .close {
       margin: 0;
-      width: 36px;
-      height: 24px;
+      width: $modal-header-close-width;
+      height: $modal-header-close-height;
       position: absolute;
       right: 22px;
       top: 40px;
@@ -548,15 +551,19 @@ body { background: #000; }
   }
 
   .modal-body {
-    background: url('../images/ui/modal/modal-body.png') repeat-y center top;
+    background-image: $modal-body-background;
+    background-repeat: repeat-y;
+    background-position: center top;
     padding: 0 50px;
     margin-top: -1px;
-    min-height: 227px;
+    min-height: $modal-body-height;
   }
 
   .modal-footer {
-    background: url('../images/ui/modal/modal-footer.png') no-repeat center bottom;
-    height: 53px;
+    background-image: $modal-footer-background;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    height: $modal-footer-height;
     border: 0;
   }
 
@@ -572,7 +579,7 @@ body { background: #000; }
 
       .hero {
         flex: 1 auto;
-        width: 128px;
+        width: $modal-add-hero-width;
 
         img {
           cursor: pointer;
@@ -587,7 +594,7 @@ body { background: #000; }
     }
 
     input {
-      width: 80%;
+      width: $modal-add-input-width;
       margin: 0 auto;
       text-align: center;
     }
@@ -595,20 +602,20 @@ body { background: #000; }
 
   .modal-settings {
     text-align: center;
-    font-size: 15px;
-    font-family: HearthstoneFont, serif;
+    font-size: $font-size;
+    font-family: $font-family-hs;
     font-weight: bold;
-    height: 220px;
+    height: $modal-settings-height;
 
     a {
-      color: #000;
+      color: $modal-text-color;
       cursor: pointer;
       display: block;
       padding: 10px 0;
     }
 
     .Select {
-      width: 200px;
+      width: $modal-settings-select-width;
       margin: 0 auto;
 
       .Select-menu-outer {
@@ -624,12 +631,12 @@ body { background: #000; }
 
   .modal-remove {
     text-align: center;
-    font-size: 15px;
-    font-family: HearthstoneFont, serif;
+    font-size: $font-size;
+    font-family: $font-family-hs;
     font-weight: bold;
-    color: #000;
+    color: $modal-text-color;
     position: relative;
-    height: 220px;
+    height: $modal-remove-height;
 
     img {
       position: absolute;
