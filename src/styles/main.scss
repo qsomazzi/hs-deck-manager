@@ -348,36 +348,17 @@ body { background: $body-background; }
           padding-left: 0;
           max-width: $navBar-filters-width;
           margin: 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           .search {
             width: $navBar-filters-search-width;
             height: $navBar-filters-search-height;
             margin-right: 20px;
-            float: left;
           }
 
-          .cristals {
-            padding: 5px 0;
-            width: $navBar-filters-cristals-width;
-            float: right;
-            @include no-select;
-
-            img {
-              height: $navBar-filters-cristals-image-height;
-              cursor: pointer;
-              margin-right: 3px;
-              margin-bottom: 2px;
-            }
-          }
-
-          .selectFilters {
-            clear: both;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-top: 5px;
-
-            .Select {
+          .Select {
               margin-right: 20px;
 
               .Select-control {
@@ -437,7 +418,6 @@ body { background: $body-background; }
                 .Select-menu-outer{width: $navBar-filters-select-status-outer-width;}
               }
             }
-          }
         }
       }
 
@@ -474,6 +454,22 @@ body { background: $body-background; }
             &.selectable {
               cursor: pointer;
             }
+          }
+        }
+
+        .cristals {
+          padding: 5px 0;
+          width: $search-area-cards-wrapper-cristals-width;
+          position: absolute;
+          bottom: 27px;
+          right: 142px;
+          @include no-select;
+
+          img {
+            height: $search-area-cards-wrapper-cristals-image-height;
+            cursor: pointer;
+            margin-right: 3px;
+            margin-bottom: 2px;
           }
         }
 

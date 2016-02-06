@@ -73,6 +73,7 @@ class Hearthstone extends Component {
                         <NavBar filters={filters}/>
 
                         <Cards
+                            cristals={filters.cristal}
                             cards={filters.cards}
                             nbCards={filters.cards.length} />
                     </div>
