@@ -26,6 +26,13 @@ class DeckList extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {number} current
+ * @type {array}  heroes
+ * @type {array}  decks
+ */
 DeckList.PropTypes = {
     current: PropTypes.number,
     heroes:  PropTypes.array.isRequired,

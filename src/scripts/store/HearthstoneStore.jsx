@@ -13,6 +13,9 @@ import DefaultDecks        from './../resources/default-decks.json';
 const HearthstoneStore = Reflux.createStore({
     listenables: HearthstoneActions,
 
+    /**
+     * Initialise the store
+     */
     init() {
         this.collection = localStorage.collection == undefined ? this.initCollection() : JSON.parse(localStorage.collection);
         this.decks      = localStorage.decks == undefined      ? []                    : JSON.parse(localStorage.decks);
@@ -49,12 +52,23 @@ const HearthstoneStore = Reflux.createStore({
      *    Actions
      * ------------- */
 
+    /**
+     * Load a deck and update filters
+     *
+     * @param {number} current
+     */
     loadDeck(current) {
         this.current = current == this.current ? null : current;
 
         this.updateFilters();
     },
 
+    /**
+     * Add a new deck and load it
+     *
+     * @param {string} deckName
+     * @param {string} hero
+     */
     addDeck(deckName, hero) {
         this.decks.unshift({
             name: deckName,
@@ -70,6 +84,11 @@ const HearthstoneStore = Reflux.createStore({
         this.loadDeck(0);
     },
 
+    /**
+     * Remove a deck and update filters
+     *
+     * @param {number} current
+     */
     removeDeck(current) {
         this.decks.splice(current, 1);
         this.current = null;
@@ -78,6 +97,11 @@ const HearthstoneStore = Reflux.createStore({
         this.write();
     },
 
+    /**
+     * Add a card to current deck OR collection
+     *
+     * @param {number} id
+     */
     addCard(id) {
         if (this.menu == 'my-decks' || this.menu == 'my-collection') {
             let card = this.filters.cards[_.findIndex(this.filters.cards, {'id': id})];
@@ -92,6 +116,14 @@ const HearthstoneStore = Reflux.createStore({
         }
     },
 
+    /**
+     * Add a card to current deck OR collection
+     * Then update filtered cards
+     *
+     * @param {object} card
+     * @param {array}  cards
+     * @param {object} deck
+     */
     addNewCard(card, cards, deck = null) {
         let newCard   = true;
         let currentCard;
@@ -132,6 +164,12 @@ const HearthstoneStore = Reflux.createStore({
         this.write();
     },
 
+    /**
+     * Remove a card from current deck OR collection
+     * Then update filtered cards
+     *
+     * @param {number} id
+     */
     removeCard(id) {
         let deck = null;
         let cards;
@@ -163,6 +201,11 @@ const HearthstoneStore = Reflux.createStore({
         }
     },
 
+    /**
+     * Change app locale
+     *
+     * @param {string} locale
+     */
     changeLocale(locale) {
         this.locale = locale;
         this.heroes = this.initHeroes();
@@ -171,12 +214,25 @@ const HearthstoneStore = Reflux.createStore({
         this.write();
     },
 
+    /**
+     * Search a card
+     * Then update filtered cards
+     *
+     * @param {string} value
+     */
     searchCard(value) {
         this.filters.search = value != '' ? value : null;
 
         this.filterCards();
     },
 
+    /**
+     * Select a filter
+     * Then update filtered cards
+     *
+     * @param {string} type
+     * @param {string} value
+     */
     selectFilter(type, value) {
         switch (type) {
             case 'hero':
@@ -197,23 +253,40 @@ const HearthstoneStore = Reflux.createStore({
         this.filterCards();
     },
 
+    /**
+     * Toggle a cost filter
+     * Then update filtered cards
+     *
+     * @param {string} filter
+     */
     toggleFilter(filter) {
         this.filters.cristal[filter] = ! this.filters.cristal[filter];
 
         this.filterCards();
     },
 
+    /**
+     * Import default decks
+     */
     importDefaultDecks() {
         this.decks = DefaultDecks;
 
         this.write();
     },
 
+    /**
+     * Open a menu
+     *
+     * @param {string} menuItem
+     */
     openMenu(menuItem) {
         this.menu = menuItem;
         this.loadDeck(null);
     },
 
+    /**
+     * Reinitialise the user collection
+     */
     reinitCollection() {
         this.collection = this.initCollection();
     },
@@ -222,6 +295,9 @@ const HearthstoneStore = Reflux.createStore({
      *   Internals
      * ------------- */
 
+    /**
+     * Initialize cards list, translate cards name and sort them
+     */
     initCards() {
         let cards = [];
 
@@ -237,6 +313,9 @@ const HearthstoneStore = Reflux.createStore({
         return _.sortByAll(cards, ['cost', 'nameSortable']);
     },
 
+    /**
+     * Initialize cards collection
+     */
     initCollection() {
         let cards = [];
 
@@ -254,6 +333,11 @@ const HearthstoneStore = Reflux.createStore({
         return cards;
     },
 
+    /**
+     * Initialize heroes list (and filters list)
+     *
+     * @param {boolean} forFilters
+     */
     initHeroes(forFilters = false) {
         let heroes = [];
 
@@ -280,6 +364,9 @@ const HearthstoneStore = Reflux.createStore({
         return _.sortByAll(heroes, ['id', 'nameSortable']);
     },
 
+    /**
+     * Save on the LocalStorage decks, locale and collection
+     */
     write() {
         this.trigger();
 
@@ -288,6 +375,9 @@ const HearthstoneStore = Reflux.createStore({
         localStorage.collection = JSON.stringify(this.collection);
     },
 
+    /**
+     * Apply all filters on cards list
+     */
     filterCards() {
         let { hero, heroes, rarity, cardType, race, cardSet, mechanics, search, status } = this.filters;
         let cards                                                                        = this.cards;
@@ -389,6 +479,10 @@ const HearthstoneStore = Reflux.createStore({
         this.trigger();
     },
 
+    /**
+     * Update heroes filters
+     * Then update filtered cards
+     */
     updateFilters() {
         this.filters.hero   = null;
         this.filters.heroes = this.initHeroes(true);
@@ -405,6 +499,11 @@ const HearthstoneStore = Reflux.createStore({
         this.filterCards();
     },
 
+    /**
+     * Convert a text to handle sort
+     *
+     * @param {string} text
+     */
     slugify(text) {
         return text.toString()
             .toLowerCase()
@@ -413,6 +512,11 @@ const HearthstoneStore = Reflux.createStore({
             .replace(/[œ]/g,'oe');
     },
 
+    /**
+     * Sort a list of card by cost then translated name
+     *
+     * @param {array} cards
+     */
     sortCards(cards) {
         return _.sortByAll(_.map(cards, card => {
             return _.assign(card, {
@@ -425,10 +529,16 @@ const HearthstoneStore = Reflux.createStore({
      *   Assessors
      * ------------- */
 
+    /**
+     * Return app locale
+     */
     getLocale() {
         return this.locale;
     },
 
+    /**
+     * Return store state
+     */
     getComposedState() {
         return {
             decks:      this.decks,
@@ -441,6 +551,11 @@ const HearthstoneStore = Reflux.createStore({
         };
     },
 
+    /**
+     * Calculate the mana curve for a deck
+     *
+     * @param {object} deck
+     */
     getManaCurve(deck) {
         let barSizes = {
             0: 0,
@@ -470,6 +585,12 @@ const HearthstoneStore = Reflux.createStore({
         });
     },
 
+    /**
+     * Get translated card name
+     *
+     * @param {object} card
+     * @param {number} truncate
+     */
     getCardName(card, truncate = null) {
         let name = TranslationHelper.translate(card.id);
 
@@ -480,6 +601,12 @@ const HearthstoneStore = Reflux.createStore({
         return name;
     },
 
+    /**
+     * Return card image path
+     *
+     * @param {object} card
+     * @param {string} size
+     */
     getCardImage(card, size = 'large') {
         let path = '/images/cards/';
 
@@ -497,6 +624,12 @@ const HearthstoneStore = Reflux.createStore({
         return `${path}/${card.id}.png`;
     },
 
+    /**
+     * Return hero image path
+     *
+     * @param {object} hero
+     * @param {string} size
+     */
     getHeroImage(hero, size = 'default') {
         let path = '/images/heroes';
 
@@ -512,12 +645,22 @@ const HearthstoneStore = Reflux.createStore({
         return path;
     },
 
+    /**
+     * Return if the card's id is in user collection
+     *
+     * @param {number} id
+     */
     isInCollection(id) {
         let card = this.collection[_.findIndex(this.collection, {'id': id})];
 
         return card != undefined && (card.count == 2 || card.rarity == 'Legendary');
     },
 
+    /**
+     * Return deck dust cost calculate with user collection
+     *
+     * @param {object} deck
+     */
     getDeckCost(deck) {
         let initialCost = deck.cost;
 

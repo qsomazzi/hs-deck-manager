@@ -11,7 +11,16 @@ import ruRU             from './../resources/ruRU.json';
 import zhCN             from './../resources/zhCN.json';
 import jaJP             from './../resources/jaJP.json';
 
+/**
+ * TranslationHelper
+ */
 const TranslationHelper = {
+    /**
+     * Translate key in the current locale (of forced)
+     *
+     * @param {string} key
+     * @param {string} locale
+     */
     translate(key, locale = null) {
         locale = locale == null ? HearthstoneStore.getLocale() : locale;
         let translation;

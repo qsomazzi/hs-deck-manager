@@ -43,7 +43,6 @@ Users can easily create and share a deck.
 ## Planned features
 
 * Add more Unit tests
-* Add more doc
 * Add Lazy Load on media
 * Add translations on cards images (`koKR`, `plPL` and `jaJP`)
 * Add more mechanics filters

@@ -29,6 +29,11 @@ class Footer extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {array} decks
+ */
 Footer.PropTypes = {
     decks: PropTypes.array.isRequired
 };

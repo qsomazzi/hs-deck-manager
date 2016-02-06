@@ -10,6 +10,11 @@ import TranslationHelper               from './../../helper/TranslationHelper'
  * DeckListItem
  */
 class DeckListItem extends Component {
+    /**
+     * Constructor
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
 
@@ -18,16 +23,27 @@ class DeckListItem extends Component {
         };
     }
 
+    /**
+     * Display remove deck modal
+     */
     toggleModal() {
         this.setState({displayModal: !this.state.displayModal});
     }
 
+    /**
+     * Remove a deck
+     */
     removeDeck() {
         this.toggleModal();
 
         HearthstoneActions.removeDeck(this.props.position);
     }
 
+    /**
+     * Render remove deck modal
+     *
+     * @return {XML}
+     */
     renderDeleteModal() {
         let { displayModal } = this.state;
 
@@ -85,6 +101,13 @@ class DeckListItem extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {object} deck
+ * @type {number} position
+ * @type {number} current
+ */
 DeckListItem.PropTypes = {
     deck: PropTypes.shape({
         name:  PropTypes.string.isRequired,

@@ -37,6 +37,11 @@ class DeckCurrent extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {object} deck
+ */
 DeckCurrent.PropTypes = {
     deck: PropTypes.shape({
         name:  PropTypes.string.isRequired,

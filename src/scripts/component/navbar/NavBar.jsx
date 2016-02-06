@@ -11,10 +11,21 @@ import HearthstoneConstant             from './../../constant/HearthstoneConstan
  * NavBar
  */
 class NavBar extends Component {
+    /**
+     * Search a card
+     *
+     * @param {object} event
+     */
     searchCard(event) {
         HearthstoneActions.searchCard(event.target.value);
     }
 
+    /**
+     * Select one filter
+     *
+     * @param {string} type
+     * @param {string} value
+     */
     selectFilter(type, value) {
         HearthstoneActions.selectFilter(type, value);
     }
@@ -112,6 +123,12 @@ class NavBar extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {number} nbCards
+ * @type {array}  filters
+ */
 NavBar.PropTypes = {
     nbCards: PropTypes.number.isRequired,
     filters: PropTypes.array.isRequired

@@ -23,6 +23,11 @@ class Collection extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {array} collection
+ */
 Collection.PropTypes = {
     collection: PropTypes.array.isRequired
 };

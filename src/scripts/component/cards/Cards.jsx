@@ -22,6 +22,11 @@ class Cards extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {object} card
+ */
 Cards.PropTypes = {
     cards:  PropTypes.arrayOf(
         PropTypes.shape({

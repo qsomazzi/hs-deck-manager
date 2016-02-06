@@ -15,6 +15,11 @@ import Footer                  from './navbar/Footer';
  * Hearthstone
  */
 class Hearthstone extends Component {
+    /**
+     * Constructor
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
 

@@ -12,6 +12,11 @@ import Collection                      from './../collection/Collection';
  * Menu
  */
 class Menu extends Component {
+    /**
+     * Constructor
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
 
@@ -20,6 +25,11 @@ class Menu extends Component {
         };
     }
 
+    /**
+     * Render the app menu
+     *
+     * @return {XML}
+     */
     renderMenu() {
         return (
             <ListGroup>
@@ -34,22 +44,36 @@ class Menu extends Component {
         );
     }
 
+    /**
+     * Display settings modal
+     */
     toggleModal() {
         this.setState({displayModal: !this.state.displayModal});
     }
 
+    /**
+     * Import all defaults decks and open menu
+     */
     importDefaultDecks() {
         HearthstoneActions.importDefaultDecks();
         HearthstoneActions.openMenu('my-decks');
         this.toggleModal();
     }
 
+    /**
+     * Reinitialize the collection and open menu
+     */
     reinitCollection() {
         HearthstoneActions.reinitCollection();
         HearthstoneActions.openMenu('my-collection');
         this.toggleModal();
     }
 
+    /**
+     * Render settings modal
+     *
+     * @return {XML}
+     */
     renderModal() {
         let { displayModal } = this.state;
 
@@ -128,6 +152,15 @@ class Menu extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {number} current
+ * @type {array}  heroes
+ * @type {array}  decks
+ * @type {array}  collection
+ * @type {string} menu
+ */
 Menu.PropTypes = {
     current:    PropTypes.number,
     heroes:     PropTypes.array.isRequired,

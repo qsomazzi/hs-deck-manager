@@ -10,6 +10,11 @@ import TranslationHelper               from './../../helper/TranslationHelper'
  * DeckAdd
  */
 class DeckAdd extends Component {
+    /**
+     * Constructor
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
 
@@ -19,12 +24,22 @@ class DeckAdd extends Component {
         };
     }
 
+    /**
+     * Select a hero
+     *
+     * @param {number} id
+     */
     selectHero(id) {
         this.setState({
             selectedHero: id
         });
     }
 
+    /**
+     * Add an user on 'Enter' key press
+     *
+     * @param {object} e
+     */
     addDeck(e) {
         if (e.keyCode == 13) {
             this.toggleModal();
@@ -33,10 +48,18 @@ class DeckAdd extends Component {
         }
     }
 
+    /**
+     * Display the add deck modal
+     */
     toggleModal() {
         this.setState({displayModal: !this.state.displayModal});
     }
 
+    /**
+     * Render the add deck modal
+     *
+     * @return {XML}
+     */
     renderModal() {
         let { heroes }                     = this.props;
         let { selectedHero, displayModal } = this.state;
@@ -91,6 +114,11 @@ class DeckAdd extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {array} heroes
+ */
 DeckAdd.PropTypes = {
     heroes: PropTypes.array.isRequired
 };

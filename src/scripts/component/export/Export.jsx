@@ -20,6 +20,14 @@ class Export extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {object} data
+ * @type {string} filename
+ * @type {string} classname
+ * @type {string} icon
+ */
 Export.PropTypes = {
     data:      PropTypes.object.isRequired,
     filename:  PropTypes.string.isRequired,

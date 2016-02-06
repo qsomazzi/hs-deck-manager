@@ -28,6 +28,11 @@ class Card extends Component {
     }
 }
 
+/**
+ * PropTypes
+ *
+ * @type {object} card
+ */
 Card.PropTypes = {
     card: PropTypes.shape({
         id: PropTypes.string.isRequired
