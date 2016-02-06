@@ -47,7 +47,6 @@ Users can easily create and share a deck.
 * Add translations on cards images (`koKR`, `plPL` and `jaJP`)
 * Add more mechanics filters
 * Redesign Filters Bar
-* Redesign search area
 * Redesign scroll cursor
 * Import JSON
 

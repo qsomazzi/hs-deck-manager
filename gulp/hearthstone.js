@@ -24,7 +24,7 @@ function getAndOptimizeCardImage(card, cpt, cardsFolder, locale) {
 
             GraphicsMagick(fileName)
                 .trim()
-                .resize(200)
+                .resize(190)
                 .noProfile()
                 .quality(90)
                 .write(fileName, err => {

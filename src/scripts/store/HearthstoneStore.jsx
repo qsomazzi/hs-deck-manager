@@ -657,6 +657,13 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     /**
+     * Return if the card is selectable
+     */
+    isSelectable() {
+        return this.menu === 'my-collection' || (this.menu === 'my-decks' && this.current !== null);
+    },
+
+    /**
      * Return deck dust cost calculate with user collection
      *
      * @param {object} deck

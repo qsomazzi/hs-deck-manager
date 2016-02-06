@@ -69,12 +69,12 @@ class Hearthstone extends Component {
                         </div>
                     </div>
 
-                    <div className="panel panel-default search-area">
-                        <NavBar
-                            filters={filters}
-                            nbCards={filters.cards.length} />
+                    <div className="search-area">
+                        <NavBar filters={filters}/>
 
-                        <Cards cards={filters.cards} />
+                        <Cards
+                            cards={filters.cards}
+                            nbCards={filters.cards.length} />
                     </div>
                 </div>
 

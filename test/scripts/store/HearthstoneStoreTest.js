@@ -499,6 +499,24 @@ describe('HearthstoneStoreTest', () => {
         });
     });
 
+    describe('isSelectable()', () => {
+        it('should return if the card is selectable', () => {
+            chai.assert.notOk(HearthstoneStore.isSelectable());
+
+            HearthstoneStore.menu = 'my-collection';
+
+            chai.assert.ok(HearthstoneStore.isSelectable());
+
+            HearthstoneStore.menu = 'my-decks';
+
+            chai.assert.notOk(HearthstoneStore.isSelectable());
+
+            HearthstoneStore.current = 1;
+
+            chai.assert.ok(HearthstoneStore.isSelectable());
+        });
+    });
+
     //describe('getDeckCost(deck)', () => {
     //    it('@TODO', () => {
     //    });

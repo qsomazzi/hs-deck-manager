@@ -89,7 +89,6 @@ body { background: $body-background; }
     .deck-builder {
       order: 1;
       height: $app-height;
-      margin-right: 10px;
       display: flex;
 
       .menu {
@@ -333,94 +332,34 @@ body { background: $body-background; }
       height: $app-height;
       overflow: hidden;
       border: 0;
+      background-color: transparent;
+      background-image: $search-area-background;
+      background-repeat: no-repeat;
+      background-position: top left;
+      background-size: 100% 100%;
 
       .navbar {
         width: $navBar-width;
-        margin-bottom: 0;
-        padding: 5px 0;
         height: $navBar-height;
+        margin-bottom: 0;
+        padding: 56px 0 0 0;
 
         .filters {
           padding-left: 0;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          min-width: $navBar-filters-width;
+          max-width: $navBar-filters-width;
+          margin: 0 auto;
 
           .search {
             width: $navBar-filters-search-width;
             height: $navBar-filters-search-height;
             margin-right: 20px;
-          }
-
-          .Select {
-            margin-right: 20px;
-
-            .Select-control {
-              height: $navBar-filters-select-height;
-            }
-
-            .Select-placeholder {
-              top: 4px;
-            }
-
-            .Select-arrow {
-              top: 22px;
-            }
-
-            .Select-clear {
-              padding: 12px 10px;
-            }
-
-            .Select-menu-outer img {
-              border-radius: 50%;
-              margin-right: 10px;
-            }
-
-            &.heroes {
-              width: $navBar-filters-select-heroes-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-heroes-outer-width;}
-            }
-            &.rarity {
-              width: $navBar-filters-select-rarity-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-rarity-outer-width;}
-            }
-            &.set {
-              width: $navBar-filters-select-set-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-set-outer-width;}
-            }
-            &.type {
-              width: $navBar-filters-select-type-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-type-outer-width;}
-            }
-            &.race {
-              width: $navBar-filters-select-race-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-race-outer-width;}
-            }
-            &.mechanics {
-              width: $navBar-filters-select-mechanics-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-mechanics-outer-width;}
-            }
-            &.status {
-              width: $navBar-filters-select-status-width;
-
-              .Select-menu-outer{width: $navBar-filters-select-status-outer-width;}
-            }
+            float: left;
           }
 
           .cristals {
             padding: 5px 0;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
             width: $navBar-filters-cristals-width;
+            float: right;
             @include no-select;
 
             img {
@@ -430,36 +369,123 @@ body { background: $body-background; }
               margin-bottom: 2px;
             }
           }
+
+          .selectFilters {
+            clear: both;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 5px;
+
+            .Select {
+              margin-right: 20px;
+
+              .Select-control {
+                height: $navBar-filters-select-height;
+              }
+
+              .Select-placeholder {
+                top: 4px;
+              }
+
+              .Select-arrow {
+                top: 22px;
+              }
+
+              .Select-clear {
+                padding: 12px 10px;
+              }
+
+              .Select-menu-outer img {
+                border-radius: 50%;
+                margin-right: 10px;
+              }
+
+              &.heroes {
+                width: $navBar-filters-select-heroes-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-heroes-outer-width;}
+              }
+              &.rarity {
+                width: $navBar-filters-select-rarity-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-rarity-outer-width;}
+              }
+              &.set {
+                width: $navBar-filters-select-set-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-set-outer-width;}
+              }
+              &.type {
+                width: $navBar-filters-select-type-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-type-outer-width;}
+              }
+              &.race {
+                width: $navBar-filters-select-race-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-race-outer-width;}
+              }
+              &.mechanics {
+                width: $navBar-filters-select-mechanics-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-mechanics-outer-width;}
+              }
+              &.status {
+                width: $navBar-filters-select-status-width;
+
+                .Select-menu-outer{width: $navBar-filters-select-status-outer-width;}
+              }
+            }
+          }
         }
       }
 
-      .cards {
-        overflow-y: scroll;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        height: $app-height - $navBar-height;
-        align-items: flex-start;
-        align-content: flex-start;
+      .cards-wrapper{
+        height: $search-area-cards-wrapper-height;
+        padding: 105px 150px 170px 148px;
+        position: relative;
 
-        .card {
-          flex-grow: 1;
-          opacity: 0.5;
-          @include no-select;
+        .cards {
+          overflow-y: scroll;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          align-content: flex-start;
+          height: $search-area-cards-wrapper-cards-height;
 
-          img {
-            width: $search-area-card-width;
-            height: $search-area-card-height;
-            cursor: pointer;
-            -webkit-transition: opacity 500ms ease-in-out;
-            -moz-transition: opacity 500ms ease-in-out;
-            -o-transition: opacity 500ms ease-in-out;
-            transition: opacity 500ms ease-in-out;
+          .card {
+            flex-grow: 1;
+            opacity: 0.6;
+            @include no-select;
+
+            img {
+              width: $search-area-card-width;
+              -webkit-transition: opacity 500ms ease-in-out;
+              -moz-transition: opacity 500ms ease-in-out;
+              -o-transition: opacity 500ms ease-in-out;
+              transition: opacity 500ms ease-in-out;
+            }
+
+            &.owned {
+              opacity: 1;
+            }
+            &.selectable {
+              cursor: pointer;
+            }
           }
+        }
 
-          &.owned {
-            opacity: 1;
-          }
+        .cards-cpt {
+          position: absolute;
+          right: 50%;
+          bottom: 33px;
+          font-size: 20px;
+          font-family: $font-family-hs;
+          font-weight: bold;
+          color: $text-special-color;
+          margin: 0;
         }
       }
     }

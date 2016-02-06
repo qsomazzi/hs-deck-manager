@@ -14,7 +14,8 @@ class Card extends Component {
         let { card } = this.props;
 
         let cardClass = classNames('card', {
-            owned: HearthstoneStore.isInCollection(card.id)
+            owned:      HearthstoneStore.isInCollection(card.id),
+            selectable: HearthstoneStore.isSelectable()
         });
 
         return (
