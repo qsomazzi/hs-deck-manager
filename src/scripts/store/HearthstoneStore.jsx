@@ -56,7 +56,7 @@ const HearthstoneStore = Reflux.createStore({
     },
 
     addDeck(deckName, hero) {
-        this.decks.push({
+        this.decks.unshift({
             name: deckName,
             cards: [],
             hero: hero,
@@ -65,6 +65,9 @@ const HearthstoneStore = Reflux.createStore({
         });
 
         this.write();
+
+        this.current = null;
+        this.loadDeck(0);
     },
 
     removeDeck(current) {
@@ -408,6 +411,14 @@ const HearthstoneStore = Reflux.createStore({
             .replace(/[àáâãäå]/g,'a')
             .replace(/[éèêë]/g,'e')
             .replace(/[œ]/g,'oe');
+    },
+
+    sortCards(cards) {
+        return _.sortByAll(_.map(cards, card => {
+            return _.assign(card, {
+                name: this.slugify(TranslationHelper.translate(card.id))
+            });
+        }), ['cost', 'name']);
     },
 
     /* -------------

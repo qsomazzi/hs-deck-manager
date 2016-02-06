@@ -84,17 +84,33 @@ describe('HearthstoneStoreTest', () => {
                 nbCards: 0,
                 cost: 0
             }]);
+            chai.assert.equal(HearthstoneStore.current, 0);
+
+            HearthstoneStore.addDeck('Bar', 'HERO_02');
+
+            chai.assert.deepEqual(HearthstoneStore.decks, [{
+                name: 'Bar',
+                cards: [],
+                hero: 'HERO_02',
+                nbCards: 0,
+                cost: 0
+            }, {
+                name: 'Foo',
+                cards: [],
+                hero: 'HERO_01',
+                nbCards: 0,
+                cost: 0
+            }]);
+
+            chai.assert.equal(HearthstoneStore.current, 0);
         });
         it('should be present even after reinit', () => {
-            chai.assert.equal(HearthstoneStore.decks.length, 1);
+            chai.assert.equal(HearthstoneStore.decks.length, 2);
         });
     });
 
     describe('removeDeck(current)', () => {
         it('should remove a specific deck', () => {
-            chai.assert.equal(HearthstoneStore.decks.length, 1);
-
-            HearthstoneStore.addDeck('Bar', 'HERO_02');
             chai.assert.equal(HearthstoneStore.decks.length, 2);
 
             HearthstoneStore.removeDeck(1);
@@ -350,6 +366,12 @@ describe('HearthstoneStoreTest', () => {
             chai.assert.equal(HearthstoneStore.slugify('àáâãäå éèêë œ'), 'aaaaaa eeee oe');
         });
     });
+
+    //describe('sortCards(cards)', () => {
+    //    it('should sort cards by cost then translated name', () => {
+    //
+    //    });
+    //});
 
     describe('getLocale()', () => {
         it('should return proper locale', () => {

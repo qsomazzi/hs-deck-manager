@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import DeckCurrentItem                 from './../deck-current/DeckCurrentItem';
 import _                               from 'lodash';
+import DeckCurrentItem                 from './../deck-current/DeckCurrentItem';
+import HearthstoneStore                from './../../store/HearthstoneStore';
 
 /**
  * Collection
@@ -14,7 +15,7 @@ class Collection extends Component {
 
         return (
             <div className="list-group">
-                {_.map(_.sortByAll(collection, ['cost', 'name']), (card, key) => {
+                {_.map(HearthstoneStore.sortCards(collection), (card, key) => {
                     return <DeckCurrentItem card={card} key={`collection-item-${key}`} />;
                 })}
             </div>

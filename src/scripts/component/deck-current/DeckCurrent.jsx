@@ -15,7 +15,7 @@ class DeckCurrent extends Component {
     render() {
         let { deck } = this.props;
 
-        let currentDeck = _.map(_.sortByAll(deck.cards, ['cost', 'name']), (card, key) => {
+        let currentDeck = _.map(HearthstoneStore.sortCards(deck.cards), (card, key) => {
             return <DeckCurrentItem card={card} key={`current-deck-item-${key}`} />;
         });
 

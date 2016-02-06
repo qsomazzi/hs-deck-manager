@@ -1,66 +1,87 @@
-Hearthstone Deck Manager
-========================
+# Hearthstone Deck Manager
 
 [![Build Status](https://travis-ci.org/qsomazzi/hs-deck-manager.svg?branch=master)](https://travis-ci.org/qsomazzi/hs-deck-manager)
 [![Codeship Status for qsomazzi/hs-deck-manager](https://codeship.com/projects/d2c87640-ac89-0133-dfd8-1e5da553331a/status?branch=master)](https://codeship.com/projects/131676)
 
-[DEMO](http://hearthstone.qsomazzi.fr)
+This app will provide a fast and simple deck manager for Hearthstone. 
+Users can easily create and share a deck.
 
-Require
--------
-- npm ~3.3.5
-- gulp ~3.9.0
+## Live-Demo
 
-Installation
-------------
+[See a live demo of the last stable version](http://hearthstone.qsomazzi.fr)
+
+## Features
+
+* Manage as many deck as you want
+* Import default builded decks
+* Manage my collection
+* Select language between :
+    * `enUS`
+    * `frFR`
+    * `deDE`
+    * `esES`
+    * `itIT` 
+    * `koKR`
+    * `plPL`
+    * `ptBR`
+    * `ruRU`
+    * `zhCN`
+    * `jaJP`
+* Export one deck to share it, or all your decks !
+* Calculate deck dust's cost within your current collection
+* Fast filters on cards list, find your card with the help of multiples filters
+    * Card Name
+    * Hero
+    * Rarity
+    * Card set
+    * Card Type
+    * Race
+    * Mechanics
+    * Status
+    * Cost
+
+## Planned features
+
+* Add more Unit tests
+* Add more doc
+* Add Lazy Load on media
+* Add translations on cards images (`koKR`, `plPL` and `jaJP`)
+* Add more mechanics filters
+* Redesign Filters Bar
+* Redesign search area
+* Redesign scroll cursor
+* Import JSON
+
+## Requirement
+
+* npm ~3.3.5
+* gulp ~3.9.0
+
+## Installation
 
 Run in a cmd line the following commands
-- `npm install`
-    - `npm start` -> for prod (build assets)
-    - `npm dev`   -> for dev (build assets, launch watchers and server)
-    - `npm test`  -> for test (launching tests units)
+* `npm install`  
+* Then :
+    * `npm start` -> for prod (build assets)
+    * `npm dev`   -> for dev (build assets, launch watchers and server)
+    * `npm test`  -> for test (launching tests units)
 
-Contributions
--------------
+## License
 
-Feel free to contribute to this project. You can submit a PR or an issue, I will look into it as soon as possible.
+Licensed under [MIT](http://www.opensource.org/licenses/mit-license.php). 
+Totally free for private or commercial projects.
 
-*Note* : All files located under `/src/scripts/resources/` are generated with API calls, don't edit them manually. 
+## Resources
 
-Features that needs to be developed
------------------------------------
+* [Blizzards assets](http://blizzard.gamespress.com)
+* [HearthStone API](https://market.mashape.com/omgvamp/hearthstone)
 
-With 'priority' order
+## History
 
-* Bug
-    * Wrong Sort in Collection and Current deck
-* High
-    * Finish Unit tests on HerthstoneStoreTest
-    * Add Lazy Load on media
-    * Redesign Filters Bar
-    * Redesign scroll cursor
-    * Redesign search area
-* Low
-    * Import JSON
-
-Resources
----------
-
-- [Blizzards assets](http://blizzard.gamespress.com)
-- [HearthStone API](https://market.mashape.com/omgvamp/hearthstone)
-
-
-History
--------
-
-| Version |                          Image                          |    Date    |
-|:-------:|:-------------------------------------------------------:|:----------:|
-|    v0   |                        ![v0][v0]                        | 20/12/2015 |
-|    v1   |                        ![v1][v1]                        | 29/12/2015 |
-|   v1.1  | ![v1.1-menu][v1.1-menu] ![v1.1-my-decks][v1.1-my-decks] | 03/01/2016 |
-
+| Version |   Image   |    Date    |
+|:-------:|:---------:|:----------:|
+|    v0   | ![v0][v0] | 20/12/2015 |
+|    v1   | ![v1][v1] | 03/01/2016 |
 
 [v0]: resources/docs/v0.png
 [v1]: resources/docs/v1.png
-[v1.1-menu]: resources/docs/v1.1-menu.png
-[v1.1-my-decks]: resources/docs/v1.1-my-decks.png
