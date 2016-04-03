@@ -18,7 +18,7 @@ const HearthstoneStore = Reflux.createStore({
      */
     init() {
         this.collection = localStorage.collection == undefined ? this.initCollection() : JSON.parse(localStorage.collection);
-        this.decks      = localStorage.decks == undefined      ? []                    : JSON.parse(localStorage.decks);
+        this.decks      = localStorage.decks == undefined      ? []                    : _.sortByAll(JSON.parse(localStorage.decks), ['hero', 'name']);
         this.locale     = localStorage.locale == undefined     ? 'frFR'                : JSON.parse(localStorage.locale);
         this.heroes     = this.initHeroes();
         this.cards      = this.initCards();
